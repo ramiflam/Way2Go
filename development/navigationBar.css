@@ -1,0 +1,98 @@
+body{
+position:relative;
+background-color: rgba(248,248,248,1);
+margin: 0px;
+font-family: arial;
+width: 100%;
+}
+.right{
+    background-color: rgba(65,65,65,1);
+
+}
+
+.header{
+background-color: white;
+width:10%;
+font-size:14px;
+font-family: arial;
+display:inline-block;margin: 0px;
+}
+h2.header{height: 158px;
+width: 3px;}
+.header p{
+    display: inline-block;
+}
+
+.sucess{
+display: inline-block;
+background-image: url("/assets/check_mark.png");
+background-repeat: no-repeat;
+background-position:left bottom;
+float:right;
+padding-right: 13px;
+color:rgba(8,180,18,1);
+/*margin:12px;
+margin-bottom:6px;*/
+}
+.sucess p{
+    display: block;
+    padding-left: 45px;
+    text-align: left;
+    font-size: 16px;
+font-weight: bold;
+  padding-top: 8px;
+  margin-bottom: 0px;
+}
+p#sucses{
+  font-weight: bold;
+  padding-top: 8px;
+}
+p#update{
+  font-weight: normal;
+margin-top: 0px;
+    color: grey;
+    font-size: 12px;
+    line-height:0%;
+}
+.menu{
+ padding-left:200px; 
+ padding-right: 40px;
+ display: inline-block;
+ vertical-align:top;
+ margin-top:42px;
+}
+.menu a{
+width: 86px;
+text-decoration: none;
+color:black;
+padding-right:19px;
+padding-left:19px;
+}
+
+.details{
+background-color: rgba(243,243,243,1);
+  height: 35px;
+  width: 100%;
+  line-height: 50px;
+  text-align:right;
+  /* padding-top: 10px; */
+  margin-top: -1px;
+  font-size: 14px; padding-right:13px;
+}
+.details label{
+  /*padding-right:13px;*/
+}
+.title{
+    background-color:rgba(248,248,248,1);
+    text-align: center;  
+    font-size: 12px;
+}
+.title img{
+padding-top:45px;}
+p.title1{
+    font-size: 23px;
+line-height: 0%;}
+.underdetails {
+  background-color:white;
+  height: 1px;
+}

@@ -1,0 +1,1404 @@
+In student select file. 
+In student select file. 
+In student select file. 
+In studentUpload.  Testing! 
+05/24/2016 09:54:18upload file : /var/tmp/phpvwuxL4 to ../uploads/students1.csv
+[05/24/2016 09:54:18]: schoolLng, schoolLat -75.025787 39.836330
+[05/24/2016 09:54:18]: Calculating quadrant. schoolLng, schoolLat, longi, lati -75.025787 39.836330 -74.9153 39.9218
+[05/24/2016 09:54:18]: student bearing is: 38
+[05/24/2016 09:54:18]: REPLACE INTO `students`
+	  	        SET `student_address` = '745 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name1',
+	  	            `school_name` = 'Sterling',
+	  	            `lat` = '39.9218',
+	  	            `lng` = '-74.9153',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 09:54:18]: Calculating quadrant. schoolLng, schoolLat, longi, lati -75.025787 39.836330 -74.9155 39.9216
+[05/24/2016 09:54:18]: student bearing is: 38
+[05/24/2016 09:54:18]: REPLACE INTO `students`
+	  	        SET `student_address` = '747 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name2',
+	  	            `school_name` = 'Sterling',
+	  	            `lat` = '39.9216',
+	  	            `lng` = '-74.9155',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 09:54:19]: Calculating quadrant. schoolLng, schoolLat, longi, lati -75.025787 39.836330 -74.9158 39.9214
+[05/24/2016 09:54:19]: student bearing is: 38
+[05/24/2016 09:54:19]: REPLACE INTO `students`
+	  	        SET `student_address` = '749 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name3',
+	  	            `school_name` = 'Sterling',
+	  	            `lat` = '39.9214',
+	  	            `lng` = '-74.9158',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '1'
+	  	             
+In student select file. 
+In studentUpload.  Testing! 
+05/24/2016 09:55:54upload file : /var/tmp/phpNxn8Hd to ../uploads/students1.csv
+[05/24/2016 09:55:54]: schoolLng, schoolLat -75.025787 39.836330
+[05/24/2016 09:55:55]: Calculating quadrant. schoolLng, schoolLat, longi, lati -75.025787 39.836330 -74.9153 39.9218
+[05/24/2016 09:55:55]: student bearing is: 38
+[05/24/2016 09:55:55]: REPLACE INTO `students`
+	  	        SET `student_address` = '745 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name1',
+	  	            `school_name` = 'Sterling',
+	  	            `lat` = '39.9218',
+	  	            `lng` = '-74.9153',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 09:55:55]: Calculating quadrant. schoolLng, schoolLat, longi, lati -75.025787 39.836330 -74.9155 39.9216
+[05/24/2016 09:55:55]: student bearing is: 38
+[05/24/2016 09:55:55]: REPLACE INTO `students`
+	  	        SET `student_address` = '747 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name2',
+	  	            `school_name` = 'Sterling',
+	  	            `lat` = '39.9216',
+	  	            `lng` = '-74.9155',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 09:55:55]: Calculating quadrant. schoolLng, schoolLat, longi, lati -75.025787 39.836330 -74.9158 39.9214
+[05/24/2016 09:55:55]: student bearing is: 38
+[05/24/2016 09:55:55]: REPLACE INTO `students`
+	  	        SET `student_address` = '749 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name3',
+	  	            `school_name` = 'Sterling',
+	  	            `lat` = '39.9214',
+	  	            `lng` = '-74.9158',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '1'
+	  	             
+In student select file. 
+In student select file. 
+In studentUpload.  Testing! 
+05/24/2016 10:15:35upload file : /var/tmp/phpBxrC4W to ../uploads/students.csv
+[05/24/2016 10:15:35]: schoolLng, schoolLat -74.854797 39.920967
+[05/24/2016 10:15:35]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9153 39.9218
+[05/24/2016 10:15:35]: student bearing is: 359
+[05/24/2016 10:15:35]: REPLACE INTO `students`
+	  	        SET `student_address` = '745 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name1',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9218',
+	  	            `lng` = '-74.9153',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 10:15:35]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9155 39.9216
+[05/24/2016 10:15:35]: student bearing is: 359
+[05/24/2016 10:15:35]: REPLACE INTO `students`
+	  	        SET `student_address` = '747 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name2',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9216',
+	  	            `lng` = '-74.9155',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 10:15:35]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9158 39.9214
+[05/24/2016 10:15:35]: student bearing is: 360
+[05/24/2016 10:15:35]: REPLACE INTO `students`
+	  	        SET `student_address` = '749 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name3',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9214',
+	  	            `lng` = '-74.9158',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 10:15:35]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8629 39.9461
+[05/24/2016 10:15:35]: student bearing is: 288
+[05/24/2016 10:15:35]: REPLACE INTO `students`
+	  	        SET `student_address` = '138 Kettlebrook Dr. Mt Laurel, NJ',
+	  	            `student_name` = 'Name4',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9461',
+	  	            `lng` = '-74.8629',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 10:15:35]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8644 39.9489
+[05/24/2016 10:15:35]: student bearing is: 289
+[05/24/2016 10:15:35]: REPLACE INTO `students`
+	  	        SET `student_address` = '2104B Denham Ct Mt Laurel, NJ',
+	  	            `student_name` = 'Name5',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9489',
+	  	            `lng` = '-74.8644',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 10:15:36]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.869 39.9527
+[05/24/2016 10:15:36]: student bearing is: 294
+[05/24/2016 10:15:36]: REPLACE INTO `students`
+	  	        SET `student_address` = '1038 Hainesport Mt Laurel Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name6',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9527',
+	  	            `lng` = '-74.869',
+	  	            `student_grade` = '10',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 10:15:36]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8849 39.9204999
+[05/24/2016 10:15:36]: student bearing is: 1
+[05/24/2016 10:15:36]: REPLACE INTO `students`
+	  	        SET `student_address` = '5014 Church Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name7',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9204999',
+	  	            `lng` = '-74.8849',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 10:15:36]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8609 39.9156
+[05/24/2016 10:15:36]: student bearing is: 41
+[05/24/2016 10:15:36]: REPLACE INTO `students`
+	  	        SET `student_address` = '22 Wellesley Way, Medford, N',
+	  	            `student_name` = 'Name8',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9156',
+	  	            `lng` = '-74.8609',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 10:15:36]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8643501 39.9198097
+[05/24/2016 10:15:36]: student bearing is: 7
+[05/24/2016 10:15:36]: REPLACE INTO `students`
+	  	        SET `student_address` = '103 Church Rd, Mt Laurel, NJ',
+	  	            `student_name` = 'Name9',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9198097',
+	  	            `lng` = '-74.8643501',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 10:15:36]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8608 39.917
+[05/24/2016 10:15:36]: student bearing is: 33
+[05/24/2016 10:15:36]: REPLACE INTO `students`
+	  	        SET `student_address` = '14 Wellesley Way, Medford, NJ',
+	  	            `student_name` = 'Name10',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.917',
+	  	            `lng` = '-74.8608',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 10:15:37]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8501 39.9277
+[05/24/2016 10:15:37]: student bearing is: 55
+[05/24/2016 10:15:37]: REPLACE INTO `students`
+	  	        SET `student_address` = '8 Pine Acres Dr Medford, NJ',
+	  	            `student_name` = 'Name13',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9277',
+	  	            `lng` = '-74.8501',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 10:15:37]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8494 39.9336
+[05/24/2016 10:15:37]: student bearing is: 67
+[05/24/2016 10:15:37]: REPLACE INTO `students`
+	  	        SET `student_address` = '74 Ark Rd, Lumberton, NJ',
+	  	            `student_name` = 'Name14',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9336',
+	  	            `lng` = '-74.8494',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 10:15:37]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8494 39.9336
+[05/24/2016 10:15:37]: student bearing is: 67
+[05/24/2016 10:15:37]: REPLACE INTO `students`
+	  	        SET `student_address` = '74 Ark Rd, Lumberton, NJ',
+	  	            `student_name` = 'Name15',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9336',
+	  	            `lng` = '-74.8494',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+In student select file. 
+In student select file. 
+In studentUpload.  Testing! 
+05/24/2016 12:22:37upload file : /var/tmp/phpMsHXeN to ../uploads/students.csv
+[05/24/2016 12:22:37]: schoolLng, schoolLat -74.854797 39.920967
+[05/24/2016 12:22:37]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9153 39.9218
+[05/24/2016 12:22:37]: student bearing is: 359
+[05/24/2016 12:22:37]: REPLACE INTO `students`
+	  	        SET `student_address` = '745 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name1',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9218',
+	  	            `lng` = '-74.9153',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 12:22:38]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9155 39.9216
+[05/24/2016 12:22:38]: student bearing is: 359
+[05/24/2016 12:22:38]: REPLACE INTO `students`
+	  	        SET `student_address` = '747 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name2',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9216',
+	  	            `lng` = '-74.9155',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 12:22:38]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9158 39.9214
+[05/24/2016 12:22:38]: student bearing is: 360
+[05/24/2016 12:22:38]: REPLACE INTO `students`
+	  	        SET `student_address` = '749 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name3',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9214',
+	  	            `lng` = '-74.9158',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 12:22:38]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8629 39.9461
+[05/24/2016 12:22:38]: student bearing is: 288
+[05/24/2016 12:22:38]: REPLACE INTO `students`
+	  	        SET `student_address` = '138 Kettlebrook Dr. Mt Laurel, NJ',
+	  	            `student_name` = 'Name4',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9461',
+	  	            `lng` = '-74.8629',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 12:22:38]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8644 39.9489
+[05/24/2016 12:22:38]: student bearing is: 289
+[05/24/2016 12:22:38]: REPLACE INTO `students`
+	  	        SET `student_address` = '2104B Denham Ct Mt Laurel, NJ',
+	  	            `student_name` = 'Name5',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9489',
+	  	            `lng` = '-74.8644',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 12:22:38]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.869 39.9527
+[05/24/2016 12:22:38]: student bearing is: 294
+[05/24/2016 12:22:38]: REPLACE INTO `students`
+	  	        SET `student_address` = '1038 Hainesport Mt Laurel Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name6',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9527',
+	  	            `lng` = '-74.869',
+	  	            `student_grade` = '10',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 12:22:39]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8849 39.9204999
+[05/24/2016 12:22:39]: student bearing is: 1
+[05/24/2016 12:22:39]: REPLACE INTO `students`
+	  	        SET `student_address` = '5014 Church Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name7',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9204999',
+	  	            `lng` = '-74.8849',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 12:22:39]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8609 39.9156
+[05/24/2016 12:22:39]: student bearing is: 41
+[05/24/2016 12:22:39]: REPLACE INTO `students`
+	  	        SET `student_address` = '22 Wellesley Way, Medford, N',
+	  	            `student_name` = 'Name8',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9156',
+	  	            `lng` = '-74.8609',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 12:22:39]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8643501 39.9198097
+[05/24/2016 12:22:39]: student bearing is: 7
+[05/24/2016 12:22:39]: REPLACE INTO `students`
+	  	        SET `student_address` = '103 Church Rd, Mt Laurel, NJ',
+	  	            `student_name` = 'Name9',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9198097',
+	  	            `lng` = '-74.8643501',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 12:22:39]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8608 39.917
+[05/24/2016 12:22:39]: student bearing is: 33
+[05/24/2016 12:22:39]: REPLACE INTO `students`
+	  	        SET `student_address` = '14 Wellesley Way, Medford, NJ',
+	  	            `student_name` = 'Name10',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.917',
+	  	            `lng` = '-74.8608',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 12:22:39]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8441769 39.9170726
+[05/24/2016 12:22:39]: student bearing is: 340
+[05/24/2016 12:22:39]: REPLACE INTO `students`
+	  	        SET `student_address` = '10 Bedford Dr Medford, NJ',
+	  	            `student_name` = 'Name11',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9170726',
+	  	            `lng` = '-74.8441769',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '4'
+	  	             
+[05/24/2016 12:22:39]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.847092 39.9138214
+[05/24/2016 12:22:39]: student bearing is: 317
+[05/24/2016 12:22:39]: REPLACE INTO `students`
+	  	        SET `student_address` = '26 Derby Ct Medford, NJ',
+	  	            `student_name` = 'Name12',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9138214',
+	  	            `lng` = '-74.847092',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '4'
+	  	             
+[05/24/2016 12:22:40]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8501 39.9277
+[05/24/2016 12:22:40]: student bearing is: 55
+[05/24/2016 12:22:40]: REPLACE INTO `students`
+	  	        SET `student_address` = '8 Pine Acres Dr Medford, NJ',
+	  	            `student_name` = 'Name13',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9277',
+	  	            `lng` = '-74.8501',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 12:22:40]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8494 39.9336
+[05/24/2016 12:22:40]: student bearing is: 67
+[05/24/2016 12:22:40]: REPLACE INTO `students`
+	  	        SET `student_address` = '74 Ark Rd, Lumberton, NJ',
+	  	            `student_name` = 'Name14',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9336',
+	  	            `lng` = '-74.8494',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 12:22:40]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8494 39.9336
+[05/24/2016 12:22:40]: student bearing is: 67
+[05/24/2016 12:22:40]: REPLACE INTO `students`
+	  	        SET `student_address` = '74 Ark Rd, Lumberton, NJ',
+	  	            `student_name` = 'Name15',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9336',
+	  	            `lng` = '-74.8494',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+In student select file. 
+In student select file. 
+In studentUpload.  Testing! 
+In student select file. 
+In studentUpload.  Testing! 
+[]: schoolLng, schoolLat -74.854797 39.920967
+[05/24/2016 01:03:25]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9153 39.9218
+[05/24/2016 01:03:25]: student bearing is: 179
+[05/24/2016 01:03:25]: REPLACE INTO `students`
+	  	        SET `student_address` = '745 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name1',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9218',
+	  	            `lng` = '-74.9153',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:03:26]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9155 39.9216
+[05/24/2016 01:03:26]: student bearing is: 179
+[05/24/2016 01:03:26]: REPLACE INTO `students`
+	  	        SET `student_address` = '747 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name2',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9216',
+	  	            `lng` = '-74.9155',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:03:26]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9158 39.9214
+[05/24/2016 01:03:26]: student bearing is: 180
+[05/24/2016 01:03:26]: REPLACE INTO `students`
+	  	        SET `student_address` = '749 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name3',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9214',
+	  	            `lng` = '-74.9158',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:03:26]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8629 39.9461
+[05/24/2016 01:03:26]: student bearing is: 108
+[05/24/2016 01:03:26]: REPLACE INTO `students`
+	  	        SET `student_address` = '138 Kettlebrook Dr. Mt Laurel, NJ',
+	  	            `student_name` = 'Name4',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9461',
+	  	            `lng` = '-74.8629',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:03:26]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8644 39.9489
+[05/24/2016 01:03:26]: student bearing is: 109
+[05/24/2016 01:03:26]: REPLACE INTO `students`
+	  	        SET `student_address` = '2104B Denham Ct Mt Laurel, NJ',
+	  	            `student_name` = 'Name5',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9489',
+	  	            `lng` = '-74.8644',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:03:26]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.869 39.9527
+[05/24/2016 01:03:26]: student bearing is: 114
+[05/24/2016 01:03:26]: REPLACE INTO `students`
+	  	        SET `student_address` = '1038 Hainesport Mt Laurel Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name6',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9527',
+	  	            `lng` = '-74.869',
+	  	            `student_grade` = '10',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:03:27]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8849 39.9204999
+[05/24/2016 01:03:27]: student bearing is: 1
+[05/24/2016 01:03:27]: REPLACE INTO `students`
+	  	        SET `student_address` = '5014 Church Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name7',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9204999',
+	  	            `lng` = '-74.8849',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:03:27]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8609 39.9156
+[05/24/2016 01:03:27]: student bearing is: 41
+[05/24/2016 01:03:27]: REPLACE INTO `students`
+	  	        SET `student_address` = '22 Wellesley Way, Medford, N',
+	  	            `student_name` = 'Name8',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9156',
+	  	            `lng` = '-74.8609',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:03:27]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8643501 39.9198097
+[05/24/2016 01:03:27]: student bearing is: 7
+[05/24/2016 01:03:27]: REPLACE INTO `students`
+	  	        SET `student_address` = '103 Church Rd, Mt Laurel, NJ',
+	  	            `student_name` = 'Name9',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9198097',
+	  	            `lng` = '-74.8643501',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:03:27]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8608 39.917
+[05/24/2016 01:03:27]: student bearing is: 33
+[05/24/2016 01:03:27]: REPLACE INTO `students`
+	  	        SET `student_address` = '14 Wellesley Way, Medford, NJ',
+	  	            `student_name` = 'Name10',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.917',
+	  	            `lng` = '-74.8608',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:03:27]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8441769 39.9170726
+[05/24/2016 01:03:27]: student bearing is: -20
+[05/24/2016 01:03:27]: REPLACE INTO `students`
+	  	        SET `student_address` = '10 Bedford Dr Medford, NJ',
+	  	            `student_name` = 'Name11',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9170726',
+	  	            `lng` = '-74.8441769',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '4'
+	  	             
+[05/24/2016 01:03:28]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8501 39.9277
+[05/24/2016 01:03:28]: student bearing is: 55
+[05/24/2016 01:03:28]: REPLACE INTO `students`
+	  	        SET `student_address` = '8 Pine Acres Dr Medford, NJ',
+	  	            `student_name` = 'Name13',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9277',
+	  	            `lng` = '-74.8501',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 01:03:28]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8494 39.9336
+[05/24/2016 01:03:28]: student bearing is: 67
+[05/24/2016 01:03:28]: REPLACE INTO `students`
+	  	        SET `student_address` = '74 Ark Rd, Lumberton, NJ',
+	  	            `student_name` = 'Name14',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9336',
+	  	            `lng` = '-74.8494',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 01:03:28]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8494 39.9336
+[05/24/2016 01:03:28]: student bearing is: 67
+[05/24/2016 01:03:28]: REPLACE INTO `students`
+	  	        SET `student_address` = '74 Ark Rd, Lumberton, NJ',
+	  	            `student_name` = 'Name15',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9336',
+	  	            `lng` = '-74.8494',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+In student select file. 
+In studentUpload.  Testing! 
+[]: schoolLng, schoolLat -74.854797 39.920967
+[05/24/2016 01:26:22]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9153 39.9218
+[05/24/2016 01:26:22]: student bearing is: 179
+[05/24/2016 01:26:22]: REPLACE INTO `students`
+	  	        SET `student_address` = '745 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name1',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9218',
+	  	            `lng` = '-74.9153',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:26:22]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9155 39.9216
+[05/24/2016 01:26:22]: student bearing is: 179
+[05/24/2016 01:26:22]: REPLACE INTO `students`
+	  	        SET `student_address` = '747 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name2',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9216',
+	  	            `lng` = '-74.9155',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:26:22]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9158 39.9214
+[05/24/2016 01:26:22]: student bearing is: 180
+[05/24/2016 01:26:22]: REPLACE INTO `students`
+	  	        SET `student_address` = '749 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name3',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9214',
+	  	            `lng` = '-74.9158',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:26:22]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8629 39.9461
+[05/24/2016 01:26:22]: student bearing is: 108
+[05/24/2016 01:26:22]: REPLACE INTO `students`
+	  	        SET `student_address` = '138 Kettlebrook Dr. Mt Laurel, NJ',
+	  	            `student_name` = 'Name4',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9461',
+	  	            `lng` = '-74.8629',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:26:22]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8644 39.9489
+[05/24/2016 01:26:22]: student bearing is: 109
+[05/24/2016 01:26:22]: REPLACE INTO `students`
+	  	        SET `student_address` = '2104B Denham Ct Mt Laurel, NJ',
+	  	            `student_name` = 'Name5',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9489',
+	  	            `lng` = '-74.8644',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:26:23]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.869 39.9527
+[05/24/2016 01:26:23]: student bearing is: 114
+[05/24/2016 01:26:23]: REPLACE INTO `students`
+	  	        SET `student_address` = '1038 Hainesport Mt Laurel Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name6',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9527',
+	  	            `lng` = '-74.869',
+	  	            `student_grade` = '10',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:26:23]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8849 39.9204999
+[05/24/2016 01:26:23]: student bearing is: 1
+[05/24/2016 01:26:23]: REPLACE INTO `students`
+	  	        SET `student_address` = '5014 Church Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name7',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9204999',
+	  	            `lng` = '-74.8849',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:26:23]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8609 39.9156
+[05/24/2016 01:26:23]: student bearing is: 41
+[05/24/2016 01:26:23]: REPLACE INTO `students`
+	  	        SET `student_address` = '22 Wellesley Way, Medford, N',
+	  	            `student_name` = 'Name8',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9156',
+	  	            `lng` = '-74.8609',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:26:23]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8643501 39.9198097
+[05/24/2016 01:26:23]: student bearing is: 7
+[05/24/2016 01:26:23]: REPLACE INTO `students`
+	  	        SET `student_address` = '103 Church Rd, Mt Laurel, NJ',
+	  	            `student_name` = 'Name9',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9198097',
+	  	            `lng` = '-74.8643501',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:26:23]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8608 39.917
+[05/24/2016 01:26:23]: student bearing is: 33
+[05/24/2016 01:26:23]: REPLACE INTO `students`
+	  	        SET `student_address` = '14 Wellesley Way, Medford, NJ',
+	  	            `student_name` = 'Name10',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.917',
+	  	            `lng` = '-74.8608',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:26:24]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8501 39.9277
+[05/24/2016 01:26:24]: student bearing is: 55
+[05/24/2016 01:26:24]: REPLACE INTO `students`
+	  	        SET `student_address` = '8 Pine Acres Dr Medford, NJ',
+	  	            `student_name` = 'Name13',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9277',
+	  	            `lng` = '-74.8501',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 01:26:24]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8494 39.9336
+[05/24/2016 01:26:24]: student bearing is: 67
+[05/24/2016 01:26:24]: REPLACE INTO `students`
+	  	        SET `student_address` = '74 Ark Rd, Lumberton, NJ',
+	  	            `student_name` = 'Name14',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9336',
+	  	            `lng` = '-74.8494',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 01:26:24]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8494 39.9336
+[05/24/2016 01:26:24]: student bearing is: 67
+[05/24/2016 01:26:24]: REPLACE INTO `students`
+	  	        SET `student_address` = '74 Ark Rd, Lumberton, NJ',
+	  	            `student_name` = 'Name15',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9336',
+	  	            `lng` = '-74.8494',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+In student select file. 
+In studentUpload.  Testing! 
+[]: schoolLng, schoolLat -74.854797 39.920967
+[05/24/2016 01:29:51]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9153 39.9218
+[05/24/2016 01:29:51]: student bearing is: 179
+[05/24/2016 01:29:51]: REPLACE INTO `students`
+	  	        SET `student_address` = '745 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name1',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9218',
+	  	            `lng` = '-74.9153',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:29:51]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9155 39.9216
+[05/24/2016 01:29:51]: student bearing is: 179
+[05/24/2016 01:29:51]: REPLACE INTO `students`
+	  	        SET `student_address` = '747 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name2',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9216',
+	  	            `lng` = '-74.9155',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:29:52]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9158 39.9214
+[05/24/2016 01:29:52]: student bearing is: 180
+[05/24/2016 01:29:52]: REPLACE INTO `students`
+	  	        SET `student_address` = '749 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name3',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9214',
+	  	            `lng` = '-74.9158',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:29:52]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8629 39.9461
+[05/24/2016 01:29:52]: student bearing is: 108
+[05/24/2016 01:29:52]: REPLACE INTO `students`
+	  	        SET `student_address` = '138 Kettlebrook Dr. Mt Laurel, NJ',
+	  	            `student_name` = 'Name4',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9461',
+	  	            `lng` = '-74.8629',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:29:52]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8644 39.9489
+[05/24/2016 01:29:52]: student bearing is: 109
+[05/24/2016 01:29:52]: REPLACE INTO `students`
+	  	        SET `student_address` = '2104B Denham Ct Mt Laurel, NJ',
+	  	            `student_name` = 'Name5',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9489',
+	  	            `lng` = '-74.8644',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:29:52]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.869 39.9527
+[05/24/2016 01:29:52]: student bearing is: 114
+[05/24/2016 01:29:52]: REPLACE INTO `students`
+	  	        SET `student_address` = '1038 Hainesport Mt Laurel Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name6',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9527',
+	  	            `lng` = '-74.869',
+	  	            `student_grade` = '10',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:29:52]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8849 39.9204999
+[05/24/2016 01:29:52]: student bearing is: 1
+[05/24/2016 01:29:52]: REPLACE INTO `students`
+	  	        SET `student_address` = '5014 Church Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name7',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9204999',
+	  	            `lng` = '-74.8849',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:29:52]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8609 39.9156
+[05/24/2016 01:29:52]: student bearing is: 41
+[05/24/2016 01:29:52]: REPLACE INTO `students`
+	  	        SET `student_address` = '22 Wellesley Way, Medford, N',
+	  	            `student_name` = 'Name8',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9156',
+	  	            `lng` = '-74.8609',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:29:52]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8643501 39.9198097
+[05/24/2016 01:29:52]: student bearing is: 7
+[05/24/2016 01:29:52]: REPLACE INTO `students`
+	  	        SET `student_address` = '103 Church Rd, Mt Laurel, NJ',
+	  	            `student_name` = 'Name9',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9198097',
+	  	            `lng` = '-74.8643501',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:29:52]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8608 39.917
+[05/24/2016 01:29:52]: student bearing is: 33
+[05/24/2016 01:29:52]: REPLACE INTO `students`
+	  	        SET `student_address` = '14 Wellesley Way, Medford, NJ',
+	  	            `student_name` = 'Name10',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.917',
+	  	            `lng` = '-74.8608',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:29:52]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8441769 39.9170726
+[05/24/2016 01:29:52]: student bearing is: -20
+[05/24/2016 01:29:52]: REPLACE INTO `students`
+	  	        SET `student_address` = '10 Bedford Dr Medford, NJ',
+	  	            `student_name` = 'Name11',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9170726',
+	  	            `lng` = '-74.8441769',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '4'
+	  	             
+[05/24/2016 01:29:53]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.847092 39.9138214
+[05/24/2016 01:29:53]: student bearing is: -43
+[05/24/2016 01:29:53]: REPLACE INTO `students`
+	  	        SET `student_address` = '26 Derby Ct Medford, NJ',
+	  	            `student_name` = 'Name12',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9138214',
+	  	            `lng` = '-74.847092',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '4'
+	  	             
+In student select file. 
+In studentUpload.  Testing! 
+[]: schoolLng, schoolLat -74.854797 39.920967
+[05/24/2016 01:30:16]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9153 39.9218
+[05/24/2016 01:30:16]: student bearing is: 179
+[05/24/2016 01:30:16]: REPLACE INTO `students`
+	  	        SET `student_address` = '745 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name1',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9218',
+	  	            `lng` = '-74.9153',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:30:16]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9155 39.9216
+[05/24/2016 01:30:16]: student bearing is: 179
+[05/24/2016 01:30:16]: REPLACE INTO `students`
+	  	        SET `student_address` = '747 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name2',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9216',
+	  	            `lng` = '-74.9155',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:30:16]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9158 39.9214
+[05/24/2016 01:30:16]: student bearing is: 180
+[05/24/2016 01:30:16]: REPLACE INTO `students`
+	  	        SET `student_address` = '749 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name3',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9214',
+	  	            `lng` = '-74.9158',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:30:16]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8629 39.9461
+[05/24/2016 01:30:16]: student bearing is: 108
+[05/24/2016 01:30:16]: REPLACE INTO `students`
+	  	        SET `student_address` = '138 Kettlebrook Dr. Mt Laurel, NJ',
+	  	            `student_name` = 'Name4',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9461',
+	  	            `lng` = '-74.8629',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:30:16]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8644 39.9489
+[05/24/2016 01:30:16]: student bearing is: 109
+[05/24/2016 01:30:16]: REPLACE INTO `students`
+	  	        SET `student_address` = '2104B Denham Ct Mt Laurel, NJ',
+	  	            `student_name` = 'Name5',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9489',
+	  	            `lng` = '-74.8644',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:30:16]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.869 39.9527
+[05/24/2016 01:30:16]: student bearing is: 114
+[05/24/2016 01:30:16]: REPLACE INTO `students`
+	  	        SET `student_address` = '1038 Hainesport Mt Laurel Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name6',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9527',
+	  	            `lng` = '-74.869',
+	  	            `student_grade` = '10',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:30:16]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8849 39.9204999
+[05/24/2016 01:30:16]: student bearing is: 1
+[05/24/2016 01:30:16]: REPLACE INTO `students`
+	  	        SET `student_address` = '5014 Church Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name7',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9204999',
+	  	            `lng` = '-74.8849',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:30:17]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8609 39.9156
+[05/24/2016 01:30:17]: student bearing is: 41
+[05/24/2016 01:30:17]: REPLACE INTO `students`
+	  	        SET `student_address` = '22 Wellesley Way, Medford, N',
+	  	            `student_name` = 'Name8',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9156',
+	  	            `lng` = '-74.8609',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:30:17]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8643501 39.9198097
+[05/24/2016 01:30:17]: student bearing is: 7
+[05/24/2016 01:30:17]: REPLACE INTO `students`
+	  	        SET `student_address` = '103 Church Rd, Mt Laurel, NJ',
+	  	            `student_name` = 'Name9',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9198097',
+	  	            `lng` = '-74.8643501',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:30:17]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8608 39.917
+[05/24/2016 01:30:17]: student bearing is: 33
+[05/24/2016 01:30:17]: REPLACE INTO `students`
+	  	        SET `student_address` = '14 Wellesley Way, Medford, NJ',
+	  	            `student_name` = 'Name10',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.917',
+	  	            `lng` = '-74.8608',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+In student select file. 
+In student select file. 
+In student select file. 
+In student select file. 
+In student select file. 
+In student select file. 
+In studentUpload.  Testing! 
+05/24/2016 01:59:47upload file : /var/tmp/phpLyqaSh to ../uploads/students.csv
+[05/24/2016 01:59:47]: schoolLng, schoolLat -74.854797 39.920967
+[05/24/2016 01:59:47]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9153 39.9218
+[05/24/2016 01:59:47]: student bearing is: 179
+[05/24/2016 01:59:47]: REPLACE INTO `students`
+	  	        SET `student_address` = '745 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name1',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9218',
+	  	            `lng` = '-74.9153',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:59:47]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9155 39.9216
+[05/24/2016 01:59:47]: student bearing is: 179
+[05/24/2016 01:59:47]: REPLACE INTO `students`
+	  	        SET `student_address` = '747 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name2',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9216',
+	  	            `lng` = '-74.9155',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:59:47]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9158 39.9214
+[05/24/2016 01:59:47]: student bearing is: 180
+[05/24/2016 01:59:47]: REPLACE INTO `students`
+	  	        SET `student_address` = '749 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name3',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9214',
+	  	            `lng` = '-74.9158',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:59:48]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8629 39.9461
+[05/24/2016 01:59:48]: student bearing is: 108
+[05/24/2016 01:59:48]: REPLACE INTO `students`
+	  	        SET `student_address` = '138 Kettlebrook Dr. Mt Laurel, NJ',
+	  	            `student_name` = 'Name4',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9461',
+	  	            `lng` = '-74.8629',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:59:48]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8644 39.9489
+[05/24/2016 01:59:48]: student bearing is: 109
+[05/24/2016 01:59:48]: REPLACE INTO `students`
+	  	        SET `student_address` = '2104B Denham Ct Mt Laurel, NJ',
+	  	            `student_name` = 'Name5',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9489',
+	  	            `lng` = '-74.8644',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:59:48]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.869 39.9527
+[05/24/2016 01:59:48]: student bearing is: 114
+[05/24/2016 01:59:48]: REPLACE INTO `students`
+	  	        SET `student_address` = '1038 Hainesport Mt Laurel Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name6',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9527',
+	  	            `lng` = '-74.869',
+	  	            `student_grade` = '10',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 01:59:48]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8849 39.9204999
+[05/24/2016 01:59:48]: student bearing is: 1
+[05/24/2016 01:59:48]: REPLACE INTO `students`
+	  	        SET `student_address` = '5014 Church Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name7',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9204999',
+	  	            `lng` = '-74.8849',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:59:48]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8609 39.9156
+[05/24/2016 01:59:48]: student bearing is: 41
+[05/24/2016 01:59:48]: REPLACE INTO `students`
+	  	        SET `student_address` = '22 Wellesley Way, Medford, N',
+	  	            `student_name` = 'Name8',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9156',
+	  	            `lng` = '-74.8609',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:59:49]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8643501 39.9198097
+[05/24/2016 01:59:49]: student bearing is: 7
+[05/24/2016 01:59:49]: REPLACE INTO `students`
+	  	        SET `student_address` = '103 Church Rd, Mt Laurel, NJ',
+	  	            `student_name` = 'Name9',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9198097',
+	  	            `lng` = '-74.8643501',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:59:49]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8608 39.917
+[05/24/2016 01:59:49]: student bearing is: 33
+[05/24/2016 01:59:49]: REPLACE INTO `students`
+	  	        SET `student_address` = '14 Wellesley Way, Medford, NJ',
+	  	            `student_name` = 'Name10',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.917',
+	  	            `lng` = '-74.8608',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 01:59:49]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8441769 39.9170726
+[05/24/2016 01:59:49]: student bearing is: -20
+[05/24/2016 01:59:49]: REPLACE INTO `students`
+	  	        SET `student_address` = '10 Bedford Dr Medford, NJ',
+	  	            `student_name` = 'Name11',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9170726',
+	  	            `lng` = '-74.8441769',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '4'
+	  	             
+[05/24/2016 01:59:49]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.847092 39.9138214
+[05/24/2016 01:59:49]: student bearing is: -43
+[05/24/2016 01:59:49]: REPLACE INTO `students`
+	  	        SET `student_address` = '26 Derby Ct Medford, NJ',
+	  	            `student_name` = 'Name12',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9138214',
+	  	            `lng` = '-74.847092',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '4'
+	  	             
+[05/24/2016 01:59:49]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8501 39.9277
+[05/24/2016 01:59:49]: student bearing is: 55
+[05/24/2016 01:59:49]: REPLACE INTO `students`
+	  	        SET `student_address` = '8 Pine Acres Dr Medford, NJ',
+	  	            `student_name` = 'Name13',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9277',
+	  	            `lng` = '-74.8501',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 01:59:50]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8494 39.9336
+[05/24/2016 01:59:50]: student bearing is: 67
+[05/24/2016 01:59:50]: REPLACE INTO `students`
+	  	        SET `student_address` = '74 Ark Rd, Lumberton, NJ',
+	  	            `student_name` = 'Name14',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9336',
+	  	            `lng` = '-74.8494',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 01:59:50]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8494 39.9336
+[05/24/2016 01:59:50]: student bearing is: 67
+[05/24/2016 01:59:50]: REPLACE INTO `students`
+	  	        SET `student_address` = '74 Ark Rd, Lumberton, NJ',
+	  	            `student_name` = 'Name15',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9336',
+	  	            `lng` = '-74.8494',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+In student select file. 
+In studentUpload.  Testing! 
+[]: schoolLng, schoolLat -74.854797 39.920967
+[05/24/2016 02:03:33]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9153 39.9218
+[05/24/2016 02:03:33]: student bearing is: 179
+[05/24/2016 02:03:33]: REPLACE INTO `students`
+	  	        SET `student_address` = '745 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name1',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9218',
+	  	            `lng` = '-74.9153',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 02:03:33]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9155 39.9216
+[05/24/2016 02:03:33]: student bearing is: 179
+[05/24/2016 02:03:33]: REPLACE INTO `students`
+	  	        SET `student_address` = '747 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name2',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9216',
+	  	            `lng` = '-74.9155',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 02:03:33]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.9158 39.9214
+[05/24/2016 02:03:33]: student bearing is: 180
+[05/24/2016 02:03:33]: REPLACE INTO `students`
+	  	        SET `student_address` = '749 Grant Rd. Mount Laurel, NJ',
+	  	            `student_name` = 'Name3',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9214',
+	  	            `lng` = '-74.9158',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 02:03:33]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8629 39.9461
+[05/24/2016 02:03:33]: student bearing is: 108
+[05/24/2016 02:03:33]: REPLACE INTO `students`
+	  	        SET `student_address` = '138 Kettlebrook Dr. Mt Laurel, NJ',
+	  	            `student_name` = 'Name4',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9461',
+	  	            `lng` = '-74.8629',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 02:03:33]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8644 39.9489
+[05/24/2016 02:03:33]: student bearing is: 109
+[05/24/2016 02:03:33]: REPLACE INTO `students`
+	  	        SET `student_address` = '2104B Denham Ct Mt Laurel, NJ',
+	  	            `student_name` = 'Name5',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9489',
+	  	            `lng` = '-74.8644',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 02:03:33]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.869 39.9527
+[05/24/2016 02:03:33]: student bearing is: 114
+[05/24/2016 02:03:33]: REPLACE INTO `students`
+	  	        SET `student_address` = '1038 Hainesport Mt Laurel Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name6',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9527',
+	  	            `lng` = '-74.869',
+	  	            `student_grade` = '10',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '2'
+	  	             
+[05/24/2016 02:03:33]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8849 39.9204999
+[05/24/2016 02:03:33]: student bearing is: 1
+[05/24/2016 02:03:33]: REPLACE INTO `students`
+	  	        SET `student_address` = '5014 Church Rd Mt Laurel, NJ',
+	  	            `student_name` = 'Name7',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9204999',
+	  	            `lng` = '-74.8849',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'Y',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 02:03:33]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8609 39.9156
+[05/24/2016 02:03:33]: student bearing is: 41
+[05/24/2016 02:03:33]: REPLACE INTO `students`
+	  	        SET `student_address` = '22 Wellesley Way, Medford, N',
+	  	            `student_name` = 'Name8',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9156',
+	  	            `lng` = '-74.8609',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 02:03:33]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8643501 39.9198097
+[05/24/2016 02:03:33]: student bearing is: 7
+[05/24/2016 02:03:33]: REPLACE INTO `students`
+	  	        SET `student_address` = '103 Church Rd, Mt Laurel, NJ',
+	  	            `student_name` = 'Name9',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9198097',
+	  	            `lng` = '-74.8643501',
+	  	            `student_grade` = '11',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 02:03:34]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8608 39.917
+[05/24/2016 02:03:34]: student bearing is: 33
+[05/24/2016 02:03:34]: REPLACE INTO `students`
+	  	        SET `student_address` = '14 Wellesley Way, Medford, NJ',
+	  	            `student_name` = 'Name10',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.917',
+	  	            `lng` = '-74.8608',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '3'
+	  	             
+[05/24/2016 02:03:34]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8441769 39.9170726
+[05/24/2016 02:03:34]: student bearing is: -20
+[05/24/2016 02:03:34]: REPLACE INTO `students`
+	  	        SET `student_address` = '10 Bedford Dr Medford, NJ',
+	  	            `student_name` = 'Name11',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9170726',
+	  	            `lng` = '-74.8441769',
+	  	            `student_grade` = '6',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '4'
+	  	             
+[05/24/2016 02:03:34]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.847092 39.9138214
+[05/24/2016 02:03:34]: student bearing is: -43
+[05/24/2016 02:03:34]: REPLACE INTO `students`
+	  	        SET `student_address` = '26 Derby Ct Medford, NJ',
+	  	            `student_name` = 'Name12',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9138214',
+	  	            `lng` = '-74.847092',
+	  	            `student_grade` = '8',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '4'
+	  	             
+[05/24/2016 02:03:34]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8501 39.9277
+[05/24/2016 02:03:34]: student bearing is: 55
+[05/24/2016 02:03:34]: REPLACE INTO `students`
+	  	        SET `student_address` = '8 Pine Acres Dr Medford, NJ',
+	  	            `student_name` = 'Name13',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9277',
+	  	            `lng` = '-74.8501',
+	  	            `student_grade` = '9',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 02:03:34]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8494 39.9336
+[05/24/2016 02:03:34]: student bearing is: 67
+[05/24/2016 02:03:34]: REPLACE INTO `students`
+	  	        SET `student_address` = '74 Ark Rd, Lumberton, NJ',
+	  	            `student_name` = 'Name14',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9336',
+	  	            `lng` = '-74.8494',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+[05/24/2016 02:03:34]: Calculating quadrant. schoolLng, schoolLat, longi, lati -74.854797 39.920967 -74.8494 39.9336
+[05/24/2016 02:03:34]: student bearing is: 67
+[05/24/2016 02:03:34]: REPLACE INTO `students`
+	  	        SET `student_address` = '74 Ark Rd, Lumberton, NJ',
+	  	            `student_name` = 'Name15',
+	  	            `school_name` = 'Lenape',
+	  	            `lat` = '39.9336',
+	  	            `lng` = '-74.8494',
+	  	            `student_grade` = '12',
+	  	            `student_special_needs` = 'N',
+	  	            `quadrant` = '1'
+	  	             
+In studentUpload.  Testing! 

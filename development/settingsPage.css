@@ -1,0 +1,648 @@
+body{
+    position: relative;
+    width:100%;
+    margin: 10px;
+    background-color: rgb(255,255,255);
+}
+
+img.logo{
+    display: block;
+    margin: 0px auto 30px auto;
+
+}
+
+.imgSelect{
+    height: 350px;
+    margin: 22px auto auto auto;
+    
+} 
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.mapSnippet {
+    width: 250px;
+    height: 80px;
+    padding-left: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+/* *********** TOOL TIP ********************* */
+div#tipDeleteSchool {
+  display: none;
+  position: absolute;
+  padding: 10px;
+  background: #eeeeee;
+  color: #000000;
+  border: 1px solid #1a1a1a;
+  font-size: 90%;
+}
+div#tipAddSchool {
+  display: none;
+  position: absolute;
+  
+  padding: 10px;
+  background: #eeeeee;
+  color: #000000;
+  border: 1px solid #1a1a1a;
+  font-size: 90%;
+}
+
+
+/* ******** CLASS: generalSettingsForm ******** */
+.generalSettingsForm {
+    display: inline-block;
+    width: 85%;
+    background-color: lightgrey;
+    padding: 10px;
+    border-style: solid;
+    margin: 0px 0px 0px 50px;    
+}
+.generalSettingsForm h1{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom:30px;
+}
+.generalSettingsForm label{
+    display: inline-block;
+    font-size: 18px;
+    margin: 20px 0px 20px 0px;
+}
+set{
+    float:left;
+}
+.generalSettingsForm li {
+    display:inline-block;
+    list-style-type:none;
+    font-size: 18px;
+    padding: 5px 0px 5px 0px;
+    margin:0px;
+    
+}
+.generalSettingsForm select{
+    -webkit-appearance: none;
+    display: inline-block;
+    width: 150px;
+    height: 20px;
+    background: url(/assets/arrow.png) no-repeat rgb(47,159,207);
+    background-position: 130px 6px;
+    background-color: rgb(47,159,207);
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    padding: 0px 0px 0px 7px;
+    border-radius: 5px;
+    border-color: white;  
+    border: 0px;
+    margin: 30px 0px 30px 60px;    
+}
+
+
+
+/* ******** CLASS: schoolsSettingsForm ******** */
+.schoolsSettingsForm{
+    display: inline-block;
+    width: 85%;
+    background-color: lightgrey;
+    padding: 10px;
+    border-style: solid;
+    margin: 0px 0px 0px 50px;    
+}
+.schoolsSettingsForm h1{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom:30px;
+}
+.schoolsSettingsForm label{
+    display: inline-block;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+set{
+    float:left;
+}
+.schoolsSettingsForm li {
+    display:inline-block;
+    list-style-type:none;
+    font-size: 18px;
+    margin:0px;
+    padding: 5px 0px 5px 0px;
+}
+.schoolsSettingsForm select{
+    -webkit-appearance: none;
+    display: inline-block;
+    width: 150px;
+    height: 20px;
+    background: url(/assets/arrow.png) no-repeat rgb(47,159,207);
+    background-position: 288px 12px;
+    background-color: rgb(47,159,207);
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    padding: 0px 0px 0px 7px;
+    border-radius: 5px;
+    border-color: white;  
+    border: 0px;
+    margin-bottom: 0px 0px 30px 0px;    
+}
+
+
+/* ******** CLASS: studentsSettingsForm ******** */
+.studentsSettingsForm{
+    display: inline-block;
+    width: 85%;
+    background-color: lightgrey;
+    padding: 10px;
+    border-style: solid;
+    margin: 0px 0px 0px 50px;    
+}
+.studentsSettingsForm h1{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom:30px;
+}
+.studentsSettingsForm h2{
+    text-align: right;
+    font-size: 30px;
+    margin-bottom:30px;
+}
+.studentsSettingsForm label{
+    display: inline-block;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+set{
+    float:left;
+}
+.studentsSettingsForm li {
+    display:inline-block;
+    list-style-type:none;
+    font-size: 18px;
+    margin:0px;
+    padding: 5px 0px 5px 0px;
+}
+.studentsSettingsForm select{
+    -webkit-appearance: none;
+    display: inline-block;
+    width: 150px;
+    height: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    background: url(/assets/arrow.png) no-repeat rgb(47,159,207); 
+    background-position: 125px 7px;
+    background-color: rgb(47,159,207);
+    padding: 0px 0px 0px 7px;
+    border-radius: 5px;
+    border-color: white;  
+    border: 0px;
+    margin: 0px 10px 30px 10px;    
+}
+
+
+
+/* ******** CLASS: studentsTable ******** */
+table.studentsTable {
+    width: 100%;
+}
+th.studentsTable {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-color: rgb(47,159,207);
+    padding: 2px 2px 2px 2px;
+    border: 1px solid rgb(47,159,207);
+}
+td.studentsTable {
+    padding: 2px 2px 2px 2px;
+    border: 1px solid rgb(47,159,207);
+}
+
+/* ******** INPUT TYPES ******** */
+input[type=radiobutton] {
+    display: none; 
+} 
+
+
+
+/* ******** INPUT: checkbox ******** */
+input[type=checkbox] {
+    display: none; 
+}
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:22px;
+    height:20px;
+    vertical-align:middle;
+    background: url("../assets/check_box.png") left top no-repeat;
+    padding: 0px;
+    margin:-1px 4px 0px 0px;
+    cursor:pointer;
+}
+input[type="checkbox"]:checked + label span {
+    background: url("../assets/check_box_marked.png") top no-repeat;
+    background-size: 20.9px;
+    background-position: 0px 1px;
+}
+
+
+
+/* ******** CLASS: submit ******** */
+button.submit{
+    width: 120px;
+    height:36px;
+    background-color: rgb(47,159,207);
+    text-align: center;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding-top: 10px 20px 10px 20px;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 3px;
+    border-color: rgb(255,255,255);
+    margin-top: 13px auto 13px 20px;
+}
+button.submit:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.submit:active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+
+
+/* ******** CLASS: addSchool ******** */
+button.addSchool {
+    width: 50px;
+    height:50px;
+    background-color: rgb(47,159,207);
+    text-align: center;
+    font-size: 40px;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding: auto auto auto auto;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 100%;
+    border-color: rgb(255,255,255);
+    margin-top: 13px auto 13px auto;   
+}
+button.addSchool:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.addSchool:active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+
+/* ******** CLASS: deleteSchool ******** */
+button.deleteSchool{
+    width: 25px;
+    height: 25px;
+    background-image:url("../assets/deleteButtonRed25px.png");
+    background-repeat:no-repeat;
+    font-size: 35px;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding: 0px 0px 0px 0px;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 50%;
+    border-color: rgb(255,255,255);
+    margin: auto auto auto auto;   
+}
+button.deleteSchool:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.deleteSchool:active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+
+/* ******** CLASS: addStudent ******** */
+button.addStudent {
+    width: 50px;
+    height:50px;
+    background-color: rgb(47,159,207);
+    text-align: center;
+    font-size: 40px;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding: auto auto auto auto;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 100%;
+    border-color: rgb(255,255,255);
+    margin-top: 13px auto 13px auto;   
+}
+button.addStudent:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.addStudent:active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+
+/* ******** CLASS: schoolNameSubmit ******** */
+button.schoolNameSubmit {
+    width: 80px;
+    height:30px;
+    background-color: rgb(47,159,207);
+    text-align: center;
+    font-size: 10px;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding: auto auto auto auto;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 5px;
+    border-color: rgb(255,255,255);
+    margin-top: 13px auto 13px auto;   
+}
+button.schoolNameSubmit:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.schoolNameSubmit :active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+
+/* ******** CLASS: content ******** */
+.content{
+    background-color: rgb(56,132,182);
+    width: 150px;
+    display: inline-block;  
+    float: left;
+}
+.content ul{ 
+    padding: 8px;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgb(78,178,238);
+}
+.content a{
+    text-decoration:none;  
+}
+.content li{	
+    cursor:pointer;
+    font-size: 13px;
+    list-style-type:none;
+    color: rgb(248,248,248);
+    padding: 18px;
+    padding-left: 30px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    margin-left: 10px;
+}
+.content ul:hover{
+    background-color:rgba(44,106,145,1);
+}
+
+
+
+/* ******** INPUT: range / slider ******** */
+/*
+input[type=range] {
+    -webkit-appearance: none;
+    border-radius:0px;
+    vertical-align: middle;
+    margin: -20px 0 0 0;
+    padding: 0;
+    position: relative;
+    vertical-align: middle;
+    overflow-x: hidden;
+    overflow-y: visible;
+    width: 100%;
+    background: transparent
+    border-radius:0px;
+}
+input[type=range]:disabled::-webkit-slider-thumb:after {
+    /*background: url("/assets/slider.png") no-repeat;
+    cursor: pointer;
+    background-position: -3px -4px;
+    background-size: 23px;
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    left: -5px;
+    right: -4px;
+    top: -4px;
+    bottom: -4px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    cursor: pointer;
+    /*background-image: url("../assets/slider.png") no-repeat;
+    background: #3071a9;
+    position: relative;
+    /*pointer-events:none;
+    width: 15px;
+    height: 15px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    background: rgb(255,255,255);
+    cursor: pointer;
+    height: 5px;
+    margin: 5px 5px;
+}
+input[type=range]::-webkit-slider-thumb:before {
+    background: url(../assets/slider.png) no-repeat;
+    cursor: pointer;
+    content: "";
+    /* content: "-"; 
+    font-style: 0;
+    line-height: 0;
+    position: absolute;
+    left: -3000px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgb(47,159,207);
+}
+input[type=range]::-webkit-slider-thumb:after {
+    background: url("../assets/slider.png") no-repeat;
+    background-position: -3px -4px;
+    background-size: 23px;
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    left: -5px;
+    right: -4px;
+    top: -4px;
+    bottom: -4px;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:disabled::-webkit-slider-thumb:before {
+    background-color: background: rgb(78,178,238);
+}
+*/
+
+
+
+
+/* ******** INPUT: range / slider NEW CODE******** */
+
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+    
+    /*fix for FF unable to apply focus style bug */
+    /*border: 1px solid white;*/
+    
+    /*required for proper track sizing in FF*/
+    width: 300px;
+    margin: 0px 0px 0px 60px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    background: rgb(255,255,255);
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: rgb(47,159,207);
+    margin-top: -4px;
+}
+input[type=range]::-webkit-slider-thumb:before {
+    background: rgb(47,159,207);
+}
+/*
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+*/
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 5px;
+    background: rgb(255,255,255);
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: rgb(47,159,207);
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+input[type=range]::-ms-track {
+    width: 300px;
+    height: 5px;
+    
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    background: transparent;
+    
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-color: transparent;
+    border-width: 6px 0;
+
+    /*remove default tick marks*/
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: rgb(78,178,238);
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #888;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}
+
+
+
+
+.sliderVal{
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+  color: rgb(47,159,207);
+  width: 300px;
+  padding: 0px;
+  border: none;
+  margin: 0px 0px 20px 60px;
+  min-width: 51px;
+  display: inline-block;
+  
+}
+
+tr{
+    text-align: left;
+    padding: 30px;
+    border: 1px solid black;
+}
+td#dropDown{
+    vertical-align: bottom;
+}
+td#checkBox{
+   vertical-align: top;
+   margin: 0px 0px 0px 60px;
+   padding: 0px 0px 0px 60px;
+}
+input:checked{
+}
+span{
+    padding: 5px;
+}
+set{
+    float:left;
+}
+
+.tooltip {
+  display: none;
+  position: absolute;
+  color: red;
+  background-color: white;
+  border: 1px solid red;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 3px;
+}
+
+.menu a#settingsGeneral{
+  border-bottom: 5px solid;
+  border-bottom-color: crimson;   // rgb(56,132,182);
+  padding-bottom:8px;
+}

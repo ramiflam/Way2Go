@@ -1,0 +1,108 @@
+body{
+    position:relative;
+    width:100%;
+    margin: 10px;
+    background-color: rgba(255,255,255,1);
+}
+
+img.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;   
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+img.circle{
+    display: inline-block;
+    height: 154px;
+    width: 154px;
+    background-color: rgba(255,255,255,1);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50%;
+    border-color: rgba(47,159,207,1);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.circleMenu
+{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(255,255,255,1);   
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    border-color: rgba(255,255,255,1);
+    margin-left: auto;
+    margin-right:auto; 
+}
+
+.circleLink
+{
+    display: inline-block;
+    
+    width:13%;
+    height:270px
+    background-color: rgba(255,255,255,1);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    border-color: rgba(255,255,255,1);
+    margin: auto;
+    padding:auto;
+}
+
+.center{
+width:925px;
+margin:0 auto;
+}
+
+.circleLink label
+{
+    display: block;
+    text-align: center;
+    color: rgba(47,159,207,1);
+    font-size: 20px;
+    font-weight:bold;
+}
+div#manual.circle{
+    background-image: url("/assets/cows2.png");
+}
+div#bulls.circle{
+    
+    background-image: url("/assets/bulls2.png");
+}
+div#settings.circle{   
+    background-image: url("/assets/settings.png");
+}
+div#tank.circle {
+  background-image: url("../assets/VectorSmartObject.png");
+}
+.part1{
+    display:inline-block;
+    height: 205px;
+    width: 140px;
+    padding-right: 45px;
+}
+div#tank.part1{
+ padding-right:0px;
+}
+div#tank.part1 lable{
+  width: 160px;
+  }
+.part1 label{
+    padding-top:15px;
+   
+}
+.part1#tank label{
+    width:188px;
+   
+}
+
+div#center2{
+width:730px;
+margin:0 auto;
+}

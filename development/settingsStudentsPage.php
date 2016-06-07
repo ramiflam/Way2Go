@@ -1,0 +1,286 @@
+<?php
+include './generalFunctions.php';
+$db=getDbConnection();
+if ($db->connect_error) {
+echo '<p>connection failed</p>';
+}
+
+$userName=$_COOKIE["userName"];
+echo ("User Name: " . $userName ."\n");
+
+$schoolName = "";
+
+// $file = fopen("debug.txt","a");
+$fileTimestamp = date('Ymd');
+$file = fopen("debug_" . $fileTimestamp . ".txt","a");
+// fwrite($file,"Hello World. Testing! \n");
+if( isset($_POST['schoolNameSelect'])  OR isset($_GET['schoolNameSelect']) )  {
+echo("School Name Select is set");
+$showStudents = true;
+}
+else {
+echo("School Name Select Not Set: " );
+$showStudents = false;
+}
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students Settings</title>
+    <meta http-equiv="Content-Type" content="text/html/php" charset='utf-8' >
+    <link rel="stylesheet" type="text/css" href="settingsPage.css">
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    
+<script>
+
+  $(document).ready(function() {
+    
+    // hide/show add student button
+    // $("#addStudent").hide();	 
+    $(function () {
+      $('#schoolNameSubmit').click( function() {
+        $(this).parent().parent().parent().find('[name=addStudentDiv]').show();
+      });
+    });
+  
+    // hide/show new student form
+    $("#newStudentDiv").hide();
+    $(function () {
+      $('#addStudent').click( function() {
+      // window.alert('addStudent clicked');
+      $parentObject = $(this).parent().parent().parent().find('[name=newStudentDiv]');
+        $(this).parent().parent().parent().parent().find('[name=newStudentDiv]').show();
+       
+      });
+    });
+    
+    // hide/show upload students button
+    // $("#studentUpload").hide();
+    $(function () {
+      $('#schoolNameSubmit').click( function() {
+        $(this).parent().find('[class=studentUpload]').show();
+      });
+    });
+  
+  });
+  
+</script>		
+</head>
+
+<body>   
+   
+<img class='logo'src= "../assets/way2goLogo.png" height=120/>
+
+<div class="content">
+    <ul><a href="settingsGeneralPage.php"><li>GENERAL</li></a></ul>
+    <ul><a href="settingsSchoolsPage.php"><li>SCHOOLS</li></a></ul>
+    <ul><a href="settingsStudentsPage.php"><li>STUDENTS</li></a></ul>
+</div>
+
+
+
+
+<div class=studentsSettingsForm>
+
+<div> 
+    <h1>STUDENTS</h1>
+</div>
+
+<div>
+  <form name="schoolNameSelect" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" > 
+    <td>Select a School:<td>
+    <select name="schoolNameSelect" class= 'studentsSettingsForm'>
+                    
+      <?php 
+      $querySchools = "SELECT * FROM `user_schools` WHERE `user_name`='$userName';";
+      $rowSchools=mysqli_fetch_array($querySchools,MYSQLI_ASSOC);
+      $resultSchools = mysqli_query($db, $querySchools);
+      while($fetch_options = mysqli_fetch_array($resultSchools)) { 
+      ?> 
+  
+      <option value ="<?php echo $fetch_options['school_name']; ?>"><?php echo $fetch_options['school_name']; ?></option>
+    </selcet>
+  
+      <?php 
+      }; 
+      ?>
+      <input type = "submit" type="button" id="schoolNameSubmit" class="schoolNameSubmit">
+  </form>
+</div>
+
+<?php  
+// display rest of form if showStudents is true
+if ($showStudents) {
+
+?>
+
+<div id="addStudentDiv" class='addStudentDiv' name='addStudentDiv'>
+    <h2><button id="addStudent" class='addStudent' type="button" name="addStudent"  input type="submit">+</button></h2>
+</div>
+
+<div id="studentUpload">
+<!--
+    Upload Students File:  <input name="csv" type="file" id="csv" />   
+    <input type="submit" name="fileUploadSubmit" id="fileUploadSubmit" value="Submit" /> 
+-->
+    <h1><button id='studentUpload' type="button" name="studentUpload" class="studentUpload" input type="submit">Load Students</button></h1>
+</div>
+
+
+
+
+<div id="newStudentDiv" class="newStudentDiv" name="newStudentDiv">  
+  <form name='studentsAddForm' method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" >
+    <li>
+      <label for="newStudent" >&nbsp Student Name &nbsp </label>
+      <input type="text" id="studentName" name="studentName" required pattern="[A-Za-z0-9]{1,}" required >
+    </li>
+    <li>
+      <label for="studentAddress" >&nbsp Student Address &nbsp </label>
+      <input type="text" id="studentAddress" name="studentAddress" required pattern="[A-Za-z0-9]{1,}" required  >
+    </li>
+    <li>
+      <label for="studentGrade" >&nbsp Student Grade &nbsp </label>
+      <input type="text" id="studentGrade" name="studentGrade" required pattern="[A-Za-z0-9]{1,}" required  >
+    </li>
+    <li>
+      <label for="studentSpecialNeeds" >&nbsp Special Needs &nbsp </label>
+      <input type="text" id="studentSpecialNeeds" name="studentSpecialNeeds" required pattern="[A-Za-z0-9]{1,}" required  >
+    </li> 
+    <table>
+        <h1><button id='saveNewStudent' type="button" name="saveNewSchool" class='saveNewSchool' input type="submit">SAVE</button></h1>
+    </table>
+  </form>
+</div>
+
+
+<div id='studentsTableDiv' class='studentsTableDiv'>
+  <table id='studentsTable' class='studentsTable'>
+    <tr>
+      <th class=studentsTable>School Name</th>
+      <th class=studentsTable>Student Name</th>
+      <th class=studentsTable>Student Address</th>
+      <th class=studentsTable>Lat</th>
+      <th class=studentsTable>Lng</th>
+      <th class=studentsTable>Student Grade</th>
+      <th class=studentsTable>Special Needs</th>
+    </tr>
+
+  <?php
+  // Loop studentrecords and present it
+  $schoolName = "";
+  if ($_POST['schoolNameSelect'])
+      $schoolName = $_POST['schoolNameSelect'];
+  if ($_GET['schoolNameSelect'])
+      $schoolName = $_GET['schoolNameSelect'];
+  echo ('school name is: ' . $schoolName);
+  $queryStudents = "SELECT * FROM `students` WHERE `school_name`= '$schoolName';";
+
+  $rowStudents=mysqli_fetch_array($queryStudents,MYSQLI_ASSOC);
+  $resultStudents = mysqli_query($db, $queryStudents);
+  
+  
+    while ($rowStudents=mysqli_fetch_array($resultStudents)) {
+      $schoolName = $rowStudents["school_name"];
+      $studentName = $rowStudents["student_name"];
+      $studentAddress= $rowStudents["student_address"];
+      $studentLat = $rowStudents["lat"];
+      $studentLng = $rowStudents["lng"];
+      $studentGrade = $rowStudents["student_grade"];	
+      $studentSpecialNeeds  = $rowStudents["student_special_needs"];
+  ?>	
+
+    <tr>
+      <td class=studentsTable><?php echo $schoolName; ?></td>
+      <td class=studentsTable><?php echo $studentName; ?></td>
+      <td class=studentsTable><?php echo $studentAddress; ?></td>
+      <td class=studentsTable><?php echo $studentLat; ?></td>
+      <td class=studentsTable><?php echo $studentLng; ?></td>
+      <td class=studentsTable><?php echo $studentGrade; ?></td>
+      <td class=studentsTable><?php echo $studentSpecialNeeds; ?></td>
+    </tr>
+  
+  <?php
+  };
+  ?>   
+  
+  </table>
+</div>
+
+</div>
+
+
+<?php
+// if ($showStudents)
+}
+?>
+
+ 
+<script>
+   var flag = 0;
+   $(function () {
+   
+      
+     $('#studentUpload').click( function() {
+     schName = "<?php echo $schoolName; ?>";
+          window.location.replace("selectStudentFile.php?schoolName=" + schName);
+     });  
+
+ 
+      $('#saveNewStudent').click( function() {
+     // get lat and lng from address
+       window.alert("entering save new student");
+      var saveButton = $(this); // assign button object for later use when $this will mean other object
+      var newStudentAddress = saveButton.parent().parent().find('[name=studentAddress]').val(); 
+      window.alert(newStudentAddress);		      
+      var studentLatLng;
+      var geocoder = new google.maps.Geocoder();
+      // window.alert("Entering loadAddress with address: " + schoolAddress);
+      
+      geocoder.geocode( { 'address': newStudentAddress}, function(results, status) {   
+         if (status == google.maps.GeocoderStatus.OK) {
+            if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+            // window.alert(results);
+               studentLatLng = results[0].geometry.location;
+               // window.alert(schoolLatLng);
+            }
+            else {
+            window.alert("no result");
+            }
+         }
+         else {
+         window.alert("Status not ok");
+         }
+         
+         //window.alert($schoolName);
+         var schName = "<?php echo $schoolName; ?>";
+         // make ajax call for school update
+         var data = {
+            func : 'saveNewStudent',
+               schoolName: schName ,
+ 	       studentName: saveButton.parent().parent().find('[name=studentName]').val(),
+ 	       studentAddress: saveButton.parent().parent().find('[name=studentAddress]').val(),
+ 	       studentGrade: saveButton.parent().parent().find('[name=studentGrade]').val(),
+ 	       studentSpecialNeeds: saveButton.parent().parent().find('[name=studentSpecialNeeds]').val(),
+ 	       lat: studentLatLng.lat(),
+ 	       lng: studentLatLng.lng()
+            };
+           $.ajax({
+	      type: "POST",
+	      dataType: "json",
+	      url: "ajax.php", //Relative or absolute path to response.php file
+	      data: data,
+	      success: function(data) {
+        		location.reload();
+              }
+      
+            }); // ajax call        
+      });
+      });
+      });
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw5gl1LJqMre1o3JztvMM7jK_qDbB5pBk" async defer></script> 
+</body>
+</html>
