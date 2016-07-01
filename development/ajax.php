@@ -92,8 +92,7 @@ $timestamp = date('m/d/Y h:i:s');
 	  	            `eleventh_grade` = '$eleventhGrade',
 	  	            `twelfth_grade` = '$twelfthGrade',
 	  	            `lat` = '$schooLAT',
-	  	            `lng` = '$schooLNG'
-	  	             ";
+	  	            `lng` = '$schooLNG'";
 	  	        
 	  	        
   	$timestamp = date('m/d/Y h:i:s');       
@@ -144,6 +143,57 @@ if (isset($_POST["func"]) && ($_POST["func"]=='saveNewStudent')) {
 	    $result = mysqli_query($db, $query);
 	    echo 1;
   }    // save new student
+  
+if (isset($_POST["func"]) && ($_POST["func"]=='saveNewFleet')) { 
+            $vehicleName=$_POST["vehicleName"];
+	    $vehicleID=$_POST["vehicleID"];
+	    
+	    
+	    $query ="REPLACE INTO`fleet` 
+	  	        SET `user_name` = '$userName',
+	  	            `vehicle_name` = '$vehicleName',
+	  	            `vehicle_id` = '$vehicleID'
+	  	            ";
+	  	             
+	  	               	    
+	    $timestamp = date('m/d/Y h:i:s');       
+	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
+	    $result = mysqli_query($db, $query);
+	    echo 1;
+  }   // save new vehicle
+  
+if (isset($_POST["func"]) && ($_POST["func"]=='saveNewDriver')) { 
+            $driverID=$_POST["driverID"];
+	    $driverCell=$_POST["driverCell"];
+	    
+	    $query ="REPLACE INTO`drivers` 
+	  	        SET `user_name` = '$userName',
+	  	        `driver_id` = '$driverID',
+	  	         `driver_cell` = '$driverCell'";
+	  	             
+	  	               	    
+	    $timestamp = date('m/d/Y h:i:s');       
+	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
+	    $result = mysqli_query($db, $query);
+	    echo 1;
+  }   // save new driver
+  
+if (isset($_POST["func"]) && ($_POST["func"]=='saveNewVehicleType')) { 
+            $vehicleName=$_POST["vehicleName"];
+	    $vehicleCapacity=$_POST["vehicleCapacity"];
+	    $vehicleSpecialNeeds=$_POST["vehicleSpecialNeeds"];
+	    
+	    $query ="REPLACE INTO`vehicle_type` 
+	  	        SET `vehicle_name` = '$vehicleName',
+	  	        `vehicle_capacity` = '$vehicleCapacity',
+	  	         `special_needs` = '$vehicleSpecialNeeds'";
+	  	             
+	  	               	    
+	    $timestamp = date('m/d/Y h:i:s');       
+	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
+	    $result = mysqli_query($db, $query);
+	    echo 1;
+  }   // save new fleet type
   
 }    // if is_ajax
 

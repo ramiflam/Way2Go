@@ -17,7 +17,7 @@ $userName=$_COOKIE["userName"];
 // $file = fopen("debug.txt","a");
 $fileTimestamp = date('Ymd');
 $file = fopen("debug_" . $fileTimestamp . ".txt","a");
-fwrite($file,"In fleetUpload.  Testing! \n");
+fwrite($file,"In driverUpload.  Testing! \n");
 
 if(!$_FILES['csv']['name'])
 {
@@ -59,7 +59,7 @@ if($uploadOk){
 
 }
 
-// process fleets csv file
+// process drivers csv file
 if ($_FILES['csv']['size'] > 0) { 
 
  
@@ -84,17 +84,17 @@ if ($_FILES['csv']['size'] > 0) {
     // do not process the header row
     if ($ndx > 0) {
 
-        $vehicleName = $data['vehicle_name'];
-        $vehicleId = $data['vehicle_id'];
+        $driverID = $data['driver_id'];
+        $driverCell = $data['driver_cell'];
         
-        echo ("Processing record no " . $ndx . " data is " . $vehicleName . "," . $vehicleId . " <br>" );
+        fwrite($file, "Processing record no " . $ndx . " data is " . $driverID . "," . $driverCell . "\n" );
         
 
-            $query ="REPLACE INTO `fleet`
-	  	        SET `vehicle_name` = '$vehicleName',
-	  	            `vehicle_id` = '$vehicleId ',
-	  	            `user_name` = '$userName'
-	  	             ";
+            $query ="REPLACE INTO `drivers`
+	  	        SET `user_name` = '$userName',
+	  	        `driver_id` = '$driverID',
+	  	         `driver_cell` = '$driverCell'
+	  	          ";
 	  	        
 	  	        
   	        $timestamp = date('m/d/Y h:i:s');       
@@ -109,11 +109,11 @@ if ($_FILES['csv']['size'] > 0) {
     } ; 
   
     $timestamp = date('m/d/Y h:i:s');       
-    fwrite($file,'['.$timestamp.']: Uploaded ' . $ndx . ' vehicles' . "\n");   
+    fwrite($file,'['.$timestamp.']: Uploaded ' . $ndx-1 . ' drivers' . "\n");   
     fclose($file); 
 }
 
 // return to students setting page
- header('location:fleetsPage.php');
+ header('location:fleetsDriversPage.php');
 
 ?>

@@ -1,5 +1,6 @@
 <?php
 include './generalFunctions.php';
+include './navigationBar.php';
 $db=getDbConnection();
 if ($db->connect_error) {
 echo '<p>connection failed</p>';
@@ -80,10 +81,12 @@ $result = mysqli_query($db, $query);
 <body>   
    
 
-   
+<!--  
 <img class='logo'src= "../assets/way2goLogo.png" height=120/>
+-->
 
 
+<br><br><br>
 <div class="content">
     <ul><a href="settingsGeneralPage.php"><li>GENERAL</li></a></ul>
     <ul><a href="settingsSchoolsPage.php"><li>SCHOOLS</li></a></ul>

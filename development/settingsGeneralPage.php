@@ -8,7 +8,7 @@ echo '<p>connection failed</p>';
 }
 
 $userName=$_COOKIE["userName"];
-echo ("User Name: " . $userName ."\n");
+// echo ("User Name: " . $userName ."\n");
 
 $query = "SELECT * FROM `user_settings` WHERE user_name='$userName';";
 
@@ -62,7 +62,7 @@ $LOB = $row["LOB"];
 <!--   
 <img class='logo' src= "../assets/way2goLogo.png" height=120/>
 -->
-<br><br>
+<br><br><br>
 <div class="content">
     <ul><a href="settingsGeneralPage.php"><li>GENERAL</li></a></ul>
     <ul><a href="settingsSchoolsPage.php"><li>SCHOOLS</li></a></ul>

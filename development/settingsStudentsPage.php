@@ -1,12 +1,13 @@
 <?php
 include './generalFunctions.php';
+include './navigationBar.php';
 $db=getDbConnection();
 if ($db->connect_error) {
 echo '<p>connection failed</p>';
 }
 
 $userName=$_COOKIE["userName"];
-echo ("User Name: " . $userName ."\n");
+// echo ("User Name: " . $userName ."\n");
 
 $schoolName = "";
 
@@ -15,11 +16,11 @@ $fileTimestamp = date('Ymd');
 $file = fopen("debug_" . $fileTimestamp . ".txt","a");
 // fwrite($file,"Hello World. Testing! \n");
 if( isset($_POST['schoolNameSelect'])  OR isset($_GET['schoolNameSelect']) )  {
-echo("School Name Select is set");
+// echo("School Name Select is set");
 $showStudents = true;
 }
 else {
-echo("School Name Select Not Set: " );
+// echo("School Name Select Not Set: " );
 $showStudents = false;
 }
 ?>
@@ -66,13 +67,44 @@ $showStudents = false;
   
   });
   
+   $(function ()  {
+   var moveLeft = 20;
+   var moveDown = 10;
+      $('#addStudent').mouseenter(function() { 
+      $('div#tipAddStudent').show();
+      })
+      $('#addStudent').mouseleave(function () {
+      $('div#tipAddStudent').hide();
+      })   
+      $('#addStudent').mousemove(function(e) {
+      $('div#tipAddStudent').css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+      })
+  });
+  
+   $(function ()  {
+   var moveLeft = 20;
+   var moveDown = 10;
+      $('#studentUpload').mouseenter(function() { 
+      $('div#tipUploadStudent').show();
+      })
+      $('#studentUpload').mouseleave(function () {
+      $('div#tipUploadStudent').hide();
+      })   
+      $('#studentUpload').mousemove(function(e) {
+      $('div#tipUploadStudent').css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+      })
+  });
+  
 </script>		
 </head>
 
 <body>   
-   
-<img class='logo'src= "../assets/way2goLogo.png" height=120/>
 
+<!--  
+<img class='logo'src= "../assets/way2goLogo.png" height=120/>
+-->
+
+<br><br><br>
 <div class="content">
     <ul><a href="settingsGeneralPage.php"><li>GENERAL</li></a></ul>
     <ul><a href="settingsSchoolsPage.php"><li>SCHOOLS</li></a></ul>
@@ -117,7 +149,7 @@ if ($showStudents) {
 ?>
 
 <div id="addStudentDiv" class='addStudentDiv' name='addStudentDiv'>
-    <h2><button id="addStudent" class='addStudent' type="button" name="addStudent"  input type="submit">+</button></h2>
+    <h1><button id="addStudent" class='addStudent' type="button" name="addStudent"  input type="submit">+</button></h1>
 </div>
 
 <div id="studentUpload">
@@ -217,7 +249,9 @@ if ($showStudents) {
 }
 ?>
 
- 
+<div id= tipAddStudent> Add a New Student </div>
+<div id= tipUploadStudent> Upload Students From CSV File </div>
+
 <script>
    var flag = 0;
    $(function () {
