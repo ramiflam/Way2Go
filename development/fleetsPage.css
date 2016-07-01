@@ -14,6 +14,349 @@ img.logo{
 }
 .menu a#fleet{
   border-bottom: 5px solid;
-  border-bottom-color: crimson;   // rgb(56,132,182);
+  border-bottom-color: nave blue;   // rgb(60, 2, 20);
   padding-bottom:8px;
 }
+
+
+/* ******** CLASS: content ******** */
+.content{
+    background-color: rgb(56,132,182);
+    width: 150px;
+    display: inline-block;  
+    float: left;
+}
+.content ul{ 
+    padding: 8px;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgb(78,178,238);
+}
+.content a{
+    text-decoration:none;  
+}
+.content li{	
+    cursor:pointer;
+    font-size: 13px;
+    list-style-type:none;
+    color: rgb(248,248,248);
+    padding: 18px;
+    padding-left: 30px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    margin-left: 10px;
+}
+.content ul:hover{
+    background-color:rgba(44,106,145,1);
+}
+
+
+/* ******** CLASS: fleetSettingsForm ******** */
+.fleetSettingsForm{
+    display: inline-block;
+    width: 70%;
+    background-color: lightgrey;
+    padding: 10px;
+    border-style: solid;
+    margin: 0px 0px 0px 50px;    
+}
+.fleetSettingsForm h1{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom:30px;
+}
+.fleetSettingsForm h2{
+    text-align: right;
+    font-size: 30px;
+    margin-bottom:30px;
+}
+.fleetSettingsFormlabel{
+    display: inline-block;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+set{
+    float:left;
+}
+.fleetSettingsForm li {
+    display:inline-block;
+    list-style-type:none;
+    font-size: 18px;
+    margin:0px;
+    padding: 5px 0px 5px 0px;
+}
+.fleetSettingsForm select{
+    -webkit-appearance: none;
+    display: inline-block;
+    width: 150px;
+    height: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    background: url(/assets/arrow.png) no-repeat rgb(47,159,207); 
+    background-position: 125px 7px;
+    background-color: rgb(47,159,207);
+    padding: 0px 0px 0px 7px;
+    border-radius: 5px;
+    border-color: white;  
+    border: 0px;
+    margin: 0px 10px 30px 10px;    
+}
+
+
+
+/* ******** CLASS: fleetTable ******** */
+table.fleetTable {
+    width: 100%;
+}
+th.fleetTable {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-color: rgb(47,159,207);
+    padding: 2px 2px 2px 2px;
+    border: 1px solid rgb(47,159,207);
+}
+td.fleetTable {
+    padding: 2px 2px 2px 2px;
+    border: 1px solid rgb(47,159,207);
+}
+
+
+
+
+
+
+/* ******** CLASS: fleetDriverTable ******** */
+table.driverTable{
+    width: 100%;
+}
+th.driverTable{
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-color: rgb(47,159,207);
+    padding: 2px 2px 2px 2px;
+    border: 1px solid rgb(47,159,207);
+}
+td.driverTable{
+    padding: 2px 2px 2px 2px;
+    border: 1px solid rgb(47,159,207);
+}
+
+
+
+/* ******** CLASS: fleetTypeTable ******** */
+table.fleetTypeTable{
+    width: 100%;
+}
+th.fleetTypeTable{
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-color: rgb(47,159,207);
+    padding: 2px 2px 2px 2px;
+    border: 1px solid rgb(47,159,207);
+}
+td.fleetTypeTable{
+    padding: 2px 2px 2px 2px;
+    border: 1px solid rgb(47,159,207);
+}
+
+
+
+/* ******** CLASS: addFleet******** */
+button.addFleet{
+    width: 50px;
+    height:50px;
+    background-color: rgb(47,159,207);
+    text-align: center;
+    font-size: 40px;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding: auto auto auto auto;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 100%;
+    border-color: rgb(255,255,255);
+    margin-top: 13px auto 13px auto;   
+}
+button.addFleet:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.addFleet:active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+
+/* ******** CLASS: saveNewFleet ******** */
+button.saveNewFleet{
+    width: 120px;
+    height:36px;
+    background-color: rgb(47,159,207);
+    text-align: center;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding-top: 10px 20px 10px 20px;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 3px;
+    border-color: rgb(255,255,255);
+    margin-top: 13px auto 13px 20px;
+}
+button.saveNewFleet:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.saveNewFleet:active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+
+/* ******** CLASS: fleetUpload ******** */
+button.fleetUpload{
+    width: 120px;
+    height:36px;
+    background-color: rgb(47,159,207);
+    text-align: center;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding-top: 10px 20px 10px 20px;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 3px;
+    border-color: rgb(255,255,255);
+    margin-top: 13px auto 13px 20px;
+}
+button.fleetUpload:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.fleetUpload:active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+
+
+
+/* ******** CLASS: addDriver ******** */
+button.addDriver{
+    width: 50px;
+    height:50px;
+    background-color: rgb(47,159,207);
+    text-align: center;
+    font-size: 40px;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding: auto auto auto auto;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 100%;
+    border-color: rgb(255,255,255);
+    margin-top: 13px auto 13px auto;   
+}
+button.addDriver:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.addDriver:active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+
+/* ******** CLASS: saveNewDriver ******** */
+button.saveNewDriver{
+    width: 120px;
+    height:36px;
+    background-color: rgb(47,159,207);
+    text-align: center;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding-top: 10px 20px 10px 20px;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 3px;
+    border-color: rgb(255,255,255);
+    margin-top: 13px auto 13px 20px;
+}
+button.saveNewDriver:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.saveNewDriver:active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+
+/* ******** CLASS: driverUpload ******** */
+button.driverUpload{
+    width: 120px;
+    height:36px;
+    background-color: rgb(47,159,207);
+    text-align: center;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding-top: 10px 20px 10px 20px;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 3px;
+    border-color: rgb(255,255,255);
+    margin-top: 13px auto 13px 20px;
+}
+button.driverUpload:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.driverUpload:active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+
+/* ******** CLASS: addFleetType ******** */
+button.addFleetType{
+    width: 50px;
+    height:50px;
+    background-color: rgb(47,159,207);
+    text-align: center;
+    font-size: 40px;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding: auto auto auto auto;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 100%;
+    border-color: rgb(255,255,255);
+    margin-top: 13px auto 13px auto;   
+}
+button.addFleetType:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.addFleetType:active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+
+/* ******** CLASS: saveNewVehicleType  ******** */
+button.saveNewVehicleType{
+    width: 120px;
+    height:36px;
+    background-color: rgb(47,159,207);
+    text-align: center;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding-top: 10px 20px 10px 20px;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 3px;
+    border-color: rgb(255,255,255);
+    margin-top: 13px auto 13px 20px;
+}
+button.saveNewVehicleType:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.saveNewVehicleType:active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+

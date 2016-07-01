@@ -44,7 +44,24 @@ div#tipDeleteSchool {
 div#tipAddSchool {
   display: none;
   position: absolute;
-  
+  padding: 10px;
+  background: #eeeeee;
+  color: #000000;
+  border: 1px solid #1a1a1a;
+  font-size: 90%;
+}
+div#tipAddStudent {
+  display: none;
+  position: absolute;
+  padding: 10px;
+  background: #eeeeee;
+  color: #000000;
+  border: 1px solid #1a1a1a;
+  font-size: 90%;
+}
+div#tipUploadStudent {
+  display: none;
+  position: absolute;
   padding: 10px;
   background: #eeeeee;
   color: #000000;
@@ -52,11 +69,10 @@ div#tipAddSchool {
   font-size: 90%;
 }
 
-
 /* ******** CLASS: generalSettingsForm ******** */
 .generalSettingsForm {
     display: inline-block;
-    width: 85%;
+    width: 80%;
     background-color: lightgrey;
     padding: 10px;
     border-style: solid;
@@ -64,8 +80,8 @@ div#tipAddSchool {
 }
 .generalSettingsForm h1{
     text-align: center;
-    font-size: 30px;
-    margin-bottom:30px;
+    font-size: 25px;
+    margin-bottom:25px;
 }
 .generalSettingsForm label{
     display: inline-block;
@@ -107,7 +123,7 @@ set{
 /* ******** CLASS: schoolsSettingsForm ******** */
 .schoolsSettingsForm{
     display: inline-block;
-    width: 85%;
+    width: 80%;
     background-color: lightgrey;
     padding: 10px;
     border-style: solid;
@@ -156,7 +172,7 @@ set{
 /* ******** CLASS: studentsSettingsForm ******** */
 .studentsSettingsForm{
     display: inline-block;
-    width: 85%;
+    width: 80%;
     background-color: lightgrey;
     padding: 10px;
     border-style: solid;
@@ -350,6 +366,30 @@ button.addStudent:hover {
     cursor: pointer; 
 }
 button.addStudent:active {
+    box-shadow: 0 0 10px 5px #0E457A inset;
+}
+
+/* ******** CLASS: studentUpload ******** */
+button.studentUpload{
+    width: 120px;
+    height:36px;
+    background-color: rgb(47,159,207);
+    text-align: center;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(255,255,255);
+    padding-top: 10px 20px 10px 20px;
+    border-style: solid;
+    border-weight: 1px;
+    border-radius: 3px;
+    border-color: rgb(255,255,255);
+    margin-top: 13px auto 13px 20px;
+}
+button.studentUpload:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+button.studentUpload:active {
     box-shadow: 0 0 10px 5px #0E457A inset;
 }
 
@@ -570,7 +610,7 @@ input[type=range]::-ms-track {
     color: transparent;
 }
 input[type=range]::-ms-fill-lower {
-    background: #777;
+    background: blue;  // #777;
     border-radius: 10px;
 }
 input[type=range]::-ms-fill-upper {
@@ -643,6 +683,6 @@ set{
 
 .menu a#settingsGeneral{
   border-bottom: 5px solid;
-  border-bottom-color: crimson;   // rgb(56,132,182);
+  border-bottom-color: navy blue;   // rgb(56,132,182);
   padding-bottom:8px;
 }
