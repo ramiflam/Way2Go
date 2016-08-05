@@ -18,6 +18,10 @@ $file = fopen("debug_" . $fileTimestamp . ".txt","a");
 if( isset($_POST['schoolNameSelect'])  OR isset($_GET['schoolNameSelect']) )  {
 // echo("School Name Select is set");
 $showStudents = true;
+  if ($_POST['schoolNameSelect'])
+      $schoolName = $_POST['schoolNameSelect'];
+  if ($_GET['schoolNameSelect'])
+      $schoolName = $_GET['schoolNameSelect'];
 }
 else {
 // echo("School Name Select Not Set: " );
@@ -38,24 +42,29 @@ $showStudents = false;
 
   $(document).ready(function() {
     
-    // hide/show add student button
-    // $("#addStudent").hide();	 
+    // hide/show new student form
+    $("#newStudentDiv").hide();
+  }); 
+    
+    
     $(function () {
       $('#schoolNameSubmit').click( function() {
         $(this).parent().parent().parent().find('[name=addStudentDiv]').show();
       });
     });
   
-    // hide/show new student form
-    $("#newStudentDiv").hide();
+ 
     $(function () {
       $('#addStudent').click( function() {
       // window.alert('addStudent clicked');
       $parentObject = $(this).parent().parent().parent().find('[name=newStudentDiv]');
         $(this).parent().parent().parent().parent().find('[name=newStudentDiv]').show();
-       
+      $('#cancelAddNewStudent').click( function() {
+      $parentObject = $(this).parent().parent().parent().find('[name=newStudentDiv]');
+        $(this).parent().parent().parent().parent().find('[name=newStudentDiv]').hide();       
       });
     });
+  });
     
     // hide/show upload students button
     // $("#studentUpload").hide();
@@ -65,7 +74,6 @@ $showStudents = false;
       });
     });
   
-  });
   
    $(function ()  {
    var moveLeft = 20;
@@ -95,6 +103,8 @@ $showStudents = false;
       })
   });
   
+ 
+  
 </script>		
 </head>
 
@@ -117,7 +127,7 @@ $showStudents = false;
 <div class=studentsSettingsForm>
 
 <div> 
-    <h1>STUDENTS</h1>
+    <h1>STUDENTS ( <?php echo $schoolName; ?> )</h1>
 </div>
 
 <div>
@@ -182,7 +192,7 @@ if ($showStudents) {
       <input type="text" id="studentSpecialNeeds" name="studentSpecialNeeds" required pattern="[A-Za-z0-9]{1,}" required  >
     </li> 
     <table>
-        <h1><button id='saveNewStudent' type="button" name="saveNewSchool" class='saveNewSchool' input type="submit">SAVE</button></h1>
+        <h1><button id='saveNewStudent' type="button" name="saveNewStudent" class='submit' input type="submit">SAVE</button><button id='cancelAddNewStudent' type="button" name="cancelAddNewStudent" class='submit' input type="submit">CANCEL</button></h1>
     </table>
   </form>
 </div>
@@ -207,7 +217,16 @@ if ($showStudents) {
       $schoolName = $_POST['schoolNameSelect'];
   if ($_GET['schoolNameSelect'])
       $schoolName = $_GET['schoolNameSelect'];
-  echo ('school name is: ' . $schoolName);
+      
+  // get school lat,lng for later use
+      $querySchools = "SELECT * FROM `user_schools` WHERE `user_name`='$userName';";
+      $rowSchools=mysqli_fetch_array($querySchools,MYSQLI_ASSOC);
+      $resultSchools = mysqli_query($db, $querySchools);
+      $fetch_options = mysqli_fetch_array($resultSchools);
+      $schoolLat = $fetch_options['lat'];
+      $schoolLng = $fetch_options['lng'];
+
+  // echo ('school name is: ' . $schoolName);
   $queryStudents = "SELECT * FROM `students` WHERE `school_name`= '$schoolName';";
 
   $rowStudents=mysqli_fetch_array($queryStudents,MYSQLI_ASSOC);
@@ -288,29 +307,69 @@ if ($showStudents) {
          window.alert("Status not ok");
          }
          
-         //window.alert($schoolName);
-         var schName = "<?php echo $schoolName; ?>";
-         // make ajax call for school update
-         var data = {
-            func : 'saveNewStudent',
-               schoolName: schName ,
- 	       studentName: saveButton.parent().parent().find('[name=studentName]').val(),
- 	       studentAddress: saveButton.parent().parent().find('[name=studentAddress]').val(),
- 	       studentGrade: saveButton.parent().parent().find('[name=studentGrade]').val(),
- 	       studentSpecialNeeds: saveButton.parent().parent().find('[name=studentSpecialNeeds]').val(),
- 	       lat: studentLatLng.lat(),
- 	       lng: studentLatLng.lng()
-            };
-           $.ajax({
-	      type: "POST",
-	      dataType: "json",
-	      url: "ajax.php", //Relative or absolute path to response.php file
-	      data: data,
-	      success: function(data) {
-        		location.reload();
-              }
-      
-            }); // ajax call        
+         var schoolLat = "<?php echo $schoolLat; ?>";
+         var schoolLng = "<?php echo $schoolLng; ?>";
+         var origin1 = new google.maps.LatLng(schoolLat, schoolLng);
+         var destination1 = studentLatLng;
+         
+         var service = new google.maps.DistanceMatrixService();
+	service.getDistanceMatrix(
+	  {
+	    origins: [origin1],
+	    destinations: [destination1],
+	    travelMode: google.maps.TravelMode.DRIVING
+	  }, timeDistCallback);
+
+	   var time2School = 0;
+	   var distToSchool = 0;	
+	   
+	function timeDistCallback(response, status) {
+	   
+	   if (status == google.maps.DistanceMatrixStatus.OK) {
+	     
+	     distToSchool = response.rows[0].elements[0].distance.value;
+	     time2School = response.rows[0].elements[0].duration.value;
+	     
+	     // ajax call to create new student
+	     
+	         //window.alert($schoolName);
+	         var schName = "<?php echo $schoolName; ?>";
+	         // make ajax call for school update
+	         var data = {
+	            func : 'saveNewStudent',
+	               schoolName: schName ,
+	 	       studentName: saveButton.parent().parent().find('[name=studentName]').val(),
+	 	       studentAddress: saveButton.parent().parent().find('[name=studentAddress]').val(),
+	 	       studentGrade: saveButton.parent().parent().find('[name=studentGrade]').val(),
+	 	       studentSpecialNeeds: saveButton.parent().parent().find('[name=studentSpecialNeeds]').val(),
+	 	       lat: studentLatLng.lat(),
+	 	       lng: studentLatLng.lng(),
+	 	       timeToSchool: time2School,
+	 	       distToSchool: distToSchool
+	            };
+	           $.ajax({
+		      type: "POST",
+		      dataType: "json",
+		      url: "ajax.php", //Relative or absolute path to response.php file
+		      data: data,
+		      success: function(data) {
+	        		location.reload();
+	              }
+	      
+	            }); // ajax call    	     
+		     
+	   }
+	   else {
+	      // wait for call back to be OK
+	      // sleep (200);
+	   }
+	}
+         
+        // wait for call back to be executed
+//         setTimeout(function(){  
+         
+
+//         }, 300);    
       });
       });
       });

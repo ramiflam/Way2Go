@@ -118,23 +118,44 @@ $timestamp = date('m/d/Y h:i:s');
 
 
 if (isset($_POST["func"]) && ($_POST["func"]=='saveNewStudent')) { 
+
             $schoolName=$_POST["schoolName"];
-	    $studentName=$_POST["studentName"];
+            
+         // get school lat, lng
+        $query = "SELECT * FROM `user_schools` WHERE `user_name`='$userName' AND `school_name`='$schoolName';";
+        $result = mysqli_query($db, $query);
+        $row=mysqli_fetch_array($result);
+        // print_r($row);
+        $schoolLat = $row["lat"];
+        $schoolLng = $row["lng"];  	
+        
+ 	    $studentName=$_POST["studentName"];
   	    $studentAddress=$_POST["studentAddress"];
   	    $studentGrade=$_POST["studentGrade"];
   	    $studentSpecialNeeds=$_POST["studentSpecialNeeds"];
-  	    $schooLAT=$_POST["lat"];
-  	    $schooLNG=$_POST["lng"];
-	   
+  	    $studentLAT=$_POST["lat"];
+  	    $studentLNG=$_POST["lng"];
+  	    $studentQuadrant = getQuadrant($userName, $schoolName, $studentLAT, $studentLNG);
+	    $distanceToSchool =  $_POST["distToSchool"];     
+	    $timeToSchool =  $_POST["timeToSchool"];
+	    // calculate air distance to school
+
+	    $airDistanceToSchool = getAirDistance($studentLAT, $studentLNG, $schoolLat, $schoolLng);  
+	      
 	    
-	    $query ="INSERT INTO`students` 
+	    $query ="REPLACE INTO`students` 
 	  	        SET `school_name` = '$schoolName',
 	  	            `student_name` = '$studentName',
 	  	            `student_address` = '$studentAddress',
 	  	            `student_grade` = '$studentGrade',
 	  	            `student_special_needs` = '$studentSpecialNeeds',
-	  	            `lat` = '$schooLAT',
-	  	            `lng` = '$schooLNG'
+	  	            `lat` = '$studentLAT',
+	  	            `lng` = '$studentLNG',
+	  	            `quadrant` = '$studentQuadrant',
+	  	            `student_group` = '$studentQuadrant',         
+	  	            `distance_to_school` = '$distanceToSchool',
+	  	            `time_to_school` = '$timeToSchool',
+	  	            `air_distance_to_school` = '$airDistanceToSchool'
 	  	             ";
 	  	             
 	  	               	    
@@ -195,6 +216,25 @@ if (isset($_POST["func"]) && ($_POST["func"]=='saveNewVehicleType')) {
 	    echo 1;
   }   // save new fleet type
   
+  
+if (isset($_POST["func"]) && ($_POST["func"]=='updateStudentGroup')) { 
+        $schoolName=$_POST["schoolName"];
+	    $studentName=$_POST["studentName"];
+	    $studentNewGroup=$_POST["studentNewGroup"];
+	    
+	    $query ="UPDATE `students` 
+	  	        SET `student_group` = '$studentNewGroup'  WHERE `school_name` = '$schoolName' AND `student_name` = '$studentName'";
+	  	             
+	  	               	    
+	    $timestamp = date('m/d/Y h:i:s');       
+	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
+	    $result = mysqli_query($db, $query);
+		if($result){
+			echo '1';
+		}
+	    
+  }   // update student group manually 
+  
 }    // if is_ajax
 
 else {
@@ -203,7 +243,113 @@ fclose($file);
 echo 0;
 }
 
+if (isset($_POST["func"]) && ($_POST["func"]=='insertBusStop')) { 
+  
+ 
+  
+        $schoolName=$_POST["schoolName"];
+	    $userName=$_POST["userName"];
+  	    $lat=$_POST["lat"];
+  	    $lng=$_POST["lng"];
+  	    $desc=$_POST["desc"];
+	   
+	    
+	    $query ="INSERT INTO `school_bus_stops`(`id`, `user_name`, `shcool_name`, `lat`, `lng`, `description`) VALUES ('','".$userName."','".$schoolName."','".$lat."','".$lng."','".$desc."')";
+	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
+		
+        $result = mysqli_query($db, $query);
+		if($result){
+			echo '1';
+		}
+		
+  die();
+}
 
+if (isset($_POST["func"]) && ($_POST["func"]=='updateBusStop')) { 
+
+        $schoolName=$_POST["schoolName"];
+	    $userName=$_POST["userName"];
+  	    $lat=$_POST["lat"];
+  	    $lng=$_POST["lng"];
+  	    $newDesc=$_POST["desc"];
+		$id = $_POST['id'];
+		
+		 $query ="UPDATE `school_bus_stops` 
+	  	        SET `user_name` = '$userName', `shcool_name` = '$schoolName', `lat` = '$lat', `lng` = '$lng'  , `description` = '$newDesc' WHERE `id` = '$id'";
+	  	             
+	  	               	    
+	    $timestamp = date('m/d/Y h:i:s');       
+	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
+	    $result = mysqli_query($db, $query);
+		if($result){
+			echo '1';
+		}
+  
+}
+//delete bus stop
+if (isset($_POST["func"]) && ($_POST["func"]=='deleteBusStop')) { 
+
+    //echo '<pre>';print_r($_POST); echo '</pre>';
+	
+    $id = $_POST['id'];
+    $query ="DELETE FROM `school_bus_stops` WHERE id='$id'";
+    $timestamp = date('m/d/Y h:i:s');       
+	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
+	    $result = mysqli_query($db, $query);
+		if($result){
+			echo '1';
+		}
+
+ die();
+
+}
+
+if (isset($_POST["func"]) && ($_POST["func"]=='saveNewStudent')) { 
+
+            $schoolName=$_POST["schoolName"];
+            
+         // get school lat, lng
+        $query = "SELECT * FROM `students` WHERE `school_name`='$schoolName' AND `student_name`='$studentName' AND 'quadrant' = '1';";
+        $result = mysqli_query($db, $query);
+        $row=mysqli_fetch_array($result);
+        // print_r($row);
+        $schoolLat = $row["lat"];
+        $schoolLng = $row["lng"];  	
+        
+// 	    $studentName=$_POST["studentName"];
+//  	    $studentAddress=$_POST["studentAddress"];
+//  	    $studentGrade=$_POST["studentGrade"];
+//  	    $studentSpecialNeeds=$_POST["studentSpecialNeeds"];
+//  	    $studentLAT=$_POST["lat"];
+//  	    $studentLNG=$_POST["lng"];
+  	    $studentGroup = getStudentGroupQI($userName, $schoolName, $schoolLat, $schoolLng, $studentLat, $studentLng);
+//	    $distanceToSchool =  $_POST["distToSchool"];     
+//	    $timeToSchool =  $_POST["timeToSchool"];	    
+	    
+/*	    $query ="REPLACE INTO`students` 
+	  	        SET `school_name` = '$schoolName',
+	  	            `student_name` = '$studentName',
+	  	            `student_address` = '$studentAddress',
+	  	            `student_grade` = '$studentGrade',
+	  	            `student_special_needs` = '$studentSpecialNeeds',
+	  	            `lat` = '$studentLAT',
+	  	            `lng` = '$studentLNG',
+  	                    `quadrant` = '$studentQuadrant',
+	  	            `student_group` = '$studentGroup',         
+	  	            `distance_to_school` = '$distanceToSchool',
+	  	            `time_to_school` = '$timeToSchool'
+	  	             ";
+*/	  	   
+
+	$query ="REPLACE INTO`students` 
+	  	        SET `student_group` = '$studentGroup',";          
+	  	               	    
+	    $timestamp = date('m/d/Y h:i:s');       
+	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
+	    $result = mysqli_query($db, $query);
+	    echo 1;
+  }    // update student group automatically
+  
 
 //Function to check if the request is an AJAX request
 function is_ajax() {

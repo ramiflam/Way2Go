@@ -43,7 +43,11 @@ $result = mysqli_query($db, $query);
       });
    });
    
-   
+   $(function () {
+      $('#cancelAddSchool').click( function() {
+      $(this).parent().parent().parent().find('[class=newSchool]').hide();
+      });
+   });   
 	
    $(function ()  {
    var moveLeft = 20;
@@ -71,7 +75,8 @@ $result = mysqli_query($db, $query);
       $('#addSchool').mousemove(function(e) {
       $('div#tipAddSchool').css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
       })
-  });	
+      
+ });	
   
 </script>
 	
@@ -194,7 +199,7 @@ $result = mysqli_query($db, $query);
    </table>      
    
         <h1><button id='addSchool' type="button" name="addSchool" class='addSchool' input type="submit">+</button></h1>
-    
+            
 </div>
 
   
@@ -223,7 +228,7 @@ $result = mysqli_query($db, $query);
         <li><input type="checkbox" id="twelfthGrade" name="twelfthGrade" /> <label for="twelfthGrade">&nbsp 12th &nbsp <span></span></label></li>
         
     <table>
-        <h1><button id='saveNewSchool' type="button" name="saveNewSchool" class='submit' input type="submit">SAVE</button></h1>
+        <h1><button id='saveNewSchool' type="button" name="saveNewSchool" class='submit' input type="submit">SAVE</button><button id='cancelAddSchool' type="button" name="cancelAddSchool" class='submit' input type="submit">CANCEL</button></h1>
     </table>
     
 </div>
@@ -300,7 +305,7 @@ $.ajax({
       });  // saveNewSchool
        
 
-      $('.delete').click( function(){
+      $('.deleteSchool').click( function(){
       
       // window.alert("delete school");
       var e = $(this).parent().parent().find('[name=schoolName]');

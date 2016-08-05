@@ -18,6 +18,7 @@ echo (" schoolName = " . $schoolName );
 $fileTimestamp = date('Ymd');
 $file = fopen("debug_" . $fileTimestamp . ".txt","a");
 fwrite($file,"In studentUpload.  Testing! \n");
+$queryFile = fopen("query_" . $fileTimestamp . ".txt","a");
 
 if(!$_FILES['csv']['name'])
 {
@@ -59,6 +60,9 @@ if($uploadOk){
 
 }
 
+     $timestamp = date('m/d/Y h:i:s'); 
+     fwrite($file,'['.$timestamp.']: Starting Students Upload ' . "\n"); 
+
 // process students csv file
 if ($_FILES['csv']['size'] > 0) { 
 
@@ -70,7 +74,7 @@ if ($_FILES['csv']['size'] > 0) {
     $schoolLat = $row["lat"];
     $schoolLng = $row["lng"];
     // echo ("school data " . $schoolLat . " " . $schoolLng . "<br>");
-    fwrite($file,'['.$timestamp.']: schoolLng, schoolLat ' . $schoolLng . " " . $schoolLat . "\n");
+    // fwrite($file,'['.$timestamp.']: schoolLng, schoolLat ' . $schoolLng . " " . $schoolLat . "\n");
     
     // get quadrant tilt from user_settings table
     $query = "SELECT * FROM `user_settings` WHERE `user_name`='$userName';";
@@ -101,6 +105,8 @@ if ($_FILES['csv']['size'] > 0) {
     }
     
     // print_r($data);
+ 
+ 
     
     // do not process the header row
     if ($ndx > 0) {
@@ -110,7 +116,7 @@ if ($_FILES['csv']['size'] > 0) {
         $studentName = $data['name'];
         $studentSpecialNeeds = $data['spcial needs'];
         
-        echo ("student name " . $studentName . "<br>");
+        // echo ("student name " . $studentName . "<br>");
         // echo ("Processing record no " . $ndx . " data is " . $studentAddress . "," . $studentGrade. "," . $studentName . "," . $studentSpecialNeeds . " <br>" );
         
         $url = "http://maps.google.com/maps/api/geocode/json?address={$studentEncodedAddress}";
@@ -125,8 +131,8 @@ if ($_FILES['csv']['size'] > 0) {
         $lati = $resp['results'][0]['geometry']['location']['lat'];
         $longi = $resp['results'][0]['geometry']['location']['lng'];
         // $formatted_address = $resp['results'][0]['formatted_address'];
-        echo ("lati = " . $lati . " <br>");
-        echo ("longi = " . $longi . " <br>");
+        //echo ("lati = " . $lati . " <br>");
+        //echo ("longi = " . $longi . " <br>");
         
         // calculate quadrant compared to school lat and lng
         //  2 | 1
@@ -134,8 +140,8 @@ if ($_FILES['csv']['size'] > 0) {
         $timestamp = date('m/d/Y h:i:s');   
         // calculate bearing between shcool and student address
         $studentBearing = computeBearing($schoolLat, $schoolLng, $lati, $longi);
-	fwrite($file,'['.$timestamp.']: Calculating quadrant. schoolLng, schoolLat, longi, lati ' . $schoolLng . " " . $schoolLat . " " . $longi . " " . $lati . "\n");
-	fwrite($file,'['.$timestamp.']: student bearing is: ' . $studentBearing . "\n");
+	//fwrite($file,'['.$timestamp.']: Calculating quadrant. schoolLng, schoolLat, longi, lati ' . $schoolLng . " " . $schoolLat . " " . $longi . " " . $lati . "\n");
+	//fwrite($file,'['.$timestamp.']: student bearing is: ' . $studentBearing . "\n");
 	
         $lngDiff = ($schoolLng - $longi);
         
@@ -143,30 +149,18 @@ if ($_FILES['csv']['size'] > 0) {
         
         
         // calculate student quadrant without shift
-        /**
-        if ($longi >= $schoolLng && $lati >= $schoolLat ) {
-            $studentQuandrant = 1;   // upper right quadrant
-        }
-        if ($longi < $schoolLng && $lati >= $schoolLat ) {
-            $studentQuandrant = 2;   // upper left quadrant
-        }
-        if ($longi < $schoolLng && $lati < $schoolLat ) {
-            $studentQuandrant = 3;   // lower left quadrant
-        }
-        if ($longi >= $schoolLng && $lati < $schoolLat ) {
-            $studentQuandrant = 4;   // lower right quadrant
-        }
-        **/
-        
-        echo (" quadrant without shift is: " . $studentQuandrant . "<br>");
+       
+        // echo (" quadrant without shift is: " . $studentQuandrant . "<br>");
         
         // calculate student quadrant with shift
         // $quadrantShift = 80;
-        echo (" quadrant tilt is: " . $quadrantTilt . " degrees <br>");
+        // echo (" quadrant tilt is: " . $quadrantTilt . " degrees <br>");
         $quadrantBoundaryI = 0 + $quadrantTilt;
         $quadrantBoundaryII = 90 + $quadrantBoundaryI;
         $quadrantBoundaryIII = 180 + $quadrantBoundaryI;
         $quadrantBoundaryIV = 270 + $quadrantBoundaryI;
+        
+     
         
         if ($studentBearing >= $quadrantBoundaryI && $studentBearing < $quadrantBoundaryII){
             $studentQuadrantShifted = 1;
@@ -180,14 +174,36 @@ if ($_FILES['csv']['size'] > 0) {
         if ($studentBearing >= $quadrantBoundaryIV){
             $studentQuadrantShifted = 4;
         }
+ 
+         // fwrite($file,'['.$timestamp.']: ' . 'student bearing:' .$studentBearing . ' Quadrant boundaries: ' . $quadrantBoundaryI . ', ' .  $quadrantBoundaryII . ', ' . $quadrantBoundaryIII . ', ' . $quadrantBoundaryIV . ' quadrant shifted: ' . $studentQuadrantShifted . "\n");         
+        // echo (" quadrant with shift is: " . $studentQuadrantShifted . "<br><br>");
         
-        echo (" quadrant with shift is: " . $studentQuadrantShifted . "<br><br>");
+        // set initial group to same as quadrant
+        $studentGroup = $studentQuadrantShifted;
         
+        // calculate distance and time from student to school
+       $urlDetails = "http://maps.googleapis.com/maps/api/distancematrix/json?origins=$lati,$longi&destinations=$schoolLat,$schoolLng&mode=driving&sensor=false";
+       $jsonResp = file_get_contents($urlDetails);
+       $respDetails = json_decode($jsonResp, TRUE);
+       $dist = $respDetails['rows'][0]['elements'][0]['distance']['value'];
+       $time2School = $respDetails['rows'][0]['elements'][0]['duration']['value'];    
+       
+       // get shortest (air) distance to school
+       $airDistToSchool = getAirDistance($lati, $longi, $schoolLat, $schoolLng);
+       
+       
+ /**
+      ob_start();
+      var_dump($respDetails);
+      $timeDistDump = ob_get_clean();
+      fwrite($file,"time and distance record = " . $timeDistDump . "\n" );
+  **/  
         
         
         // verify if data is complete
         if($lati && $longi){
-            $query ="REPLACE INTO `students`
+        
+            $query ="INSERT INTO `students`
 	  	        SET `student_address` = '$studentAddress',
 	  	            `student_name` = '$studentName',
 	  	            `school_name` = '$schoolName',
@@ -195,12 +211,16 @@ if ($_FILES['csv']['size'] > 0) {
 	  	            `lng` = '$longi',
 	  	            `student_grade` = '$studentGrade',
 	  	            `student_special_needs` = '$studentSpecialNeeds',
-	  	            `quadrant` = '$studentQuandrant'
+	  	            `quadrant` = '$studentQuadrantShifted',
+	  	            `student_group` = '$studentGroup',
+	  	            `distance_to_school` = '$dist',
+	  	            `time_to_school` = '$time2School',
+	  	            `air_distance_to_school` = '$airDistToSchool'
 	  	             ";
 	  	        
-	  	        
+  	        
   	        $timestamp = date('m/d/Y h:i:s');       
-	  	fwrite($file,'['.$timestamp.']: ' .$query . "\n");
+	  	// fwrite($queryFile, $query . "\n");
 	  	// echo $query;
 	        $result = mysqli_query($db, $query);
         }
@@ -210,7 +230,8 @@ if ($_FILES['csv']['size'] > 0) {
      $ndx++;   
     } ; 
   
-    $timestamp = date('m/d/Y h:i:s');       
+    $timestamp = date('m/d/Y h:i:s'); 
+    $ndx--;      
     fwrite($file,'['.$timestamp.']: Uploaded ' . $ndx . ' students for ' . $schoolName . "\n");   
     fclose($file); 
 }
