@@ -16,7 +16,7 @@ echo (" schoolName = " . $schoolName );
 
 // $file = fopen("debug.txt","a");
 $fileTimestamp = date('Ymd');
-$file = fopen("debug_" . $fileTimestamp . ".txt","a");
+$file = fopen("../logs/debug_" . $fileTimestamp . ".txt","a");
 fwrite($file,"In studentUpload.  Testing! \n");
 $queryFile = fopen("query_" . $fileTimestamp . ".txt","a");
 
@@ -160,18 +160,20 @@ if ($_FILES['csv']['size'] > 0) {
         $quadrantBoundaryIII = 180 + $quadrantBoundaryI;
         $quadrantBoundaryIV = 270 + $quadrantBoundaryI;
         
-     
+        // if bearing is 0 set it to 360
+        if ($studentBearing == 0)
+           $studentBearing = 360;
         
-        if ($studentBearing >= $quadrantBoundaryI && $studentBearing < $quadrantBoundaryII){
+        if ($studentBearing > $quadrantBoundaryI && $studentBearing < $quadrantBoundaryII){
             $studentQuadrantShifted = 1;
         }
-        if ($studentBearing >= $quadrantBoundaryII  && $studentBearing < $quadrantBoundaryIII){
+        if ($studentBearing > $quadrantBoundaryII  && $studentBearing <= $quadrantBoundaryIII){
             $studentQuadrantShifted = 2;
         }
-        if ($studentBearing >= $quadrantBoundaryIII && $studentBearing < $quadrantBoundaryIV){
+        if ($studentBearing > $quadrantBoundaryIII && $studentBearing <= $quadrantBoundaryIV){
             $studentQuadrantShifted = 3;
         }
-        if ($studentBearing >= $quadrantBoundaryIV){
+        if ($studentBearing > $quadrantBoundaryIV){
             $studentQuadrantShifted = 4;
         }
  
@@ -180,6 +182,8 @@ if ($_FILES['csv']['size'] > 0) {
         
         // set initial group to same as quadrant
         $studentGroup = $studentQuadrantShifted;
+        if ($studentSpecialNeeds == 'Y')
+          $studentGroup = 0;
         
         // calculate distance and time from student to school
        $urlDetails = "http://maps.googleapis.com/maps/api/distancematrix/json?origins=$lati,$longi&destinations=$schoolLat,$schoolLng&mode=driving&sensor=false";
@@ -215,7 +219,8 @@ if ($_FILES['csv']['size'] > 0) {
 	  	            `student_group` = '$studentGroup',
 	  	            `distance_to_school` = '$dist',
 	  	            `time_to_school` = '$time2School',
-	  	            `air_distance_to_school` = '$airDistToSchool'
+	  	            `air_distance_to_school` = '$airDistToSchool',
+	  	            `bearing` = '$studentBearing'
 	  	             ";
 	  	        
   	        

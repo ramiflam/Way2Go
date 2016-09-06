@@ -13,7 +13,7 @@ $schoolName = "";
 
 // $file = fopen("debug.txt","a");
 $fileTimestamp = date('Ymd');
-$file = fopen("debug_" . $fileTimestamp . ".txt","a");
+$file = fopen("../logs/debug_" . $fileTimestamp . ".txt","a");
 fwrite($file,"POST[schoolNameSelect = " . $_POST['schoolNameSelect'] . "\n" );
 //fwrite($file,"GET[schoolNameSelect = " . $_GET['schoolNameSelect'] . "\n" );
 
@@ -40,8 +40,10 @@ else {
   <link rel="stylesheet" type="text/css" href="routesPage.css">
   <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 
-<!--  
+ 
 <script>
+
+<!--
   $(document).ready(function() {
     
     // hide/show school map
@@ -52,8 +54,12 @@ else {
       });
     });
     });
-</script>
 -->
+
+    
+    
+</script>
+
 		
 </head>
 <body>   
@@ -73,7 +79,7 @@ else {
 
 <div>
   <form name="schoolNameSelect" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" > 
-    <td>Select a School:<td>
+    <td>Select a School:<td> 
     <select name="schoolNameSelect" class= 'routeSettingsForm'>
                     
       <?php 
@@ -90,13 +96,18 @@ else {
       }; 
       ?>
       <input type = "submit" type="button" id="schoolNameSubmit" class="schoolNameSubmit">
-  </form>
-</div>  
 <div id='groupButton' name='groupButton' class = 'submit'>
   
         <h1><button id='groupStudents' type="button" name="groupStudents" class='submit' input type="submit">GROUP</button></h1>
   
 </div>
+      
+ </form> 
+ </div> 
+  
+
+
+
 
 <div id="map" class="mapSnippet">
 
@@ -131,7 +142,7 @@ else {
 	      $studentRec['lat'] = $studentRow['lat'];
 	      $studentRec['lng'] = $studentRow['lng'];
 	      $studentRec['student_name'] = $studentRow['student_name'];
-	      $studentRec['title'] = $studentRow['student_name'] . " " . $studentRow['student_address'] . " Grade: " . $studentRow['student_grade'] . " Quad: " . $studentRow['quadrant'] . " GRP: " . $studentRow['student_group'];
+	      $studentRec['title'] = $studentRow['student_name'] . " " . $studentRow['student_address'] . " Grade: " . $studentRow['student_grade'] . " Quad: " . $studentRow['quadrant'] . " GRP: " . $studentRow['student_group'] . " bearing:" . $studentRow['bearing'];
 	      $studentRec['quadrant'] = $studentRow['quadrant'];
 	      $studentRec['student_group'] = $studentRow['student_group'];
 /**
@@ -429,8 +440,30 @@ else {
         	  else if (inputStudentGroup == 4) {
         	     return "../assets/purple-dot.png";
         	  }
-        	  else if (inputStudentGroup < 1 || inputStudentGroup > 4) {
+        	  else if (inputStudentGroup < 1 ) {
         	     return "../assets/yellow-dot.png"
+        	  } else if (inputStudentGroup  >= 100) {
+        	     groupH = Math.floor(inputStudentGroup/100);
+        	     var groupMod = inputStudentGroup % 100 + (groupH*10);
+        	     if (groupMod == 0 || groupMod == 60) {
+        	        return "../assets/blue-dot.png";
+        	     }
+        	     if (groupMod == 10 || groupMod == 70) {
+        	        return "../assets/orange-dot.png";
+        	     }
+        	     if (groupMod == 20 || groupMod == 80) {
+        	        return "../assets/purple-dot.png";
+        	     }
+        	     if (groupMod == 30 || groupMod == 90) {
+        	        return "../assets/green-dot.png";
+        	     }
+        	     if (groupMod == 40) {
+        	        return "../assets/pink-dot.png";
+        	     }
+        	     if (groupMod == 50) {
+        	        return "../assets/ltblue-dot.png";
+        	     }
+        	     
         	  }
         };
         
@@ -465,8 +498,37 @@ else {
 		
 		} // deleteBusStop
 		
-
-
+  
+  
+    $(function () {
+       $('#groupStudents').click( function() {
+          // window.alert('groupStudents clicked:');
+          var maxStudentsPerGroups = prompt("Enter Max Students Per Group:");
+          var userName = '<?php echo $userName; ?>';
+          var schoolName = '<?php echo $schoolName; ?>';
+          if (userName && schoolName) {
+             var data = {
+				func : 'calculateGroups',
+				maxStudentsPerGroup: maxStudentsPerGroups,
+				schoolName: schoolName ,
+				userName: userName
+				};
+			  $.ajax({
+				  type: "POST",
+				  dataType: "json",
+				  url: "ajax.php", //Relative or absolute path to response.php file
+				  data: data,
+				  success: function(response) {
+				  console.log(response);
+					  location.reload();					   
+				  }
+						  
+	                }); // ajax call  
+	                location.reload(true);		
+          };
+       });
+    });
+    
 
     </script>
 

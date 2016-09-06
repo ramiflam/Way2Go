@@ -1,9 +1,10 @@
 <?php
-include './generalFunctions.php';
+error_reporting(-1);
+include 'generalFunctions.php';
 
 // $file = fopen("test.txt","a");
 $fileTimestamp = date('Ymd');
-$file = fopen("test_" . $fileTimestamp . ".txt","a");
+$file = fopen("../logs/test_" . $fileTimestamp . ".txt","a");
 fwrite($file,"Hello World. Testing! \n");
 
 
@@ -20,12 +21,9 @@ $timestamp = date('m/d/Y h:i:s');
 // fwrite($file,"Hello World. Testing! \n");
 fwrite($file, '['.$timestamp.']: ' . "user name: " . $userName . "\n");
 
-
-
-
 //else echo 1;
 if (is_ajax()) {
-// echo '<p>running update settings</p>';
+
 $timestamp = date('m/d/Y h:i:s');
 
   	if (isset($_POST["func"]) && ($_POST["func"]=='updateSettings')) { //Checks if action value exists to update user settings
@@ -54,9 +52,9 @@ $timestamp = date('m/d/Y h:i:s');
 	        fclose($file);
 	        echo 1;
   
-  	}   // update user settings
-  	
-  	if (isset($_POST["func"]) && ($_POST["func"]=='saveNewSchool')) { 
+  	}   // update user settings	
+	
+	if (isset($_POST["func"]) && ($_POST["func"]=='saveNewSchool')) { 
   	    if($_POST["firstGrade"]=='true') {$firstGrade='Y';} else {$firstGrade= 'N';};
 	    if($_POST["secondGrade"]=='true') {$secondGrade='Y';} else {$secondGrade= 'N';};
 	    if($_POST["thirdGrade"]=='true') {$thirdGrade='Y';} else {$thirdGrade= 'N';};
@@ -135,9 +133,19 @@ if (isset($_POST["func"]) && ($_POST["func"]=='saveNewStudent')) {
   	    $studentSpecialNeeds=$_POST["studentSpecialNeeds"];
   	    $studentLAT=$_POST["lat"];
   	    $studentLNG=$_POST["lng"];
+  	    $studentBearing = computeBearing($schoolLat, $schoolLng, $studentLAT, $studentLNG);
   	    $studentQuadrant = getQuadrant($userName, $schoolName, $studentLAT, $studentLNG);
 	    $distanceToSchool =  $_POST["distToSchool"];     
 	    $timeToSchool =  $_POST["timeToSchool"];
+	    
+	    // check if special needs then set student group to 0
+	    $studentGroup = $studentQuadrant;
+	    if ($studentSpecialNeeds == 'Y')
+	      $studentGroup = 0;
+	      
+	    if ($studentBearing == 0)
+	      $studentBearing = 360;
+	    
 	    // calculate air distance to school
 
 	    $airDistanceToSchool = getAirDistance($studentLAT, $studentLNG, $schoolLat, $schoolLng);  
@@ -152,10 +160,11 @@ if (isset($_POST["func"]) && ($_POST["func"]=='saveNewStudent')) {
 	  	            `lat` = '$studentLAT',
 	  	            `lng` = '$studentLNG',
 	  	            `quadrant` = '$studentQuadrant',
-	  	            `student_group` = '$studentQuadrant',         
+	  	            `student_group` = '$studentGroup',         
 	  	            `distance_to_school` = '$distanceToSchool',
 	  	            `time_to_school` = '$timeToSchool',
-	  	            `air_distance_to_school` = '$airDistanceToSchool'
+	  	            `air_distance_to_school` = '$airDistanceToSchool',
+	  	            `bearing` = '$studentBearing'
 	  	             ";
 	  	             
 	  	               	    
@@ -235,14 +244,44 @@ if (isset($_POST["func"]) && ($_POST["func"]=='updateStudentGroup')) {
 	    
   }   // update student group manually 
   
-}    // if is_ajax
-
-else {
-fwrite($file,"did not run ajax");
-fclose($file);
-echo 0;
-}
-
+  if (isset($_POST["func"]) && $_POST["func"]=='calculateGroups') { 
+  
+ 
+        $schoolName=$_POST["schoolName"];
+        $maxStudentsPerGroup = $_POST["maxStudentsPerGroup"];
+        // get school lat, lng
+        $query = "SELECT * FROM `user_schools` WHERE `user_name`='$userName' AND `school_name`='$schoolName';";
+        $result = mysqli_query($db, $query);
+        $row=mysqli_fetch_array($result);
+         //print_r($row);
+		 
+        $schoolLat = $row["lat"];
+        $schoolLng = $row["lng"];   
+        
+        //# of sections to divide by
+        $latSections = 2;
+        $lngSections = 2;
+        
+	$timestamp = date('m/d/Y h:i:s');   
+	$quad = 1;    
+	fwrite($file,'['.$timestamp.']: ' . 'calling getStudentGroupQI '  .  $userName . ', ' . $schoolName . ', ' . $schoolLat . ', ' . $schoolLng . ', ' . $latSections . ', ' . $lngSections . ", " . $maxStudentsPerGroup  . " , " . $quad . "\n");        
+        // call function that is defined in generalFunctions.php
+        $res = getStudentGroupQI($db, $userName, $schoolName, $schoolLat, $schoolLng, $latSections, $lngSections, $maxStudentsPerGroup, $quad);
+        $quad++;
+        $res = getStudentGroupQI($db, $userName, $schoolName, $schoolLat, $schoolLng, $latSections, $lngSections, $maxStudentsPerGroup, $quad);
+        $quad++;
+        $res = getStudentGroupQI($db, $userName, $schoolName, $schoolLat, $schoolLng, $latSections, $lngSections, $maxStudentsPerGroup, $quad);
+        $quad++;
+        $res = getStudentGroupQI($db, $userName, $schoolName, $schoolLat, $schoolLng, $latSections, $lngSections, $maxStudentsPerGroup, $quad);
+        
+        
+        echo 1;
+        
+		// die();
+	    
+  }   // calculateGroups
+  
+  
 if (isset($_POST["func"]) && ($_POST["func"]=='insertBusStop')) { 
   
  
@@ -259,7 +298,7 @@ if (isset($_POST["func"]) && ($_POST["func"]=='insertBusStop')) {
 		
         $result = mysqli_query($db, $query);
 		if($result){
-			echo '1';
+			echo 1;
 		}
 		
   die();
@@ -282,7 +321,7 @@ if (isset($_POST["func"]) && ($_POST["func"]=='updateBusStop')) {
 	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
 	    $result = mysqli_query($db, $query);
 		if($result){
-			echo '1';
+			echo 1;
 		}
   
 }
@@ -297,63 +336,23 @@ if (isset($_POST["func"]) && ($_POST["func"]=='deleteBusStop')) {
 	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
 	    $result = mysqli_query($db, $query);
 		if($result){
-			echo '1';
+			echo 1;
 		}
 
  die();
 
 }
-
-if (isset($_POST["func"]) && ($_POST["func"]=='saveNewStudent')) { 
-
-            $schoolName=$_POST["schoolName"];
-            
-         // get school lat, lng
-        $query = "SELECT * FROM `students` WHERE `school_name`='$schoolName' AND `student_name`='$studentName' AND 'quadrant' = '1';";
-        $result = mysqli_query($db, $query);
-        $row=mysqli_fetch_array($result);
-        // print_r($row);
-        $schoolLat = $row["lat"];
-        $schoolLng = $row["lng"];  	
-        
-// 	    $studentName=$_POST["studentName"];
-//  	    $studentAddress=$_POST["studentAddress"];
-//  	    $studentGrade=$_POST["studentGrade"];
-//  	    $studentSpecialNeeds=$_POST["studentSpecialNeeds"];
-//  	    $studentLAT=$_POST["lat"];
-//  	    $studentLNG=$_POST["lng"];
-  	    $studentGroup = getStudentGroupQI($userName, $schoolName, $schoolLat, $schoolLng, $studentLat, $studentLng);
-//	    $distanceToSchool =  $_POST["distToSchool"];     
-//	    $timeToSchool =  $_POST["timeToSchool"];	    
-	    
-/*	    $query ="REPLACE INTO`students` 
-	  	        SET `school_name` = '$schoolName',
-	  	            `student_name` = '$studentName',
-	  	            `student_address` = '$studentAddress',
-	  	            `student_grade` = '$studentGrade',
-	  	            `student_special_needs` = '$studentSpecialNeeds',
-	  	            `lat` = '$studentLAT',
-	  	            `lng` = '$studentLNG',
-  	                    `quadrant` = '$studentQuadrant',
-	  	            `student_group` = '$studentGroup',         
-	  	            `distance_to_school` = '$distanceToSchool',
-	  	            `time_to_school` = '$timeToSchool'
-	  	             ";
-*/	  	   
-
-	$query ="REPLACE INTO`students` 
-	  	        SET `student_group` = '$studentGroup',";          
-	  	               	    
-	    $timestamp = date('m/d/Y h:i:s');       
-	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
-	    $result = mysqli_query($db, $query);
-	    echo 1;
-  }    // update student group automatically
-  
+}
+else {
+fwrite($file,"did not run ajax");
+fclose($file);
+echo 0;
+}
 
 //Function to check if the request is an AJAX request
 function is_ajax() {
   return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 }
+
 
 ?>
