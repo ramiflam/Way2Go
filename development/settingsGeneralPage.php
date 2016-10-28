@@ -117,6 +117,13 @@ $LOB = $row["LOB"];
             <td><select name="lineOfBusiness"><option value="School">School</option></select ></td>
         </tr>
         <tr>
+            <td><label for="quadNumber" > &nbsp Number of quads &nbsp </td>
+            <td><select name="quadNumber">
+            <option value="4">4</option>
+                <option value="3">3</option></td>
+             </select>
+        </tr>        
+        <tr>
             
         </tr>
     </table>   
@@ -134,6 +141,7 @@ $LOB = $row["LOB"];
   // window.alert("button pressed");
   // var a = $(this).parent().find('[name=loadingTime]').val();
    window.alert($(this).parent().parent().parent().find('[name=quadrantTilt]').val());
+   origQuadrantTilt = <?php echo $quadrantTilt; ?>;
  	    var data = {
  	    	func : 'updateSettings',
  	    	// userName : $(this).parent().parent().parent().attr('userName'),
@@ -143,7 +151,9 @@ $LOB = $row["LOB"];
  	    	timeLimitPickup : $(this).parent().parent().parent().find('[name=timeLimitPickup]').val(),
  	    	timeLimitRelease : $(this).parent().parent().parent().find('[name=timeLimitRelease]').val(),
  	    	quadrantTilt : $(this).parent().parent().parent().find('[name=quadrantTilt]').val(),
- 	    	LOB: $(this).parent().parent().parent().find('[name=lineOfBusiness]').val()
+ 	    	LOB: $(this).parent().parent().parent().find('[name=lineOfBusiness]').val(),
+ 	    	quadNumber: $(this).parent().parent().parent().find('[name=quadNumber]').val(),
+ 	    	origQuadrantTilt : origQuadrantTilt
  	    	};
  	    	
             // var data = {"action":"test"};

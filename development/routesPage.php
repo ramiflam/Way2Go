@@ -19,7 +19,7 @@ fwrite($file,"POST[schoolNameSelect = " . $_POST['schoolNameSelect'] . "\n" );
 
 
 if( isset($_POST['schoolNameSelect']))  {
-echo("School Name Select is set");
+// echo("School Name Select is set");
  $showSchoolMap = true;
  $showGroupButton = true;
  $schoolName=$_POST['schoolNameSelect'];
@@ -95,12 +95,8 @@ else {
       <?php 
       }; 
       ?>
-      <input type = "submit" type="button" id="schoolNameSubmit" class="schoolNameSubmit">
-<div id='groupButton' name='groupButton' class = 'submit'>
-  
-        <h1><button id='groupStudents' type="button" name="groupStudents" class='submit' input type="submit">GROUP</button></h1>
-  
-</div>
+      <input type = "submit" type="button" id="schoolNameSubmit" class="schoolNameSubmit"> &nbsp &nbsp &nbsp <button id='groupStudents' type="button" name="groupStudents" class='submit' input type="submit">GROUP</button> &nbsp &nbsp &nbsp <button id='assignStudents' type="button" name="assignStudents" class='submit' input type="submit">ASSIGN</button>
+
       
  </form> 
  </div> 
@@ -168,7 +164,7 @@ else {
  
  
       // load bus stops from db to local array
-      $queryBusStop = "SELECT * FROM `school_bus_stops` WHERE `user_name` = '$userName' and `shcool_name` = '$schoolName' ;";
+      $queryBusStop = "SELECT * FROM `school_bus_stops` WHERE `user_name` = '$userName' and `school_name` = '$schoolName' ;";
       $rowBusStop = mysqli_fetch_array($queryBusStop,MYSQLI_ASSOC);
       $resultBusStop = mysqli_query($db, $queryBusStop);
       
@@ -444,7 +440,7 @@ else {
         	     return "../assets/yellow-dot.png"
         	  } else if (inputStudentGroup  >= 100) {
         	     groupH = Math.floor(inputStudentGroup/100);
-        	     var groupMod = inputStudentGroup % 100 + (groupH*10);
+        	     var groupMod = inputStudentGroup % 100 ;  //+ (groupH*10);
         	     if (groupMod == 0 || groupMod == 60) {
         	        return "../assets/blue-dot.png";
         	     }
@@ -486,6 +482,8 @@ else {
 						  data: data,
 
 					});
+					
+					// this.setMap(null);
 
 			}
 			else{
@@ -526,8 +524,33 @@ else {
 	                }); // ajax call  
 	                location.reload(true);		
           };
-       });
-    });
+       }); // groupStudents
+       $('#assignStudents').click( function() {
+          // window.alert('groupStudents clicked:');
+          var userName = '<?php echo $userName; ?>';
+          var schoolName = '<?php echo $schoolName; ?>';
+          if (userName && schoolName) {
+             var data = {
+				func : 'assignStudents',
+				schoolName: schoolName ,
+				userName: userName
+				};
+			  $.ajax({
+				  type: "POST",
+				  dataType: "json",
+				  url: "ajax.php", //Relative or absolute path to response.php file
+				  data: data,
+				  success: function(response) {
+				  console.log(response);
+					  location.reload();					   
+				  }
+						  
+	                }); // ajax call  
+	                location.reload(true);		
+          };
+       }); // assignStudents
+       
+    }); // function
     
 
     </script>

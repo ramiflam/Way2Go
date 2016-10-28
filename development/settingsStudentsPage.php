@@ -90,8 +90,8 @@ $showStudents = false;
   });
   
    $(function ()  {
-   var moveLeft = 20;
-   var moveDown = 10;
+   var moveLeft = 10;
+   var moveDown = 5;
       $('#studentUpload').mouseenter(function() { 
       $('div#tipUploadStudent').show();
       })
@@ -132,7 +132,7 @@ $showStudents = false;
 
 <div>
   <form name="schoolNameSelect" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" > 
-    <td>Select a School:<td>
+    <td>Select a School:</td>
     <select name="schoolNameSelect" class= 'studentsSettingsForm'>
                     
       <?php 
@@ -162,16 +162,17 @@ if ($showStudents) {
     <h1><button id="addStudent" class='addStudent' type="button" name="addStudent"  input type="submit">+</button></h1>
 </div>
 
-<div id="studentUpload">
+<!-- <div id="studentUpload"> -->
+
+    <h1><button id='studentUpload' type="button" name="studentUpload" class="studentUpload" input type="submit">Load Students</button> &nbsp <button id='resetQuad' type="button" name="resetQuad" class="resetQuad" input type="submit">Reset Quad</button> </h1>
+    
+<!-- </div> -->
+
 <!--
-    Upload Students File:  <input name="csv" type="file" id="csv" />   
-    <input type="submit" name="fileUploadSubmit" id="fileUploadSubmit" value="Submit" /> 
--->
-    <h1><button id='studentUpload' type="button" name="studentUpload" class="studentUpload" input type="submit">Load Students</button></h1>
+<div id="resetQuad">
+    <h1><button id='resetQuad' type="button" name="resetQuad" class="resetQuad" input type="submit">Reset Quad</button></h1>
 </div>
-
-
-
+-->
 
 <div id="newStudentDiv" class="newStudentDiv" name="newStudentDiv">  
   <form name='studentsAddForm' method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" >
@@ -277,7 +278,7 @@ if ($showStudents) {
    
       
      $('#studentUpload').click( function() {
-     schName = "<?php echo $schoolName; ?>";
+     var schName = "<?php echo $schoolName; ?>";
           window.location.replace("selectStudentFile.php?schoolName=" + schName);
      });  
 
@@ -371,8 +372,27 @@ if ($showStudents) {
 
 //         }, 300);    
       });
-      });
-      });
+      });  // saveNewStudent
+      
+      $('#resetQuad').click( function() {
+      window.alert("entering reset quad");
+          var schName = "<?php echo $schoolName; ?>";
+	         var data = {
+	            func : 'resetQuadrant',
+	            schoolName: schName 
+                 };
+	           $.ajax({
+		      type: "POST",
+		      dataType: "json",
+		      url: "ajax.php", //Relative or absolute path to response.php file
+		      data: data,
+		      success: function(data) {
+	        		location.reload();
+	              }
+	      
+	            }); // ajax call            
+      });   //     resetQuad
+    });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw5gl1LJqMre1o3JztvMM7jK_qDbB5pBk" async defer></script> 
 </body>

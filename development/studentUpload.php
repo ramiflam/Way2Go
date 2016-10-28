@@ -90,7 +90,7 @@ if ($_FILES['csv']['size'] > 0) {
     //get the csv file 
     // $studentsFile = $targetFileName; 
     $handle = fopen($targetFileName,"r"); 
-    echo ("Starting input file processing <br>");
+    echo ("Starting input file processing for" . $targetFileName .  "<br>");
      
     //loop through the csv file and insert into database 
     $ndx = 0;
@@ -116,8 +116,8 @@ if ($_FILES['csv']['size'] > 0) {
         $studentName = $data['name'];
         $studentSpecialNeeds = $data['spcial needs'];
         
-        // echo ("student name " . $studentName . "<br>");
-        // echo ("Processing record no " . $ndx . " data is " . $studentAddress . "," . $studentGrade. "," . $studentName . "," . $studentSpecialNeeds . " <br>" );
+        echo ("student name " . $studentName . "<br>");
+         echo ("Processing record no " . $ndx . " data is " . $studentAddress . "," . $studentGrade. "," . $studentName . "," . $studentSpecialNeeds . " <br>" );
         
         $url = "http://maps.google.com/maps/api/geocode/json?address={$studentEncodedAddress}";
         $resp_json = file_get_contents($url);
@@ -170,10 +170,10 @@ if ($_FILES['csv']['size'] > 0) {
         if ($studentBearing > $quadrantBoundaryII  && $studentBearing <= $quadrantBoundaryIII){
             $studentQuadrantShifted = 2;
         }
-        if ($studentBearing > $quadrantBoundaryIII && $studentBearing <= $quadrantBoundaryIV){
+        if ($studentBearing > $quadrantBoundaryIII && $studentBearing <= $quadrantBoundaryIV ){
             $studentQuadrantShifted = 3;
         }
-        if ($studentBearing > $quadrantBoundaryIV){
+        if ($studentBearing > $quadrantBoundaryIV || $studentBearing <= $quadrantBoundaryI){
             $studentQuadrantShifted = 4;
         }
  
@@ -207,7 +207,7 @@ if ($_FILES['csv']['size'] > 0) {
         // verify if data is complete
         if($lati && $longi){
         
-            $query ="INSERT INTO `students`
+            $query ="REPLACE INTO `students`
 	  	        SET `student_address` = '$studentAddress',
 	  	            `student_name` = '$studentName',
 	  	            `school_name` = '$schoolName',
@@ -225,7 +225,7 @@ if ($_FILES['csv']['size'] > 0) {
 	  	        
   	        
   	        $timestamp = date('m/d/Y h:i:s');       
-	  	// fwrite($queryFile, $query . "\n");
+	  	fwrite($file, $query . "\n");
 	  	// echo $query;
 	        $result = mysqli_query($db, $query);
         }

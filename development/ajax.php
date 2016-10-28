@@ -34,6 +34,8 @@ $timestamp = date('m/d/Y h:i:s');
 	  	$timeLimitRelease=$_POST["timeLimitRelease"];
 	  	$quadrantTilt = $_POST["quadrantTilt"];
 	  	$LOB=$_POST["LOB"];
+	  	$origQuadrantTilt = $_POST["origQuadrantTilt"];
+	  	$quadNumber = $_POST["quadNumber"];
 
 	  	$query ="UPDATE `user_settings`
 	  	        SET `zoning` = '$userZoning', 
@@ -42,13 +44,21 @@ $timestamp = date('m/d/Y h:i:s');
 	  	            `time_limit_pickup` = $timeLimitPickup,
 	  	            `time_limit_release` = $timeLimitRelease,
 	  	            `LOB` = '$LOB',
-	  	            `quadrant_tilt` = '$quadrantTilt'
+	  	            `quadrant_tilt` = '$quadrantTilt',
+	  	            `quadrant_number` = $quadNumber
 	  	        WHERE `user_name` = '$userName' ";
 
 	  	$timestamp = date('m/d/Y h:i:s');       
 	  	fwrite($file,'['.$timestamp.']: ' .$query . "\n");
 	  	// echo $query;
 	        $result = mysqli_query($db, $query);
+	        
+	        // check if quadrant tilt was modified. if yes recalculate it for all students and set their quadrant and group per new calc
+	        if ( $origQuadrantTilt != $quadrantTilt) {
+	           // update quadrant to initial values per new tilt
+	           // $res = updateQuadrants($userName, $quadrantTilt);
+	        }
+	        
 	        fclose($file);
 	        echo 1;
   
@@ -134,7 +144,7 @@ if (isset($_POST["func"]) && ($_POST["func"]=='saveNewStudent')) {
   	    $studentLAT=$_POST["lat"];
   	    $studentLNG=$_POST["lng"];
   	    $studentBearing = computeBearing($schoolLat, $schoolLng, $studentLAT, $studentLNG);
-  	    $studentQuadrant = getQuadrant($userName, $schoolName, $studentLAT, $studentLNG);
+  	    $studentQuadrant = getQuadrant($userName, $schoolLat, $schoolLng, $studentLAT, $studentLNG);
 	    $distanceToSchool =  $_POST["distToSchool"];     
 	    $timeToSchool =  $_POST["timeToSchool"];
 	    
@@ -244,6 +254,52 @@ if (isset($_POST["func"]) && ($_POST["func"]=='updateStudentGroup')) {
 	    
   }   // update student group manually 
   
+  if (isset($_POST["func"]) && ($_POST["func"]=='updateStudentGroup')) { 
+        $schoolName=$_POST["schoolName"];
+	    $studentName=$_POST["studentName"];
+	    $studentNewGroup=$_POST["studentNewGroup"];
+	    
+	    $query ="UPDATE `students` 
+	  	        SET `student_group` = '$studentNewGroup'  WHERE `school_name` = '$schoolName' AND `student_name` = '$studentName'";
+	  	             
+	  	               	    
+	    $timestamp = date('m/d/Y h:i:s');       
+	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
+	    $result = mysqli_query($db, $query);
+		if($result){
+			echo '1';
+		}
+	    
+  }   // update student group manually 
+  
+  
+  
+  if (isset($_POST["func"]) && ($_POST["func"]=='resetQuadrant')) { 
+        $schoolName=$_POST["schoolName"];
+	$query = "SELECT * FROM `user_settings` WHERE user_name='$userName';";
+	
+	fwrite($file,'['.$timestamp.']: ' . 'in resetQuadrant '  .  $userName . ', ' . $schoolName . "\n"); 
+	fwrite($file,'['.$timestamp.']: ' . 'Query: ' . $query . "\n");  
+	
+	$result = mysqli_query($db, $query);
+	If ($result)
+	   {
+	    	$row = mysqli_fetch_assoc($result);
+		// $returnMsg = $row["message"];
+	   }
+	
+
+	$quadrantTilt = $row["quadrant_tilt"];
+	  	             
+	fwrite($file,'['.$timestamp.']: ' . 'calling updateQuadrants: tilt is - ' . $quadrantTilt . "\n");  	               	    
+	    $res = updateQuadrants($db, $userName, $schoolName, $quadrantTilt);
+            if($res){
+		echo '1';
+	    }
+	    
+  }   // reset students quadrant 
+  
+  
   if (isset($_POST["func"]) && $_POST["func"]=='calculateGroups') { 
   
  
@@ -264,7 +320,27 @@ if (isset($_POST["func"]) && ($_POST["func"]=='updateStudentGroup')) {
         
 	$timestamp = date('m/d/Y h:i:s');   
 	$quad = 1;    
-	fwrite($file,'['.$timestamp.']: ' . 'calling getStudentGroupQI '  .  $userName . ', ' . $schoolName . ', ' . $schoolLat . ', ' . $schoolLng . ', ' . $latSections . ', ' . $lngSections . ", " . $maxStudentsPerGroup  . " , " . $quad . "\n");        
+	fwrite($file,'['.$timestamp.']: ' . 'calling getStudentGroupQI '  .  $userName . ', ' . $schoolName . ', ' . $schoolLat . ', ' . $schoolLng . ', ' . $latSections . ', ' . $lngSections . ", " . $maxStudentsPerGroup  . " , " . $quad . "\n");  
+	
+	groupByKmeans($db, $userName, $schoolName, $schoolLat, $schoolLng, $maxStudentsPerGroup, $quad );
+	$quad++;
+	groupByKmeans($db, $userName, $schoolName, $schoolLat, $schoolLng, $maxStudentsPerGroup, $quad );
+	$quad++;
+	groupByKmeans($db, $userName, $schoolName, $schoolLat, $schoolLng, $maxStudentsPerGroup, $quad );
+	$quad++;
+	groupByKmeans($db, $userName, $schoolName, $schoolLat, $schoolLng, $maxStudentsPerGroup, $quad );
+	
+	/**
+	
+	studentGroupCluster($db, $userName, $schoolName, $schoolLat, $schoolLng, $maxStudentsPerGroup, $quad);
+	$quad++;
+	studentGroupCluster($db, $userName, $schoolName, $schoolLat, $schoolLng, $maxStudentsPerGroup, $quad);
+	$quad++;
+	studentGroupCluster($db, $userName, $schoolName, $schoolLat, $schoolLng, $maxStudentsPerGroup, $quad);
+	$quad++;
+	studentGroupCluster($db, $userName, $schoolName, $schoolLat, $schoolLng, $maxStudentsPerGroup, $quad);
+***/
+	/**      
         // call function that is defined in generalFunctions.php
         $res = getStudentGroupQI($db, $userName, $schoolName, $schoolLat, $schoolLng, $latSections, $lngSections, $maxStudentsPerGroup, $quad);
         $quad++;
@@ -273,7 +349,7 @@ if (isset($_POST["func"]) && ($_POST["func"]=='updateStudentGroup')) {
         $res = getStudentGroupQI($db, $userName, $schoolName, $schoolLat, $schoolLng, $latSections, $lngSections, $maxStudentsPerGroup, $quad);
         $quad++;
         $res = getStudentGroupQI($db, $userName, $schoolName, $schoolLat, $schoolLng, $latSections, $lngSections, $maxStudentsPerGroup, $quad);
-        
+ **/      
         
         echo 1;
         
@@ -281,19 +357,46 @@ if (isset($_POST["func"]) && ($_POST["func"]=='updateStudentGroup')) {
 	    
   }   // calculateGroups
   
+if (isset($_POST["func"]) && $_POST["func"]=='assignStudents') { 
+        $schoolName=$_POST["schoolName"];
+        $userName=$_POST["userName"];
+        // get school lat, lng
+        $query = "SELECT * FROM `user_schools` WHERE `user_name`='$userName' AND `school_name`='$schoolName';";
+        $result = mysqli_query($db, $query);
+        $row=mysqli_fetch_array($result);
+         //print_r($row);
+		 
+        $schoolLat = $row["lat"];
+        $schoolLng = $row["lng"];   
+        
+	$timestamp = date('m/d/Y h:i:s');   
+	$distRange = 400;  // for now use 400 meters
+	$quad = 1;    
+	$ret = assignStudents2Stops($db, $userName, $schoolName, $schoolLat , $schoolLng, $quad, $distRange);
+
+    echo 1;
+}
   
 if (isset($_POST["func"]) && ($_POST["func"]=='insertBusStop')) { 
-  
- 
-  
+
         $schoolName=$_POST["schoolName"];
-	    $userName=$_POST["userName"];
+	$userName=$_POST["userName"];
+  
+      $querySchool = "SELECT * FROM `user_schools` WHERE `user_name`='$userName' and `school_name` = '$schoolName' ;";
+      $rowSchool=mysqli_fetch_array($querySchool,MYSQLI_ASSOC);
+      $resultSchool = mysqli_query($db, $querySchool);
+      $resultRow = mysqli_fetch_array($resultSchool );
+       
+      $schoolLat = $resultRow['lat'];
+      $schoolLng = $resultRow['lng'];
+
   	    $lat=$_POST["lat"];
   	    $lng=$_POST["lng"];
   	    $desc=$_POST["desc"];
+            $quad =  getQuadrant($userName, $schoolLat, $schoolLng, $lat , $lng);
 	   
 	    
-	    $query ="INSERT INTO `school_bus_stops`(`id`, `user_name`, `shcool_name`, `lat`, `lng`, `description`) VALUES ('','".$userName."','".$schoolName."','".$lat."','".$lng."','".$desc."')";
+	    $query ="INSERT INTO `school_bus_stops`(`id`, `user_name`, `school_name`, `lat`, `lng`, `description`, `quadrant`) VALUES ('','".$userName."','".$schoolName."','".$lat."','".$lng."','".$desc." ','".$quad."')";
 	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
 		
         $result = mysqli_query($db, $query);
@@ -308,13 +411,22 @@ if (isset($_POST["func"]) && ($_POST["func"]=='updateBusStop')) {
 
         $schoolName=$_POST["schoolName"];
 	    $userName=$_POST["userName"];
+      $querySchool = "SELECT * FROM `user_schools` WHERE `user_name`='$userName' and `school_name` = '$schoolName' ;";
+      $rowSchool=mysqli_fetch_array($querySchool,MYSQLI_ASSOC);
+      $resultSchool = mysqli_query($db, $querySchool);
+      $resultRow = mysqli_fetch_array($resultSchool );
+       
+      $schoolLat = $resultRow['lat'];
+      $schoolLng = $resultRow['lng'];	    
+	    
   	    $lat=$_POST["lat"];
   	    $lng=$_POST["lng"];
   	    $newDesc=$_POST["desc"];
-		$id = $_POST['id'];
+            $id = $_POST['id'];
+            $quad =  getQuadrant($userName, $schoolLat, $schoolLng, $lat , $lng);
 		
 		 $query ="UPDATE `school_bus_stops` 
-	  	        SET `user_name` = '$userName', `shcool_name` = '$schoolName', `lat` = '$lat', `lng` = '$lng'  , `description` = '$newDesc' WHERE `id` = '$id'";
+	  	        SET `user_name` = '$userName', `school_name` = '$schoolName', `lat` = '$lat', `lng` = '$lng'  , `description` = '$newDesc' , `quadrant` = $quad WHERE `id` = '$id'";
 	  	             
 	  	               	    
 	    $timestamp = date('m/d/Y h:i:s');       
