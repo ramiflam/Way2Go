@@ -272,6 +272,24 @@ if (isset($_POST["func"]) && ($_POST["func"]=='updateStudentGroup')) {
 	    
   }   // update student group manually 
   
+  if (isset($_POST["func"]) && ($_POST["func"]=='updateStudentBusStop')) { 
+        $schoolName=$_POST["schoolName"];
+	    $studentName=$_POST["studentName"];
+	    $studentNewBSDesc=$_POST["studentNewBSDesc"];
+	    $studentNewBSID=$_POST["studentNewBSID"];
+	    
+	    $query ="UPDATE `students` 
+	  	        SET `bus_stop_id` = '$studentNewBSID', `bus_stop_description` = '$studentNewBSDesc'  WHERE `school_name` = '$schoolName' AND `student_name` = '$studentName'";
+	  	             
+	  	               	    
+	    $timestamp = date('m/d/Y h:i:s');       
+	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
+	    $result = mysqli_query($db, $query);
+		if($result){
+			echo '1';
+		}
+	    
+  }   // update student updateStudentBusStop 
   
   
   if (isset($_POST["func"]) && ($_POST["func"]=='resetQuadrant')) { 
@@ -394,9 +412,10 @@ if (isset($_POST["func"]) && ($_POST["func"]=='insertBusStop')) {
   	    $lng=$_POST["lng"];
   	    $desc=$_POST["desc"];
             $quad =  getQuadrant($userName, $schoolLat, $schoolLng, $lat , $lng);
+            $angle = computeBearing( $schoolLat, $schoolLng, $lat, $lng );
 	   
 	    
-	    $query ="INSERT INTO `school_bus_stops`(`id`, `user_name`, `school_name`, `lat`, `lng`, `description`, `quadrant`) VALUES ('','".$userName."','".$schoolName."','".$lat."','".$lng."','".$desc." ','".$quad."')";
+	    $query ="INSERT INTO `school_bus_stops`(`id`, `user_name`, `school_name`, `lat`, `lng`, `description`, `quadrant`, `bearing`) VALUES ('','".$userName."','".$schoolName."','".$lat."','".$lng."','".$desc." ','".$quad."','".$angle."')";
 	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
 		
         $result = mysqli_query($db, $query);
@@ -424,9 +443,10 @@ if (isset($_POST["func"]) && ($_POST["func"]=='updateBusStop')) {
   	    $newDesc=$_POST["desc"];
             $id = $_POST['id'];
             $quad =  getQuadrant($userName, $schoolLat, $schoolLng, $lat , $lng);
+            $angle = computeBearing( $schoolLat, $schoolLng, $lat, $lng );
 		
 		 $query ="UPDATE `school_bus_stops` 
-	  	        SET `user_name` = '$userName', `school_name` = '$schoolName', `lat` = '$lat', `lng` = '$lng'  , `description` = '$newDesc' , `quadrant` = $quad WHERE `id` = '$id'";
+	  	        SET `user_name` = '$userName', `school_name` = '$schoolName', `lat` = '$lat', `lng` = '$lng'  , `description` = '$newDesc' , `quadrant` = $quad , `bearing` = $angle WHERE `id` = '$id'";
 	  	             
 	  	               	    
 	    $timestamp = date('m/d/Y h:i:s');       

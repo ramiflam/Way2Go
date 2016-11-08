@@ -43,18 +43,25 @@ else {
  
 <script>
 
-<!--
+
   $(document).ready(function() {
     
     // hide/show school map
+    
     $(function () {
+    /***
       $('#schoolNameSubmit').click( function() {
         $(this).parent().parent().parent().find('[name=schoolMap]').show();
         $(this).parent().parent().parent().find('[name=groupButton]').show();
       });
+      ***/
+     
+      
     });
+    
+    
     });
--->
+
 
     
     
@@ -95,7 +102,7 @@ else {
       <?php 
       }; 
       ?>
-      <input type = "submit" type="button" id="schoolNameSubmit" class="schoolNameSubmit"> &nbsp &nbsp &nbsp <button id='groupStudents' type="button" name="groupStudents" class='submit' input type="submit">GROUP</button> &nbsp &nbsp &nbsp <button id='assignStudents' type="button" name="assignStudents" class='submit' input type="submit">ASSIGN</button>
+      <input type = "submit" type="button" id="schoolNameSubmit" class="schoolNameSubmit"> &nbsp &nbsp &nbsp <button id='groupStudents' type="button" name="groupStudents" class='submit' input type="submit">GROUP</button> &nbsp &nbsp &nbsp <button id='assignStudents' type="button" name="assignStudents" class='submit' input type="submit">ASSIGN</button> &nbsp &nbsp  <button id='showAssignment' type="button" name="showAssignment" class='showAssignment' input type="submit">SHOW ASSIGNMENT</button> 
 
       
  </form> 
@@ -109,6 +116,15 @@ else {
 
 <?php 
  if ($showSchoolMap) {
+ 
+ 
+ function compareStops($a, $b) {
+    // compare by bearing
+    if ($a['bearing'] == $b['bearing']) 
+      return 0;
+      
+    return ($a['bearing']  < $b['bearing']) ? -1 : 1;
+ }
     
       $querySchool = "SELECT * FROM `user_schools` WHERE `user_name`='$userName' and `school_name` = '$schoolName' ;";
       $rowSchool=mysqli_fetch_array($querySchool,MYSQLI_ASSOC);
@@ -133,39 +149,28 @@ else {
       
       while ($studentRow = mysqli_fetch_array($resultStudent)) 
       {
+      /***
       	      $studentRec = array();
 	      $studentRec['student_address'] = $studentRow['student_address'];
 	      $studentRec['lat'] = $studentRow['lat'];
 	      $studentRec['lng'] = $studentRow['lng'];
 	      $studentRec['student_name'] = $studentRow['student_name'];
-	      $studentRec['title'] = $studentRow['student_name'] . " " . $studentRow['student_address'] . " Grade: " . $studentRow['student_grade'] . " Quad: " . $studentRow['quadrant'] . " GRP: " . $studentRow['student_group'] . " bearing:" . $studentRow['bearing'];
 	      $studentRec['quadrant'] = $studentRow['quadrant'];
 	      $studentRec['student_group'] = $studentRow['student_group'];
-/**
-      ob_start();
-      var_dump($studentRec);
-      $studentDump = ob_get_clean();
-      fwrite($file,"student record = " . $studentDump . "\n" );
-      **/
-
+***/
+              $studentRec = $studentRow;
+	      $studentRec['title'] = $studentRow['student_name'] . " " . $studentRow['student_address'] . " Grade: " . $studentRow['student_grade'] . " Quad: " . $studentRow['quadrant'] . " GRP: " . $studentRow['student_group'] . " bearing:" . $studentRow['bearing'];
 	      
 	      // add record to array
 	      $studnetArray[] = $studentRec;
 	      $i++;
 	
       }
-/***      
-      ob_start();
-      var_dump($studnetArray);
-      $arrDump = ob_get_clean();
-      fwrite($file,"student array = " . $arrDump  . "\n" );
-       
- ***/     
  
  
       // load bus stops from db to local array
       $queryBusStop = "SELECT * FROM `school_bus_stops` WHERE `user_name` = '$userName' and `school_name` = '$schoolName' ;";
-      $rowBusStop = mysqli_fetch_array($queryBusStop,MYSQLI_ASSOC);
+      // $rowBusStop = mysqli_fetch_array($queryBusStop,MYSQLI_ASSOC);
       $resultBusStop = mysqli_query($db, $queryBusStop);
       
       $timestamp = date('m/d/Y h:i:s');
@@ -174,27 +179,24 @@ else {
       $busStopArray = array();    
       
       while ($busStopRow = mysqli_fetch_array($resultBusStop)) 
-      {
+      {/**
       	      $busStopRec = array();
 	      $busStopRec['id'] = $busStopRow['id'];
 	      $busStopRec['lat'] = $busStopRow['lat'];
 	      $busStopRec['lng'] = $busStopRow['lng'];
 	      $busStopRec['description'] = $busStopRow['description'];
 	      $busStopRec['title'] = $busStopRow['description'] . " Loc: " . $busStopRow['lat'] .  " : " . $busStopRow['lng'];
-	      
+	**/      
+              $busStopRec = $busStopRow;
+              $busStopRec['title'] = $busStopRow['description'] . " Loc: " . $busStopRow['lat'] .  " : " . $busStopRow['lng'];	
 	      // add record to array
 	      $busStopArray[] = $busStopRec;
 	
       }
       
- /**    
-      ob_start();
-      var_dump($busStopArray);
-      $bsDump = ob_get_clean();
-      fwrite($file,"bus stop array = " . $bsDump  . "\n" );
- **/      
-  
-//die();   
+      // sort bust stop array by bearing
+      usort ($busStopArray, 'compareStops');
+      
  ?>
  
     <script>
@@ -258,6 +260,7 @@ else {
 				var lng = e.latLng.lng();
 				var id = this.id;
 				var newDesc = prompt("Update description:" , this.desc);
+				if (newDesc != null) {
 				    var data = {
 							func : 'updateBusStop',
 							schoolName: "<?php echo $schoolName; ?>",
@@ -281,6 +284,8 @@ else {
 						this.desc = newDesc;
 						var newTitle = newDesc + ' Loc: ' + lat + ' : ' + lng;
 						this.setTitle(newTitle);
+						
+					};
 			 });
 			 
 			 //delete bust stop marker on rightclick
@@ -381,10 +386,10 @@ else {
         
 		function addMarker(location, lat, lng){
 			
-			var infowindow = new google.maps.InfoWindow({});
+			//var infowindow = new google.maps.InfoWindow({});
 			var desc = prompt("Enter Bus Stop Description:");
 			var micon = "../assets/pin_yellow.png";
-			if(desc != ''){
+			if(desc != null){
 				
 				
 				var busStopMarker = new google.maps.Marker({
@@ -441,16 +446,16 @@ else {
         	  } else if (inputStudentGroup  >= 100) {
         	     groupH = Math.floor(inputStudentGroup/100);
         	     var groupMod = inputStudentGroup % 100 ;  //+ (groupH*10);
-        	     if (groupMod == 0 || groupMod == 60) {
+        	     if (groupMod == 0 ) {
         	        return "../assets/blue-dot.png";
         	     }
-        	     if (groupMod == 10 || groupMod == 70) {
+        	     if (groupMod == 10 || groupMod == 80) {
         	        return "../assets/orange-dot.png";
         	     }
-        	     if (groupMod == 20 || groupMod == 80) {
+        	     if (groupMod == 20  || groupMod == 90) {
         	        return "../assets/purple-dot.png";
         	     }
-        	     if (groupMod == 30 || groupMod == 90) {
+        	     if (groupMod == 30) {
         	        return "../assets/green-dot.png";
         	     }
         	     if (groupMod == 40) {
@@ -458,6 +463,12 @@ else {
         	     }
         	     if (groupMod == 50) {
         	        return "../assets/ltblue-dot.png";
+        	     }
+        	     if (groupMod == 60) {
+        	        return "../assets/maroon.png";
+        	     }
+        	     if (groupMod == 70) {
+        	        return "../assets/drkgreen.png";
         	     }
         	     
         	  }
@@ -499,6 +510,7 @@ else {
   
   
     $(function () {
+    var assignPolygons = [];
        $('#groupStudents').click( function() {
           // window.alert('groupStudents clicked:');
           var maxStudentsPerGroups = prompt("Enter Max Students Per Group:");
@@ -549,6 +561,151 @@ else {
 	                location.reload(true);		
           };
        }); // assignStudents
+       
+        $('#showAssignment').click( function() {      
+           var showAssignmentButton = this; 
+           var borderWidth = this.style.borderWidth;
+           var borderStyle = this.style.borderStyle;
+           
+ 
+           if (borderWidth  == "0px" || borderWidth  == "") {
+           
+             // showAssignmentButton.style.borderWidth = "5px 5px 5px 5px";
+             // showAssignmentButton.style.borderColor = "gold";
+             
+              var busStopJQarray = <?php echo json_encode($busStopArray); ?>;
+              var studentsArray = <?php echo json_encode($studnetArray); ?>;
+              
+              // loop students array and create line from student to its bus stop
+              var i;
+              for (i=0; i<studentsArray.length; i++) {
+                 if (studentsArray[i].bus_stop_id > 0) {
+                    // find bustop from bus stop array
+                    var j;
+                    var stopNdx=0;
+                    for (j=0; j<busStopJQarray.length; j++) {
+                       if ( busStopJQarray[j].id == studentsArray[i].bus_stop_id) {
+                          stopNdx = j;
+                          break;
+                       } 
+                    }
+                    // get bus stop x,y as well as student 
+                    var studentLat = parseFloat(studentsArray[i].lat);
+                    var customData = {bsid: studentsArray[i].bus_stop_id, bsDesc: studentsArray[i].bus_stop_description, bsLat: busStopJQarray[stopNdx].lat, bsLng: busStopJQarray[stopNdx].lng, studentName: studentsArray[i].student_name, schoolName: studentsArray[i].school_name, studentLat: studentsArray[i].lat, studentLng: studentsArray[i].lng, studentQuad: studentsArray[i].quadrant};
+                    var studentLng = parseFloat(studentsArray[i].lng);
+                    var stopLat = parseFloat(busStopJQarray[stopNdx].lat);
+                    var stopLng = parseFloat(busStopJQarray[stopNdx].lng);
+                    var studentCoords = [{lat: studentLat, lng: studentLng} , {lat: stopLat, lng: stopLng}];
+                    var sLoc1 = studentCoords[0];
+                    var sLoc2 = studentCoords[1];
+					var wayCoordinates = [
+						new google.maps.LatLng(studentLat, studentLng),
+						new google.maps.LatLng(stopLat,stopLng)
+					  ];
+				     var studentPath = new google.maps.Polyline({
+                                     path: wayCoordinates,
+                                     strokeColor: 'gold',
+                                     strokeOpacity: 1.0,
+                                     strokeWeight: 3,
+				     custom: customData,
+                                     geodesic: true,
+                                     //editable: true,
+                                     draggable: true});
+                    studentPath.setMap(map);
+                    assignPolygons.push(studentPath);
+                    
+                    // add listener for drag/drop of polygon used for bus stop change
+
+                    google.maps.event.addListener(studentPath, 'dragend', function(e) {
+                       var origPoly = this.getPath();
+                       
+                       // var newPoly = [];
+		       // alert('sid'+this.custom.studentName + '>>lat'+e.latLng.lat()+ '>> lng'+ e.latLng.lng() );
+		       // find closest bus stop to dragend location
+		       var studentQuad = this.custom.studentQuad;
+		       var minDist = 10000;
+                      var j;
+                      var stopNdx=0;
+                      for (j=0; j<busStopJQarray.length; j++) {
+                         // calc distance between new location and bus stop
+                         var latDiff = Math.abs(e.latLng.lat() - busStopJQarray[j].lat);
+                         var lngDiff = Math.abs(e.latLng.lng() - busStopJQarray[j].lng);
+                         var dist = Math.sqrt(latDiff * latDiff + lngDiff * lngDiff);
+                         if ( dist < minDist ) {
+                            stopNdx = j;
+                            minDist = dist;
+                         } 
+                      }	
+                      
+                     // now we have nearest bus stop - check it is not same as original one and has same quadrant
+                     if  ((busStopJQarray[stopNdx].quadrant == studentQuad) && ( busStopJQarray[stopNdx].id != this.custom.bsid)) {
+                        // prompt for approval and if approved - add new polygon from student to new bus stop, remove orig polygon and make ajax call to update student record for new bus stop
+                        var confirmStr =  "Confirm moving " + this.custom.studentName + " to new stop " + this.custom.bsDesc;
+                        var newStopReply = confirm( confirmStr );
+                        if (newStopReply) {
+                           var newLoc = new google.maps.LatLng(busStopJQarray[stopNdx].lat, busStopJQarray[stopNdx].lng);
+                           var studentLoc = new google.maps.LatLng(this.custom.studentLat, this.custom.studentLng);
+                           origPoly.setAt(0, studentLoc);
+                           origPoly.setAt(1, newLoc);
+                           
+                           // make ajax call to update Db
+                         var data = {
+				func : 'updateStudentBusStop',
+				schoolName: this.custom.schoolName,
+				studentName: this.custom.studentName,
+				studentNewBSDesc:  this.custom.bsDesc,
+				studentNewBSID: this.custom.bsid
+				};
+			  $.ajax({
+				  type: "POST",
+				  dataType: "json",
+				  url: "ajax.php", //Relative or absolute path to response.php file
+				  data: data,
+				  success: function(response) {
+				  console.log(response);
+					  //location.reload();					   
+				  }
+						  
+	                }); // ajax call  
+                           
+                        }
+                        else {
+                          // display orinal assignment polygon
+                           var newLoc = new google.maps.LatLng(this.custom.bsLat, this.custom.bsLng);
+                           var studentLoc = new google.maps.LatLng(this.custom.studentLat, this.custom.studentLng);
+                           origPoly.setAt(0, studentLoc);
+                           origPoly.setAt(1, newLoc);
+                          
+                        }
+                     }
+		       
+					   
+                    }); // dragend 
+                    
+                    google.maps.event.addListener(studentPath, 'drag', function(e) {
+                       var origPoly = this.getPath();
+                       var newLoc = new google.maps.LatLng(e.latLng.lat(), e.latLng.lng());
+                        var studentLoc = new google.maps.LatLng(this.custom.studentLat, this.custom.studentLng);
+                        origPoly.setAt(0, studentLoc);
+                       origPoly.setAt(1, newLoc);
+                    }); // drag
+                 };  // if bus stop > 0
+              };  // students loop
+              
+               this.style.borderWidth = "2px 2px 2px 2px";
+               this.style.borderColor = "gold";             
+           }
+           else {
+               this.style.borderWidth = "0px";
+               var i;
+               for (i=0; i<assignPolygons.length; i++) {
+                  assignPolygons[i].setMap(null);
+               }
+               
+               
+           };
+          
+        }); // showAssignment
        
     }); // function
     
