@@ -36,6 +36,9 @@ $timestamp = date('m/d/Y h:i:s');
 	  	$LOB=$_POST["LOB"];
 	  	$origQuadrantTilt = $_POST["origQuadrantTilt"];
 	  	$quadNumber = $_POST["quadNumber"];
+	  	$busDepoAddress = $_POST["busDepoAddress"];
+	  	$busDepoLat = $_POST["busDepoLat"];
+	  	$busDepoLng = $_POST["busDepoLng"];
 
 	  	$query ="UPDATE `user_settings`
 	  	        SET `zoning` = '$userZoning', 
@@ -45,7 +48,10 @@ $timestamp = date('m/d/Y h:i:s');
 	  	            `time_limit_release` = $timeLimitRelease,
 	  	            `LOB` = '$LOB',
 	  	            `quadrant_tilt` = '$quadrantTilt',
-	  	            `quadrant_number` = $quadNumber
+	  	            `quadrant_number` = $quadNumber,
+	  	            `bus_depo_address` = '$busDepoAddress',
+	  	            `bus_depo_lat` = $busDepoLat,
+	  	            `bus_depo_lng` = $busDepoLng
 	  	        WHERE `user_name` = '$userName' ";
 
 	  	$timestamp = date('m/d/Y h:i:s');       

@@ -102,7 +102,7 @@ else {
       <?php 
       }; 
       ?>
-      <input type = "submit" type="button" id="schoolNameSubmit" class="schoolNameSubmit"> &nbsp &nbsp &nbsp <button id='groupStudents' type="button" name="groupStudents" class='submit' input type="submit">GROUP</button> &nbsp &nbsp &nbsp <button id='assignStudents' type="button" name="assignStudents" class='submit' input type="submit">ASSIGN</button> &nbsp &nbsp  <button id='showAssignment' type="button" name="showAssignment" class='showAssignment' input type="submit">SHOW ASSIGNMENT</button> 
+      <input type = "submit" type="button" id="schoolNameSubmit" class="schoolNameSubmit"> &nbsp &nbsp &nbsp <button id='groupStudents' type="button" name="groupStudents" class='submit' input type="submit">GROUP</button> &nbsp &nbsp &nbsp <button id='assignStudents' type="button" name="assignStudents" class='submit' input type="submit">ASSIGN</button> &nbsp &nbsp &nbsp  <button id='showAssignment' type="button" name="showAssignment" class='showAssignment' input type="submit">SHOW ASSIGNMENT</button>  &nbsp &nbsp &nbsp <button id='optimize' type="button" name="optimize" class='submit' input type="submit">OPTIMIZE</button>
 
       
  </form> 
@@ -120,11 +120,27 @@ else {
  
  function compareStops($a, $b) {
     // compare by bearing
+    /**
     if ($a['bearing'] == $b['bearing']) 
       return 0;
       
     return ($a['bearing']  < $b['bearing']) ? -1 : 1;
+    **/
+    // compare by student group
+    if ($a['student_group'] == $b['student_group']) 
+      return 0;
+      
+    return ($a['student_group']  < $b['student_group']) ? -1 : 1;
+    
  }
+ 
+       $query = "SELECT * FROM `user_settings` WHERE user_name='$userName';";
+
+       $result = mysqli_query($db, $query);
+       If ($result) {
+    	$userSettingsRow = mysqli_fetch_assoc($result);
+	// $returnMsg = $row["message"];
+      }
     
       $querySchool = "SELECT * FROM `user_schools` WHERE `user_name`='$userName' and `school_name` = '$schoolName' ;";
       $rowSchool=mysqli_fetch_array($querySchool,MYSQLI_ASSOC);
@@ -511,6 +527,7 @@ else {
   
     $(function () {
     var assignPolygons = [];
+    
        $('#groupStudents').click( function() {
           // window.alert('groupStudents clicked:');
           var maxStudentsPerGroups = prompt("Enter Max Students Per Group:");
@@ -666,7 +683,7 @@ else {
 					  //location.reload();					   
 				  }
 						  
-	                }); // ajax call  
+	                  }); // ajax call  
                            
                         }
                         else {
@@ -685,8 +702,8 @@ else {
                     google.maps.event.addListener(studentPath, 'drag', function(e) {
                        var origPoly = this.getPath();
                        var newLoc = new google.maps.LatLng(e.latLng.lat(), e.latLng.lng());
-                        var studentLoc = new google.maps.LatLng(this.custom.studentLat, this.custom.studentLng);
-                        origPoly.setAt(0, studentLoc);
+                       var studentLoc = new google.maps.LatLng(this.custom.studentLat, this.custom.studentLng);
+                       origPoly.setAt(0, studentLoc);
                        origPoly.setAt(1, newLoc);
                     }); // drag
                  };  // if bus stop > 0
@@ -706,6 +723,27 @@ else {
            };
           
         }); // showAssignment
+        
+        $('#optimize').click( function() {
+            var newDesc = prompt("Optimize?:" , "");
+		if (newDesc != null) {        
+		};
+            // get sorted bus stop array - sorted by group number
+	    var busStopJQarray = <?php echo json_encode($busStopArray); ?>;
+	    var userSettings = <?php echo json_encode($userSettingsRow); ?>;
+	    
+	    // create new array of bus stops for route - first stop taken from bus depo and last stop is school (this is for to_school route)
+	    // get a copy of group bus stops to prepate array of locations for route calculation
+	    var workGroup = busStopJQarray[0].group_number;
+	    var i;
+	    for (i=0; i<busStopJQarray.length; i++) {
+	       if (workGroup != busStopJQarray[i].group_number)
+	         break;
+	    };
+	    // now we have bus stops from location 0 to i-1 in busStopJQarray and we copy it to local array as prep for population stop points array
+	    var workBusStopGroup = busStopJQarray.splice(0, i);
+	    
+        }); // optimize
        
     }); // function
     
@@ -717,7 +755,7 @@ else {
     
 <?php
  
-};
+};  // show school map
 ?>
 
 </div>

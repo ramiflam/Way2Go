@@ -5,7 +5,7 @@ $fileTimestamp = date('Ymd');
 $genFuncfile = fopen("../logs/func_" . $fileTimestamp . ".txt","a");
 
 function getDbConnection(){
-   $db = mysqli_connect('localhost','xmatchge','$Dlior)0p','xmatchge_way2go');
+   $db = mysqli_connect('localhost','xmatchge','$Yuval)0p','xmatchge_way2go');
    mysqli_query($db, "SET NAMES 'utf8'");
    return $db;
 }
@@ -928,10 +928,13 @@ $genFuncfile = fopen("../logs/func_" . $fileTimestamp . ".txt","a");
              }
            }
            
-           // assing group to bus stop
+           // assing group to bus stop and update it in DB for later use
            $busStops[$i]['studentGroup'] = $centroids[$closestCentroid]['student_group'];
            fwrite($genFuncfile, " bustop " . $busStops[$i]['description'] . " in group " . $busStops[$i]['studentGroup'] . "\n");
-
+           $gNum = $busStops[$i]['studentGroup'];
+           $busStopId = $busStops[$i]['id'];
+           $updateQuery = "UPDATE `school_bus_stops` SET `group_number` = '$gNum' WHERE `id` = '$busStopId' ;";
+           $result = mysqli_query($db, $updateQuery);
            
         } // for $i loop
         

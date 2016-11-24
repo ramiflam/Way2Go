@@ -73,7 +73,7 @@ $LOB = $row["LOB"];
     <table>
         <h1>SETTINGS</h1>
         <tr>
-            <td><label for="zoning" >&nbsp Include Zoning &nbsp </label></td>
+            <td><label for="zoning" >&nbsp Use Zoning &nbsp </label></td>
             <td id="checkBox"><input type="checkbox" id="zoning" name="zoning" <?php echo $userZoning; ?> /><label for="zoning"><span></span></label></td>
         </tr>
         <tr>
@@ -124,6 +124,11 @@ $LOB = $row["LOB"];
              </select>
         </tr>        
         <tr>
+            <td><label for="busDepoAddress" > &nbsp Bus Depo Address &nbsp &nbsp </td>
+            <td>  <input type="text" id="busDepoAddress" name="busDepoAddress" required pattern="[A-Za-z0-9]{1,}" required  > </td>
+        </tr>        
+        
+        <tr>
             
         </tr>
     </table>   
@@ -132,6 +137,7 @@ $LOB = $row["LOB"];
     </table>
 </form>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw5gl1LJqMre1o3JztvMM7jK_qDbB5pBk" async defer></script> 
 
 <script>
   var flag = 0;
@@ -140,19 +146,57 @@ $LOB = $row["LOB"];
   $('#userSettings').click( function(){
   // window.alert("button pressed");
   // var a = $(this).parent().find('[name=loadingTime]').val();
-   window.alert($(this).parent().parent().parent().find('[name=quadrantTilt]').val());
-   origQuadrantTilt = <?php echo $quadrantTilt; ?>;
+   // window.alert($(this).parent().parent().parent().find('[name=quadrantTilt]').val());
+   
+    var userZoning = $(this).parent().parent().parent().find('[name=zoning]')[0].checked;
+    var userLoadingTime = $(this).parent().parent().parent().find('[name=loadingTime]').val();
+    var userLoadingTimeDisabled = $(this).parent().parent().parent().find('[name=loadingTimeDisabled]').val();
+    var userTimeLimitPickup = $(this).parent().parent().parent().find('[name=timeLimitPickup]').val();
+    var userTimeLimitRelease = $(this).parent().parent().parent().find('[name=timeLimitRelease]').val();
+    var userQuadrantTilt = $(this).parent().parent().parent().find('[name=quadrantTilt]').val();
+    var userLOB = $(this).parent().parent().parent().find('[name=lineOfBusiness]').val();
+    var userQuadNumber= $(this).parent().parent().parent().find('[name=quadNumber]').val();
+
+
+   // get lat/lng from bus depo address
+   var busDepoAddress = $(this).parent().parent().parent().find('[name=busDepoAddress]').val();
+   var busDepoLatLng;
+   var geocoder = new google.maps.Geocoder();
+   var origQuadrantTilt = <?php echo $quadrantTilt; ?>;
+   
+   
+   geocoder.geocode( { 'address': busDepoAddress}, function(results, status) {   
+      if (status == google.maps.GeocoderStatus.OK) {
+         if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+         // window.alert(results);
+            busDepoLatLng= results[0].geometry.location;
+            // window.alert(schoolLatLng);
+         }
+         else {
+         window.alert("no result");
+         }
+      }
+      else {
+        window.alert("Status not ok");
+      }
+   
+   
+
+   // window.alert(userZoning);
  	    var data = {
  	    	func : 'updateSettings',
  	    	// userName : $(this).parent().parent().parent().attr('userName'),
- 	    	zoning : $(this).parent().parent().parent().find('[name=zoning]')[0].checked,
- 	    	loadingTime : $(this).parent().parent().parent().find('[name=loadingTime]').val(),
- 	    	loadingTimeDisabled : $(this).parent().parent().parent().find('[name=loadingTimeDisabled]').val(),
- 	    	timeLimitPickup : $(this).parent().parent().parent().find('[name=timeLimitPickup]').val(),
- 	    	timeLimitRelease : $(this).parent().parent().parent().find('[name=timeLimitRelease]').val(),
- 	    	quadrantTilt : $(this).parent().parent().parent().find('[name=quadrantTilt]').val(),
- 	    	LOB: $(this).parent().parent().parent().find('[name=lineOfBusiness]').val(),
- 	    	quadNumber: $(this).parent().parent().parent().find('[name=quadNumber]').val(),
+ 	    	zoning : userZoning,
+ 	    	loadingTime : userLoadingTime,
+ 	    	loadingTimeDisabled : userLoadingTimeDisabled,
+ 	    	timeLimitPickup : userTimeLimitPickup,
+ 	    	timeLimitRelease : userTimeLimitRelease,
+ 	    	quadrantTilt : userQuadrantTilt,
+ 	    	LOB: userLOB,
+ 	    	quadNumber: userQuadNumber,
+ 	    	busDepoAddress: busDepoAddress, 
+ 	    	busDepoLat: busDepoLatLng.lat(),
+ 	    	busDepoLng: busDepoLatLng.lng(),
  	    	origQuadrantTilt : origQuadrantTilt
  	    	};
  	    	
@@ -168,9 +212,11 @@ $LOB = $row["LOB"];
         		location.reload();
               }
       
-    });
-    });
-    });
+            }); // ajax call
+          }); // geocoder
+       }); // user settings
+    });  // function
+    
     if (flag == 0){
     /*window.onbeforeunload = function (e) {
   var message = "You did not save your data",
