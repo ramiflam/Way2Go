@@ -119,6 +119,14 @@ else {
  
  
  function compareStops($a, $b) {
+    // compare by quadrant and then by student group
+    if ($a['quadrant'] != $b['quadrant'])  
+       return ($a['quadrant']  < $b['quadrant']) ? -1 : 1;
+
+     if ($a['student_group'] == $b['student_group']) 
+         return 0;
+     return ($a['student_group']  < $b['student_group']) ? -1 : 1;
+       
     // compare by bearing
     /**
     if ($a['bearing'] == $b['bearing']) 
@@ -126,11 +134,6 @@ else {
       
     return ($a['bearing']  < $b['bearing']) ? -1 : 1;
     **/
-    // compare by student group
-    if ($a['student_group'] == $b['student_group']) 
-      return 0;
-      
-    return ($a['student_group']  < $b['student_group']) ? -1 : 1;
     
  }
  
@@ -210,7 +213,7 @@ else {
 	
       }
       
-      // sort bust stop array by bearing
+      // sort bust stop array 
       usort ($busStopArray, 'compareStops');
       
  ?>
@@ -244,7 +247,7 @@ else {
 	 var busStopJQarray = <?php echo json_encode($busStopArray); ?>;
          for(var i=0; i<busStopJQarray.length; i++){
 			 
-			var id = parseFloat(busStopJQarray[i].id);
+	    var id = parseFloat(busStopJQarray[i].id);
             var busStopLat = parseFloat(busStopJQarray[i].lat);
             var busStopLng = parseFloat(busStopJQarray[i].lng);
             var busStopLatLng = {lat: busStopLat, lng: busStopLng};
@@ -526,7 +529,12 @@ else {
   
   
     $(function () {
+    var routeStrokeColors = ["blue", "darkgreen", "maroon", "yellow", "hotpink", "olivedrab", "lavender" , "limegreen", "royalblue", "tomato"];
     var assignPolygons = [];
+    var directionsDisplayArray = [];
+    var workGroup;
+    var rendererCalled=0;
+    var routeZIndex = 1;
     
        $('#groupStudents').click( function() {
           // window.alert('groupStudents clicked:');
@@ -725,24 +733,122 @@ else {
         }); // showAssignment
         
         $('#optimize').click( function() {
-            var newDesc = prompt("Optimize?:" , "");
-		if (newDesc != null) {        
-		};
-            // get sorted bus stop array - sorted by group number
+            //var newDesc = prompt("Optimize?:" , "");
+		// if (newDesc != null) {        
+		// };
+            // get sorted bus stop array - sorted by quadrant and then by group number
 	    var busStopJQarray = <?php echo json_encode($busStopArray); ?>;
 	    var userSettings = <?php echo json_encode($userSettingsRow); ?>;
 	    
-	    // create new array of bus stops for route - first stop taken from bus depo and last stop is school (this is for to_school route)
-	    // get a copy of group bus stops to prepate array of locations for route calculation
-	    var workGroup = busStopJQarray[0].group_number;
-	    var i;
-	    for (i=0; i<busStopJQarray.length; i++) {
-	       if (workGroup != busStopJQarray[i].group_number)
-	         break;
-	    };
-	    // now we have bus stops from location 0 to i-1 in busStopJQarray and we copy it to local array as prep for population stop points array
-	    var workBusStopGroup = busStopJQarray.splice(0, i);
+	    // sort by quadrant and then by group number
+	    busStopJQarray.sort(function(a, b) {
+	     if (a.quadrant != b.quadrant) 
+	       return (a.quadrant < b.quadrant) ? -1 : 1;
+	     if (a.group_number == b.group_number)
+	        return 0;
+	     return (a.group_number < b.group_number) ? -1 : 1;
+	       
+	    });
+
+	    // pepare start (later also stop) point from bus depo lat lng
+	    var userSettings = <?php echo json_encode($userSettingsRow); ?>;
+            var busDepoLat = parseFloat(userSettings.bus_depo_lat);
+            var busDepoLng = parseFloat(userSettings.bus_depo_lng);
+            var busDepoLatLng = {lat: busDepoLat, lng: busDepoLng};
+            
+            // prepare school location
+            var schoolLat = parseFloat(<?php echo $schoolLat; ?>);
+            var schoolLng = parseFloat(<?php echo $schoolLng; ?>);
+            var schoolLatLng = {lat: schoolLat, lng: schoolLng};
+
 	    
+	    // loop quadrants and create routes per quadrant groups
+	    var currentQuad = 1;
+	    // var workGroup;
+	    var directionsService = new google.maps.DirectionsService();
+	    for (currentQuad=1; currentQuad<userSettings.quadrant_number; currentQuad++) {
+	       var i=0;
+               // loop all groups for given quad and create route for each group
+               while (busStopJQarray[0] && (busStopJQarray[0].quadrant == currentQuad))  {
+
+		    // create new array of bus stops for route - first stop taken from bus depo and last stop is school (this is for to_school route)
+		    // get a copy of group bus stops to prepate array of locations for route calculation
+		    
+		    // var workGroup;
+		    // if bus stop array is empty then break for next quadrant
+		    if (busStopJQarray[0]) {
+		       workGroup = busStopJQarray[0].group_number;
+		    }
+		    else break;
+		       
+		       
+		    
+		    for (i=0; i<busStopJQarray.length ; i++) {
+		       // if (workGroup != busStopJQarray[i].group_number || busStopJQarray[i].quadrant != currentQuad)
+		       if (workGroup != busStopJQarray[i].group_number)
+		         break;
+		    };
+		    // now we have bus stops from location 0 to i-1 in busStopJQarray and we copy it to local array as prep for population stop points array
+		    var workBusStopGroup = busStopJQarray.splice(0, i);
+		    var waypts = [];
+		    var j;
+		    for (j=0; j<workBusStopGroup.length; j++) {
+		    var newLoc = new google.maps.LatLng(workBusStopGroup[j].lat, workBusStopGroup[j].lng);
+		       waypts.push({
+	                 location: newLoc,
+	                 stopover: true
+	                });
+		    }
+		    
+		    // var directionsService = new google.maps.DirectionsService();
+	
+		    // var directionsDisplay = new google.maps.DirectionsRenderer();
+		    
+		    //directionsDisplay.setMap(map);
+		    
+	         
+		    var request = {
+		      origin: busDepoLatLng,
+		      destination: schoolLatLng,
+		      waypoints: waypts,
+		      optimizeWaypoints: true,
+		      travelMode: 'DRIVING'
+		    };
+		    directionsService.route(request, function(response, status) {
+		      if (status == google.maps.DirectionsStatus.OK) {
+		      // var groupNdx = (workGroup % 100)/10;
+                      var routeColor = routeStrokeColors[rendererCalled];
+                      rendererCalled++;
+                      if (rendererCalled >= routeStrokeColors.length)
+                         rendererCalled  = 0;
+		      var directionsDisplay = new google.maps.DirectionsRenderer({polylineOptions: {strokeColor: routeColor, strokeWeight: 5}});
+		        directionsDisplay.setDirections(response);
+		        // directionsDisplayArray.push(directionsDisplay);
+		        directionsDisplay.setMap(map);
+		        var directionResult = directionsDisplay.getDirections();
+  	 	      google.maps.event.addListener(directionResult, 'click', function()  {
+	                // display route on top
+	                alert("clicked on route:" );
+	                this.style.zIndex = routeZIndex++;
+	              });                             
+ 	                         		        
+		      }
+		      else {
+                            window.alert('Directions request failed due to ' + status);
+    }
+
+		    });              
+		    
+	    };  // while loop
+	    
+	  }; // quadrant loop
+	  
+	  var j;
+	  for (j=0; j<directionsDisplayArray.length; j++) {
+	     // directionsDisplayArray[j].setMap(map);
+
+	  };
+	   
         }); // optimize
        
     }); // function

@@ -354,26 +354,7 @@ if (isset($_POST["func"]) && ($_POST["func"]=='updateStudentGroup')) {
 	$quad++;
 	groupByKmeans($db, $userName, $schoolName, $schoolLat, $schoolLng, $maxStudentsPerGroup, $quad );
 	
-	/**
-	
-	studentGroupCluster($db, $userName, $schoolName, $schoolLat, $schoolLng, $maxStudentsPerGroup, $quad);
-	$quad++;
-	studentGroupCluster($db, $userName, $schoolName, $schoolLat, $schoolLng, $maxStudentsPerGroup, $quad);
-	$quad++;
-	studentGroupCluster($db, $userName, $schoolName, $schoolLat, $schoolLng, $maxStudentsPerGroup, $quad);
-	$quad++;
-	studentGroupCluster($db, $userName, $schoolName, $schoolLat, $schoolLng, $maxStudentsPerGroup, $quad);
-***/
-	/**      
-        // call function that is defined in generalFunctions.php
-        $res = getStudentGroupQI($db, $userName, $schoolName, $schoolLat, $schoolLng, $latSections, $lngSections, $maxStudentsPerGroup, $quad);
-        $quad++;
-        $res = getStudentGroupQI($db, $userName, $schoolName, $schoolLat, $schoolLng, $latSections, $lngSections, $maxStudentsPerGroup, $quad);
-        $quad++;
-        $res = getStudentGroupQI($db, $userName, $schoolName, $schoolLat, $schoolLng, $latSections, $lngSections, $maxStudentsPerGroup, $quad);
-        $quad++;
-        $res = getStudentGroupQI($db, $userName, $schoolName, $schoolLat, $schoolLng, $latSections, $lngSections, $maxStudentsPerGroup, $quad);
- **/      
+
         
         echo 1;
         
@@ -397,6 +378,12 @@ if (isset($_POST["func"]) && $_POST["func"]=='assignStudents') {
 	$distRange = 400;  // for now use 400 meters
 	$quad = 1;    
 	$ret = assignStudents2Stops($db, $userName, $schoolName, $schoolLat , $schoolLng, $quad, $distRange);
+	$quad++;
+	$ret = assignStudents2Stops($db, $userName, $schoolName, $schoolLat , $schoolLng, $quad, $distRange);	
+	$quad++;
+	$ret = assignStudents2Stops($db, $userName, $schoolName, $schoolLat , $schoolLng, $quad, $distRange);	
+	$quad++;
+	$ret = assignStudents2Stops($db, $userName, $schoolName, $schoolLat , $schoolLng, $quad, $distRange);	
 
     echo 1;
 }
