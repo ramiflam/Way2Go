@@ -215,7 +215,6 @@ else {
       
       // sort bust stop array 
       usort ($busStopArray, 'compareStops');
-      
  ?>
  
     <script>
@@ -766,6 +765,11 @@ else {
 	    var currentQuad = 1;
 	    // var workGroup;
 	    var directionsService = new google.maps.DirectionsService();
+
+	    var infow = new google.maps.InfoWindow({});
+	    
+	    
+	    var polylines =[];
 	    for (currentQuad=1; currentQuad<userSettings.quadrant_number; currentQuad++) {
 	       var i=0;
                // loop all groups for given quad and create route for each group
@@ -804,8 +808,7 @@ else {
 	
 		    // var directionsDisplay = new google.maps.DirectionsRenderer();
 		    
-		    //directionsDisplay.setMap(map);
-		    
+		    //directionsDisplay.setMap(map);	    
 	         
 		    var request = {
 		      origin: busDepoLatLng,
@@ -814,6 +817,7 @@ else {
 		      optimizeWaypoints: true,
 		      travelMode: 'DRIVING'
 		    };
+
 		    directionsService.route(request, function(response, status) {
 		      if (status == google.maps.DirectionsStatus.OK) {
 		      // var groupNdx = (workGroup % 100)/10;
@@ -821,16 +825,48 @@ else {
                       rendererCalled++;
                       if (rendererCalled >= routeStrokeColors.length)
                          rendererCalled  = 0;
+                      
 		      var directionsDisplay = new google.maps.DirectionsRenderer({polylineOptions: {strokeColor: routeColor, strokeWeight: 5}});
 		        directionsDisplay.setDirections(response);
-		        // directionsDisplayArray.push(directionsDisplay);
+		        console.log(directionsDisplay.getDirections());
+		        
 		        directionsDisplay.setMap(map);
-		        var directionResult = directionsDisplay.getDirections();
-  	 	      google.maps.event.addListener(directionResult, 'click', function()  {
+		      
+    		      var legs = response.routes[0].legs;
+    		      for (i = 0; i < legs.length; i++) {
+            		  steps = legs[i].steps;
+            		   for (j = 0; j < steps.length; j++) {
+                		var nextSegment = steps[j].path;
+
+                		var stepPolyline = new google.maps.Polyline({strokeColor: routeColor, strokeWeight: 5, path:[]});
+                		var path = response.routes[0].overview_path;
+                		for (k = 0; k < nextSegment.length; k++) {
+        				stepPolyline.getPath().push(nextSegment[k]);
+        				
+      				}
+               
+                		stepPolyline.setMap(map);
+                		
+                		var content = response.routes[0].legs[0].start_address + ' - ' + response.routes[0].legs[0].end_address;
+                		polylines.push(stepPolyline);
+                
+                		google.maps.event.addListener(stepPolyline, 'click', function (event) {
+                	
+                    			infow.setContent(content);
+                    			infow.setPosition(event.latLng);
+                    			infow.open(map, stepPolyline);
+	        		})
+            		   }
+        	      }
+		      
+		    //  console.log(polylines);
+		      //  var directionResult = directionsDisplay.getDirections();
+		        
+  	 	      //google.maps.event.addListener(directionResult, 'click', function()  {
 	                // display route on top
-	                alert("clicked on route:" );
-	                this.style.zIndex = routeZIndex++;
-	              });                             
+	              //  alert("clicked on route:" );
+	              //  this.style.zIndex = routeZIndex++;
+	              //});                             
  	                         		        
 		      }
 		      else {
@@ -852,8 +888,8 @@ else {
         }); // optimize
        
     }); // function
-    
-
+        
+	
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw5gl1LJqMre1o3JztvMM7jK_qDbB5pBk&&sensor=false&callback=initMap"  async defer>
