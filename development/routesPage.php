@@ -828,56 +828,30 @@ else {
                       
 		      var directionsDisplay = new google.maps.DirectionsRenderer({polylineOptions: {strokeColor: routeColor, strokeWeight: 5}});
 		        directionsDisplay.setDirections(response);
-		        console.log(directionsDisplay.getDirections());
+		        // console.log(directionsDisplay.getDirections());
 		        
 		        directionsDisplay.setMap(map);
 		      
-    		      var legs = response.routes[0].legs;
-    		      for (i = 0; i < legs.length; i++) {
-            		  steps = legs[i].steps;
-            		   for (j = 0; j < steps.length; j++) {
-                		var nextSegment = steps[j].path;
-
-                		var stepPolyline = new google.maps.Polyline({strokeColor: routeColor, strokeWeight: 5, path:[]});
-                		var path = response.routes[0].overview_path;
-                		for (k = 0; k < nextSegment.length; k++) {
-        				stepPolyline.getPath().push(nextSegment[k]);
-        				
-      				}
-               
-                		stepPolyline.setMap(map);
-                		
-                		var content = response.routes[0].legs[0].start_address + ' - ' + response.routes[0].legs[0].end_address;
-                		polylines.push(stepPolyline);
-                
-                		google.maps.event.addListener(stepPolyline, 'click', function (event) {
-                	
-                    			infow.setContent(content);
-                    			infow.setPosition(event.latLng);
-                    			infow.open(map, stepPolyline);
-	        		})
-            		   }
-        	      }
-		      
-		    //  console.log(polylines);
-		      //  var directionResult = directionsDisplay.getDirections();
-		        
-  	 	      //google.maps.event.addListener(directionResult, 'click', function()  {
-	                // display route on top
-	              //  alert("clicked on route:" );
-	              //  this.style.zIndex = routeZIndex++;
-	              //});                             
- 	                         		        
+			var polyDisplay = response.routes[0].overview_path;
+			var stepPolyline = new google.maps.Polyline({strokeColor: routeColor, strokeWeight: 5, clickable: true, path: polyDisplay});
+			stepPolyline.setMap(map);
+			stepPolyline.setOptions({ zIndex: routeZIndex++ });
+			
+			google.maps.event.addListener(stepPolyline, 'click', function() {
+			   // display route on top
+			   this.setOptions({ zIndex: routeZIndex++ });
+			});
+					        
 		      }
 		      else {
                             window.alert('Directions request failed due to ' + status);
-    }
+                      }
 
 		    });              
 		    
 	    };  // while loop
 	    
-	  }; // quadrant loop
+	  }; // for quadrant loop
 	  
 	  var j;
 	  for (j=0; j<directionsDisplayArray.length; j++) {
