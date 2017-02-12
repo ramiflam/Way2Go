@@ -22,6 +22,7 @@ $timestamp = date('m/d/Y h:i:s');
 fwrite($file, '['.$timestamp.']: ' . "user name: " . $userName . "\n");
 
 //else echo 1;
+
 if (is_ajax()) {
 
 $timestamp = date('m/d/Y h:i:s');
@@ -394,7 +395,7 @@ if (isset($_POST["func"]) && ($_POST["func"]=='insertBusStop')) {
 	$userName=$_POST["userName"];
   
       $querySchool = "SELECT * FROM `user_schools` WHERE `user_name`='$userName' and `school_name` = '$schoolName' ;";
-      $rowSchool=mysqli_fetch_array($querySchool,MYSQLI_ASSOC);
+     // $rowSchool=mysqli_fetch_array($querySchool,MYSQLI_ASSOC);
       $resultSchool = mysqli_query($db, $querySchool);
       $resultRow = mysqli_fetch_array($resultSchool );
        
@@ -406,9 +407,24 @@ if (isset($_POST["func"]) && ($_POST["func"]=='insertBusStop')) {
   	    $desc=$_POST["desc"];
             $quad =  getQuadrant($userName, $schoolLat, $schoolLng, $lat , $lng);
             $angle = computeBearing( $schoolLat, $schoolLng, $lat, $lng );
-	   
+           
+            // compute closest address to give location
+	    $urlDetails = "https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng";
+	    $jsonResp = file_get_contents($urlDetails);
+	    $respDetails = json_decode($jsonResp, TRUE);
+
+/**	    
+      ob_start();
+      var_dump($respDetails);
+      $stDump = ob_get_clean();
+      fwrite($file, "geocode result = " . $stDump . "\n" );	    
+	**/
+	
+	    $closestAddress = $respDetails['rows'][0]['formatted_address'];                
+	    fwrite($file,'['.$timestamp.']: ' . ' closest address: ' . $closestAddress . "\n");	    
 	    
-	    $query ="INSERT INTO `school_bus_stops`(`id`, `user_name`, `school_name`, `lat`, `lng`, `description`, `quadrant`, `bearing`) VALUES ('','".$userName."','".$schoolName."','".$lat."','".$lng."','".$desc." ','".$quad."','".$angle."')";
+	    
+	    $query ="INSERT INTO `school_bus_stops`(`id`, `user_name`, `school_name`, `lat`, `lng`, `description`, `quadrant`, `bearing`, `nearest_address`) VALUES ('','".$userName."','".$schoolName."','".$lat."','".$lng."','".$desc." ','".$quad."','".$angle."','".$closestAddress."')";
 	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
 		
         $result = mysqli_query($db, $query);
@@ -473,6 +489,59 @@ fwrite($file,"did not run ajax");
 fclose($file);
 echo 0;
 }
+
+
+if (isset($_POST["func"]) && ($_POST["func"]=='saveRoute')) { 
+    
+    $schoolName = $_POST['schoolName'];
+    $userName = $_POST['userName'];
+    $groupNumber = $_POST['groupNumber'];
+    $routePath = $_POST['routePath'];
+    $routePathDecoded = json_decode($routePath, true);
+    $routeSerialized = serialize($routePath);
+    $routeNumber = $_POST['routeNumber'];
+    $routeType = $_POST['routeType'];
+    $routeColor = $_POST['color'];
+    $routeStops = $_POST['routeStops'];
+    $routeDistance = $_POST['routeDistance'];
+    $routeTime = $_POST['routeTime'];
+    $resultId;
+    $route0Json = $_POST['route0Json'];
+    $responseJson = $_POST['responseJson'];
+    
+/** 
+     ob_start();
+      // var_dump($routePath);
+      var_dump($routePath);
+      $stDump = ob_get_clean();
+      fwrite($file, "route path result = " . $stDump . "\n" );	    
+***/
+
+       fwrite($file,'['.$timestamp.']: ' . " response json stringified: " . $responseJson . "\n");  
+       fwrite($file,'['.$timestamp.']: ' . " route0Json json stringified: " . $route0Json . "\n");  
+       fwrite($file,'['.$timestamp.']: ' . " overview path json stringified: " . $routePath . "\n");
+
+     
+     // first delete old route for combination of user, school, group and route type (possibly route number?)
+     
+            $query ="DELETE FROM `school_routes` WHERE user_name='$userName' AND school_name='$schoolName' AND route_type='$routeType' AND group_number='$groupNumber' ";
+            $timestamp = date('m/d/Y h:i:s');       
+	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");   
+	    $result = mysqli_query($db, $query);   
+	    
+	    // now add new route infomration for give data
+             $query ="INSERT INTO `school_routes`(`id`,`user_name`, `school_name`,`route_type`, `route_number`, `group_number`,`color`,`number_of_stops`,`duration`,`distance`,`route_json`) VALUES('','".$userName."','".$schoolName."','".$routeType."','".$routeNumber."','".$groupNumber."','".$routeColor."','".$routeStops."','".$routeTime."','".$routeDistance."','".$routePath."')";
+             
+          $timestamp = date('m/d/Y h:i:s');       
+	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");   
+           fwrite($file,'['.$timestamp.']: ' . " ========================= " . "\n");
+	    $result = mysqli_query($db, $query);
+	    if($result){
+		echo 1;
+	    }
+	    
+}
+
 
 //Function to check if the request is an AJAX request
 function is_ajax() {

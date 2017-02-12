@@ -5,7 +5,7 @@ $fileTimestamp = date('Ymd');
 $genFuncfile = fopen("../logs/func_" . $fileTimestamp . ".txt","a");
 
 function getDbConnection(){
-   $db = mysqli_connect('localhost','xmatchge','$Yuval)0p','xmatchge_way2go');
+   $db = mysqli_connect('localhost','xmatchge','$Rflam)0p','xmatchge_way2go');
    mysqli_query($db, "SET NAMES 'utf8'");
    return $db;
 }
@@ -51,11 +51,11 @@ function computeBearing( $lat1_d, $lon1_d, $lat2_d, $lon2_d ){
        if ($latdif < 0) {
            $bearingdegrees = 270; // no change in lng, negative change in lat
        }
-   }
+   }                                                               /////////////////////////////////////////////
    $bearingradians = atan(($latDiff)/($lonDiff));
    $bearingdegrees = rad2deg($bearingradians);
    $bearingdegrees = round($bearingdegrees);
-   
+                                                                         ////////////////////////////////////////////
    // set adjustment of angle needed based on quadrant
    if ($lonDiff > 0 && $latDiff >= 0) {
        $angleAdjust = 0; // Q1: no adjustment needed
@@ -90,6 +90,7 @@ $db=getDbConnection();
         // fwrite($genFuncfile, "getQuadrat: " . $userName . "," .  $schoolLat . "," . $schoolLng . "," . $lati  . "," . $longi . "\n");
         // calculate bearing between school and student address
         $studentBearing = computeBearing($schoolLat, $schoolLng, $lati , $longi);
+      
     	// get quadrant tilt from user_settings table
 	    $query = "SELECT * FROM `user_settings` WHERE `user_name`='$userName';";
 	    // fwrite($genFuncfile,  $query . "\n");
@@ -98,22 +99,25 @@ $db=getDbConnection();
 	    // print_r($row);
 	    $quadrantTilt= $row["quadrant_tilt"];     
 	    $quadNum = $row["quadrant_number"];   
-	    
+	  
 	    $angleShift = ceil(360/$quadNum);  // quadNum is either 3 or 4 so shift will be either 90 or 120 degrees
         // fwrite($genFuncfile, "Quadratnumber: " . $quadNum . " angle shift: " . $angleShift . " Tile: " . $quadrantTilt . "\n");
         $quadrantBoundaryI = 0 + $quadrantTilt;
         $quadrantBoundaryII = $angleShift + $quadrantBoundaryI;  // was 90 + $quadrantBoundaryI
         $quadrantBoundaryIII = $angleShift*2 + $quadrantBoundaryI;   // was 180 + $quadrantBoundaryI
         // only do if there are 4 quads
-        if ($quadNum > 3) 
-            $quadrantBoundaryIV = $angleShift*3 + $quadrantBoundaryI; // was 270 + $quadrantBoundaryI
-         else {
+         
+        
+            if ($quadNum > 3) {
+            $quadrantBoundaryIV = $angleShift*3 + $quadrantBoundaryI; // was 270 + $quadrantBoundaryI 45  135  225   315      32
+          
+            }else {
          	$quadrantBoundaryIV = ($quadrantBoundaryI == 0) ? 360 : $quadrantBoundaryI-1;
          }
         
 // fwrite($genFuncfile, "quadrantBoundaryI : " . $quadrantBoundaryI . " quadrantBoundaryII : " . $quadrantBoundaryII .  " quadrantBoundaryIII: " .  $quadrantBoundaryIII . " quadrantBoundaryIV: " . $quadrantBoundaryIV . "\n");
-        
-        if ($studentBearing >= $quadrantBoundaryI && $studentBearing < $quadrantBoundaryII){
+     
+        if ($studentBearing<$quadrantBoundaryI || $studentBearing >= $quadrantBoundaryI && $studentBearing < $quadrantBoundaryII){
             $studentQuadrantShifted = 1;
         }
         if ($studentBearing >= $quadrantBoundaryII  && $studentBearing < $quadrantBoundaryIII){
@@ -126,7 +130,7 @@ $db=getDbConnection();
             $studentQuadrantShifted = 4;
         }
         
-        
+       
         return $studentQuadrantShifted;
 }
 
