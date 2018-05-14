@@ -116,24 +116,45 @@ if ($_FILES['csv']['size'] > 0) {
         $studentName = $data['name'];
         $studentSpecialNeeds = $data['spcial needs'];
         
-        echo ("student name " . $studentName . "<br>");
-         echo ("Processing record no " . $ndx . " data is " . $studentAddress . "," . $studentGrade. "," . $studentName . "," . $studentSpecialNeeds . " <br>" );
+        // echo ("student name " . $studentName . "<br>");
+        // echo ("Processing record no " . $ndx . " data is " . $studentAddress . "," . $studentGrade. "," . $studentName . "," . $studentSpecialNeeds . " <br>" );
         
-        $url = "http://maps.google.com/maps/api/geocode/json?address={$studentEncodedAddress}";
+        // $url = "http://maps.google.com/maps/api/geocode/json?address={$studentEncodedAddress}";
+        // alternative code with HERE
+        $url = "https://geocoder.cit.api.here.com/6.2/geocode.json?searchtext={$studentEncodedAddress}&app_id=7uIV9X4j0XIJnFIHF77A&app_code=I7Lj51CdOng_Vlk0yGivqw";
         $resp_json = file_get_contents($url);
         $resp = json_decode($resp_json, true);
         // echo ("url is " . $url . " <br>");
         // print_r($resp_json);
+       	fwrite($file,'['.$timestamp.']: calling : ' . $url . "\n");
+        // fwrite($file,'['.$timestamp.']: resp is : ' . $resp . "\n");
         
-        if($resp['status']=='OK') {
+/** 
+      ob_start();
+      var_dump($resp);
+      $respHERE = ob_get_clean();
+      fwrite($file,"HERE response = " . $respHERE . "\n" );
+  **/      
+        
+        // if($resp['status']=='OK') {
+        if($resp) {    // HERE solution
  
         // get the important data
+        /**
         $lati = $resp['results'][0]['geometry']['location']['lat'];
         $longi = $resp['results'][0]['geometry']['location']['lng'];
+        **/
         // $formatted_address = $resp['results'][0]['formatted_address'];
         //echo ("lati = " . $lati . " <br>");
         //echo ("longi = " . $longi . " <br>");
         
+        // if using HERE take the lat lng from the following:
+        $lati = $resp['Response']['View'][0]['Result'][0]['Location']['NavigationPosition'][0]['Latitude'];
+        $longi = $resp['Response']['View'][0]['Result'][0]['Location']['NavigationPosition'][0]['Longitude'];     
+       	fwrite($file,'['.$timestamp.']: HERE loc: ' . $lati . ', ' . $longi . "\n");
+        
+        
+           
         // calculate quadrant compared to school lat and lng
         //  2 | 1
         //  3 | 4

@@ -117,7 +117,8 @@ $db=getDbConnection();
         
 // fwrite($genFuncfile, "quadrantBoundaryI : " . $quadrantBoundaryI . " quadrantBoundaryII : " . $quadrantBoundaryII .  " quadrantBoundaryIII: " .  $quadrantBoundaryIII . " quadrantBoundaryIV: " . $quadrantBoundaryIV . "\n");
      
-        if ($studentBearing<$quadrantBoundaryI || $studentBearing >= $quadrantBoundaryI && $studentBearing < $quadrantBoundaryII){
+        //if ($studentBearing<$quadrantBoundaryI || $studentBearing >= $quadrantBoundaryI && $studentBearing < $quadrantBoundaryII){
+        if ( $studentBearing >= $quadrantBoundaryI && $studentBearing < $quadrantBoundaryII){
             $studentQuadrantShifted = 1;
         }
         if ($studentBearing >= $quadrantBoundaryII  && $studentBearing < $quadrantBoundaryIII){
@@ -126,7 +127,7 @@ $db=getDbConnection();
         if ($studentBearing >= $quadrantBoundaryIII && $studentBearing < $quadrantBoundaryIV){
             $studentQuadrantShifted = 3;
         }
-        if ($studentBearing >= $quadrantBoundaryIV && ($quadNum  > 3)){
+        if ( ($quadNum  > 3) && ($studentBearing<$quadrantBoundaryI || $studentBearing >= $quadrantBoundaryIV)){
             $studentQuadrantShifted = 4;
         }
         
@@ -855,6 +856,12 @@ $genFuncfile = fopen("../logs/func_" . $fileTimestamp . ".txt","a");
       //$rowStudent=mysqli_fetch_array($queryStudent,MYSQLI_ASSOC);
       $resultStudent = mysqli_query($db, $queryStudent);
       
+      // clear all routes from DB
+            $query ="DELETE FROM `school_routes` WHERE user_name='$userName' AND school_name='$schoolName' ";
+            $timestamp = date('m/d/Y h:i:s');       
+	    fwrite($genFuncfile,'['.$timestamp.']: ' . $query . "\n");   
+	    $result = mysqli_query($db, $query);         
+      
       $studnetArray = array();
       $i = 0;
       
@@ -865,6 +872,18 @@ $genFuncfile = fopen("../logs/func_" . $fileTimestamp . ".txt","a");
          $sGroup = ($spcialNeeds == 'Y') ? 0 : $newQuadrant;
          // update studnet with new quad (tile is fetched in getquad function
          $updateQuery = "UPDATE `students` SET `quadrant` = '$newQuadrant',  `student_group` = '$sGroup'  WHERE `school_name` = '$schoolName' AND `student_name` = '$sName' ;";
+         $result = mysqli_query($db, $updateQuery);
+         fwrite($genFuncfile, " Update Query: " . $updateQuery . "\n");
+      } // while
+      
+      
+      // update quadrant for bus stops as well
+      $queryBusStops = "SELECT * FROM `school_bus_stops` WHERE `user_name`='$userName' AND `school_name` = '$schoolName' ;";
+      $resultBusStop = mysqli_query($db, $queryBusStops);
+      while ($busStopRow = mysqli_fetch_array($resultBusStop))   {
+         $newQuadrant = getQuadrant($userName, $schoolLat, $schoolLng,  $busStopRow['lat'], $busStopRow['lng']);
+         // update bus stop quadrant
+         $updateQuery = "UPDATE `school_bus_stops` SET `quadrant` = '$newQuadrant',  WHERE `user_name`='$userName' AND `school_name` = '$schoolName' ;";
          $result = mysqli_query($db, $updateQuery);
          fwrite($genFuncfile, " Update Query: " . $updateQuery . "\n");
       } // while
@@ -895,7 +914,7 @@ $genFuncfile = fopen("../logs/func_" . $fileTimestamp . ".txt","a");
 
         $query = "SELECT * FROM `students` WHERE `school_name`='$schoolName' AND `quadrant` = '$quad' AND `student_special_needs` = 'N' ;";
         
-        // fwrite($genFuncfile, " query is:" . $query ."\n");
+        fwrite($genFuncfile, " query is:" . $query ."\n");
         
         $result = mysqli_query($db, $query);
         fwrite($genFuncfile, $query . "\n" );
@@ -934,7 +953,7 @@ $genFuncfile = fopen("../logs/func_" . $fileTimestamp . ".txt","a");
            
            // assing group to bus stop and update it in DB for later use
            $busStops[$i]['studentGroup'] = $centroids[$closestCentroid]['student_group'];
-           fwrite($genFuncfile, " bustop " . $busStops[$i]['description'] . " in group " . $busStops[$i]['studentGroup'] . "\n");
+           // fwrite($genFuncfile, " bustop " . $busStops[$i]['description'] . " in group " . $busStops[$i]['studentGroup'] . "\n");
            $gNum = $busStops[$i]['studentGroup'];
            $busStopId = $busStops[$i]['id'];
            $updateQuery = "UPDATE `school_bus_stops` SET `group_number` = '$gNum' WHERE `id` = '$busStopId' ;";
@@ -951,7 +970,7 @@ $genFuncfile = fopen("../logs/func_" . $fileTimestamp . ".txt","a");
            // fwrite($genFuncfile, " checking student   " . $studentsArray[$i]['student_name'] . " and bus stops " .  $busStops[$k]['description'] . "\n");
              if ($studentsArray[$i]['student_group'] == $busStops[$k]['studentGroup']) {
                  $dist = getAirDistance($busStops[$k]['lat'], $busStops[$k]['lng'], $studentsArray[$i]['lat'], $studentsArray[$i]['lng']);
-                 fwrite($genFuncfile, " distance is    " . $dist . " min dist is  " .  $minDist  . "\n");
+                 // fwrite($genFuncfile, " distance is    " . $dist . " min dist is  " .  $minDist  . "\n");
                  if (($dist < $minDist) && ($dist <= $distRange) ) {
                     $minDist = $dist;
                     $stopNdx = $k;
@@ -975,7 +994,7 @@ $genFuncfile = fopen("../logs/func_" . $fileTimestamp . ".txt","a");
            $sName = $studentsArray[$i]['student_name'];
            $updateQuery = "UPDATE `students` SET `bus_stop_description` = '$busDesc',  `bus_stop_id` = '$busStopId'  WHERE `school_name` = '$schoolName' AND `student_name` = '$sName' ;";
            $result = mysqli_query($db, $updateQuery);
-           // fwrite($genFuncfile, " Update Query: " . $updateQuery . "\n");           
+           fwrite($genFuncfile, " Update Query: " . $updateQuery . "\n");           
         } // for $i
         
 }// assignStudents2Stops

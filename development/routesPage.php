@@ -191,7 +191,7 @@ else {
       while ($busStopRow = mysqli_fetch_array($resultBusStop)) 
       { 
               $busStopRec = $busStopRow;
-              $busStopRec['title'] = $busStopRow['description'] . " Loc: " . $busStopRow['lat'] .  " : " . $busStopRow['lng'];	
+              $busStopRec['title'] = $busStopRow['description'] . " Loc: " . $busStopRow['lat'] .  " : " . $busStopRow['lng'] . "(" . $busStopRow['nearest_address'] . ")";	
 	      // add record to array
 	      $busStopArray[] = $busStopRec;
 	
@@ -232,20 +232,51 @@ else {
                 $routeRec['group_number'] = $routeRow['group_number'];
                 $routeRec['color'] = $routeRow['color'];
                 $routeRec['route_json'] = $routeRow['route_json'];
+                $routeRec['route_json_blob'] = $routeRow['route_json_blob'];
                 $routeArray[]=$routeRec;
                 
               $timestamp = date('m/d/Y h:i:s');
               // fwrite($file,'['. $timestamp. ']: ' . ' route record  ' . ' route number - ' . $routeRec['route_number'] . ' Group number - ' . $routeRec['group_number'] . ' color - ' . $routeRec['color'] . "\n"); 
               
-              fwrite($file,'['. $timestamp. ']: ' . ' route json - ' . $routeRow['route_json'] . "\n");    
+              // fwrite($file,'['. $timestamp. ']: ' . ' route json - ' . $routeRow['route_json'] . "\n");    
               // fwrite($file,'['. $timestamp. ']: ' . ' route json - ' . $routeRec['route_json'] . "\n");            
        }
     //   var_dump($route_stops_array);exit;
+    
+      // load group numbers to array (to be used later to decide group color)
+      
+      $queryGroups = "SELECT distinct `student_group` FROM `students` where `student_group` > 0 order by `student_group` ;";
+      $resultGroup = mysqli_query($db, $queryGroups);
+      
+      $groupsArray = array();
+      $i = 0;
+      
+      while ($rowGroup = mysqli_fetch_array($resultGroup))  {
+           $grpNo = (string)$rowGroup['student_group'];
+           $groupsArray[]=$rowGroup['student_group'];
+           $timestamp = date('m/d/Y h:i:s');
+           fwrite($file,'['. $timestamp. ']: ' . ' student_group - ' . $rowGroup['student_group'] . '  ' . $grpNo . "\n");
+	   $i++;
+      }
+ 
+ /** 
+     ob_start();
+      // var_dump($routePath);
+      var_dump($groupsArray);
+      $stDump = ob_get_clean();
+      fwrite($file, "groups array = " . $stDump . "\n" );	    
+   **/       
+    
       
  ?>
  
     <script>
     var map;
+    var groupsArray = <?php echo json_encode($groupsArray); ?>;
+    // var groupsArray = <?php echo $groupsArray; ?>;
+    var groupIcons = ["ltblue-dot.png", "green-dot.png", "orange-dot.png", "pink-fot.png", "purple-dot.png", "red-dot.png" , "blue-dot.png", "maroon.png", "gray.png"];
+    
+    
       function initMap() {
         var showMap = <?php echo $showSchoolMap; ?>;
         var schoolLat = <?php echo $schoolLat; ?> ;
@@ -438,7 +469,7 @@ else {
                       var polyDisplay = JSON.parse(routeArray[i].route_json);
 
                
-                      // var schoolRoute = routeArray[i].route_json;
+                      var schoolRoute = routeArray[i].route_json_blob;
                        // var schoolRoute = JSON.parse(tmpStr);
 			// var polyDisplay = schoolRoute.overview_path;
 			var routePolyline = new google.maps.Polyline({strokeColor: routeColor, strokeWeight: 5, clickable: true, path: polyDisplay});
@@ -486,12 +517,23 @@ else {
 			   infowindow.setContent(desc); 
 			   infowindow.open(map,busStopMarker);
 			   
+			   // get nearest address for lat lng location
+			   var geocoder = new google.maps.Geocoder;
+			   var busStoplatlng = {lat: lat, lng: lng};
+			   var nearestAddr = "";
+			   geocoder.geocode({'location': busStoplatlng}, function(results, status) {
+			    if (status == 'OK') {
+			      if (results[0]) {
+			         nearestAddr = results[0].formatted_address;
+		                 var newAddr = nearestAddr.replace(/\,\sUSA$/, '');
+			   
 			   var data = {
 							func : 'insertBusStop',
 							schoolName: "<?php echo $schoolName; ?>" ,
 							userName: '<?php echo $userName; ?>',
 							lat: lat,
 							lng: lng,
+							nearestAddr: newAddr,
 							desc: desc
 							};
 					  $.ajax({
@@ -505,7 +547,11 @@ else {
 							  }
 				  
 						}); // ajax call  
-				busStopMarker.setTitle(desc + ' ' + lat + ':' + lng);
+				busStopMarker.setTitle(desc + ' ' + lat + ':' + lng + '(' + nearestAddr + ')' );
+			      } // if resluts[0]
+			    }	// status == OK
+			   });	 	//  geocoder.geocode			
+				
 			}
 			
 			 
@@ -528,6 +574,13 @@ else {
         	  else if (inputStudentGroup < 1 ) {
         	     return "../assets/yellow-dot.png"
         	  } else if (inputStudentGroup  >= 100) {
+        	  
+        	     var groupNdx = groupsArray.indexOf(inputStudentGroup);
+        	     var groupMod = groupNdx % groupIcons.length;
+        	     var groupIcon = "../assets/" + groupIcons[groupMod];
+        	     
+        	     return groupIcon;
+/****        	  
         	     groupH = Math.floor(inputStudentGroup/100);
         	     var groupMod = inputStudentGroup % 100 ;  //+ (groupH*10);
         	     if (groupMod == 0 ) {
@@ -554,8 +607,10 @@ else {
         	     if (groupMod == 70) {
         	        return "../assets/drkgreen.png";
         	     }
+****/
+
         	     
-        	  }
+        	  }  // if (inputStudentGroup  >= 100)
         };
         
 		//delete bus stop
@@ -935,6 +990,7 @@ else {
 			var routePathJson = JSON.stringify(response.routes[0].overview_path);
 		        var responseJson = JSON.stringify(response);
 			var route0Json = JSON.stringify(response.routes[0]);
+			var routeJB = response.routes[0];  // non strigified to be stored as blob
 			
 			// calculate total time and duration (seconds/meters) and number of stops
 			var routeDistance= 0;
@@ -950,9 +1006,11 @@ else {
 			// var tmpRoute = JSON.parse(routePathJson);
 			// routePathJson = encodeURIComponent(routePathJson);
 			// var routePathEncoded = google.maps.geometry.encoding.encodePath(response.routes[0]);
-                       var data={
+                       var data = {
                            //routePath: routePathJson,
+                           func: "saveRoute",
                            responseJson: responseJson,
+                           //routeJB: routeJB,
                            route0Json: route0Json,
                            routePath: routePathJson,
                            userName: userName,
@@ -963,8 +1021,8 @@ else {
                            color: routeColor,
                            routeStops: routeStops,
                            routeDistance: routeDistance,
-                           routeTime: routeTime,
-                           func : "saveRoute"};
+                           routeTime: routeTime
+                           };
                    
                          $.ajax({
 				  type: "POST",

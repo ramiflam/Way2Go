@@ -4,7 +4,7 @@ include 'generalFunctions.php';
 
 // $file = fopen("test.txt","a");
 $fileTimestamp = date('Ymd');
-$file = fopen("../logs/test_" . $fileTimestamp . ".txt","a");
+$file = fopen("../logs/ajax_" . $fileTimestamp . ".txt","a");
 fwrite($file,"Hello World. Testing! \n");
 
 
@@ -393,6 +393,7 @@ if (isset($_POST["func"]) && ($_POST["func"]=='insertBusStop')) {
 
         $schoolName=$_POST["schoolName"];
 	$userName=$_POST["userName"];
+	$closestAddress = $_POST['nearestAddr'];
   
       $querySchool = "SELECT * FROM `user_schools` WHERE `user_name`='$userName' and `school_name` = '$schoolName' ;";
      // $rowSchool=mysqli_fetch_array($querySchool,MYSQLI_ASSOC);
@@ -408,21 +409,25 @@ if (isset($_POST["func"]) && ($_POST["func"]=='insertBusStop')) {
             $quad =  getQuadrant($userName, $schoolLat, $schoolLng, $lat , $lng);
             $angle = computeBearing( $schoolLat, $schoolLng, $lat, $lng );
            
-            // compute closest address to give location
+            // compute closest address to give location (sent over now from js code)
+            /*******
 	    $urlDetails = "https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng";
 	    $jsonResp = file_get_contents($urlDetails);
 	    $respDetails = json_decode($jsonResp, TRUE);
 
-/**	    
+    
       ob_start();
       var_dump($respDetails);
       $stDump = ob_get_clean();
       fwrite($file, "geocode result = " . $stDump . "\n" );	    
-	**/
 	
-	    $closestAddress = $respDetails['rows'][0]['formatted_address'];                
-	    fwrite($file,'['.$timestamp.']: ' . ' closest address: ' . $closestAddress . "\n");	    
-	    
+	
+	    $closestAddress = $respDetails['rows'][0]['formatted_address'];  
+	    fwrite($file,'['.$timestamp.']: ' . ' closest address: ' . $closestAddress . "\n");
+	      
+	    $nearestAddr = preg_replace('/\(,\)*.$/', '', $closestAddress);
+            fwrite($file,'['.$timestamp.']: ' . ' nearest address: ' . $nearestAddr. "\n");
+*****/	    
 	    
 	    $query ="INSERT INTO `school_bus_stops`(`id`, `user_name`, `school_name`, `lat`, `lng`, `description`, `quadrant`, `bearing`, `nearest_address`) VALUES ('','".$userName."','".$schoolName."','".$lat."','".$lng."','".$desc." ','".$quad."','".$angle."','".$closestAddress."')";
 	    fwrite($file,'['.$timestamp.']: ' . $query . "\n");
@@ -482,13 +487,9 @@ if (isset($_POST["func"]) && ($_POST["func"]=='deleteBusStop')) {
 
  die();
 
-}
-}
-else {
-fwrite($file,"did not run ajax");
-fclose($file);
-echo 0;
-}
+} // deleteBusStop
+
+
 
 
 if (isset($_POST["func"]) && ($_POST["func"]=='saveRoute')) { 
@@ -505,9 +506,10 @@ if (isset($_POST["func"]) && ($_POST["func"]=='saveRoute')) {
     $routeStops = $_POST['routeStops'];
     $routeDistance = $_POST['routeDistance'];
     $routeTime = $_POST['routeTime'];
-    $resultId;
+    // $resultId;
     $route0Json = $_POST['route0Json'];
     $responseJson = $_POST['responseJson'];
+    // $routeJsonBlob = $_POST['routeJsonBlob'];
     
 /** 
      ob_start();
@@ -515,7 +517,7 @@ if (isset($_POST["func"]) && ($_POST["func"]=='saveRoute')) {
       var_dump($routePath);
       $stDump = ob_get_clean();
       fwrite($file, "route path result = " . $stDump . "\n" );	    
-***/
+****/
 
        fwrite($file,'['.$timestamp.']: ' . " response json stringified: " . $responseJson . "\n");  
        fwrite($file,'['.$timestamp.']: ' . " route0Json json stringified: " . $route0Json . "\n");  
@@ -540,6 +542,14 @@ if (isset($_POST["func"]) && ($_POST["func"]=='saveRoute')) {
 		echo 1;
 	    }
 	    
+}
+
+} // is ajax
+
+else {
+fwrite($file,"did not run ajax");
+fclose($file);
+echo 0;
 }
 
 

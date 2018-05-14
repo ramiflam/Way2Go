@@ -29,7 +29,8 @@ $timeLimitPickup = $row["time_limit_pickup"];
 $timeLimitRelease = $row["time_limit_release"];
 $quadrantTilt = $row["quadrant_tilt"];
 $LOB = $row["LOB"];
-
+$savedBusDepoAddress = $row["bus_depo_address"];
+//echo ("savedBusDepoAddress : " . $savedBusDepoAddress ."\n");
 
 ?>
 
@@ -107,7 +108,8 @@ $LOB = $row["LOB"];
         <tr>
             <td><label for="quadrantTilt" > &nbsp Quadrant Tilt &nbsp <br> &nbsp </td>
             <td><span class="sliderVal" id="quadrantTilt"><?php echo $quadrantTilt?></span><br>
-            <input type="range" id="quadrantTilt" value="quadrantTilt" name="quadrantTilt" min=0 max=89 
+           <!-- <input type="range" id="quadrantTilt" value="quadrantTilt" name="quadrantTilt" min=0 max=89  -->
+           <input type="range" id="quadrantTilt" value=<?php echo $quadrantTilt?> name="quadrantTilt" min=0 max=89
             oninput="showVal(this.value, 'quadrantTilt', 'quadrantTilt')"  
             onchange="showVal(this.value,  'quadrantTilt', 'quadrantTilt')" /></td>
         </tr>
@@ -125,7 +127,7 @@ $LOB = $row["LOB"];
         </tr>        
         <tr>
             <td><label for="busDepoAddress" > &nbsp Bus Depo Address &nbsp &nbsp </td>
-            <td>  <input type="text" id="busDepoAddress" name="busDepoAddress" required pattern="[A-Za-z0-9]{1,}" required  > </td>
+            <td>  <input type="text" id="busDepoAddress" name="busDepoAddress" value="<?php echo $savedBusDepoAddress?>" required pattern="[A-Za-z0-9]{1,}" required  > </td>
         </tr>        
         
         <tr>

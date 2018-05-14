@@ -13,7 +13,7 @@ $schoolName = "";
 
 // $file = fopen("debug.txt","a");
 $fileTimestamp = date('Ymd');
-$file = fopen("debug_" . $fileTimestamp . ".txt","a");
+$file = fopen("../logs/debug_" . $fileTimestamp . ".txt","a");
 // fwrite($file,"Hello World. Testing! \n");
 if( isset($_POST['schoolNameSelect'])  OR isset($_GET['schoolNameSelect']) )  {
 // echo("School Name Select is set");
