@@ -1,23 +1,39 @@
 <?php
 include './generalFunctions.php';
-
 $db=getDbConnection();
-
-if (mysqli_connect_errno()) 
+if (mysqli_connect_errno())
 {
-	echo 'connection failed';
+	// echo 'connection failed';
 }
-
 ?>
-
 <?php
 $cookie_name = "userName";
 $cookie_value = $_POST["userName"];
-setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");// 86400 = 1 day
 $nameErr =$passErr = "";
 $userName =$_POST["userName"];
 ?>
-
+<?php
+if($_SERVER['REQUEST_METHOD']=='POST')
+{
+$userName =$_POST["userName"];
+$userPassword =$_POST["userPassword"];
+$cookie_name = "userName";
+$cookie_value = $_POST["userName"];
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");// 86400 = 1 day
+// echo "validate login for: userName: " .  $userName . " pass: " . $userPassword ;
+$loginValid=validateLogin($db, $userName, $userPassword);
+// echo " loginValid = " . $loginValid;
+    if($loginValid)
+    {
+        header('location:menuPage.php');
+    }
+    else
+    {
+        echo "login failed";
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +79,7 @@ $userName =$_POST["userName"];
 <img class='logo'src= "../assets/way2goLogo.png" height=120/>
      
 
-<form class="register-form" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" >     
+<form class="register-form" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"> 
     <h1>LOGIN</h1>
 <ul>
     <li><span class='english'><input type="text" name="userName" placeholder="Name" id="userName" required></span></li><br>
@@ -74,25 +90,3 @@ $userName =$_POST["userName"];
 </body>
 </html>
 
-<?php
-
-if($_SERVER['REQUEST_METHOD']=='POST')
-{
-$userName =$_POST["userName"];
-$userPassword =$_POST["userPassword"];
-$cookie_name = "userName";
-$cookie_value = $_POST["userName"];
-setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
-$loginValid=validateLogin($db, $userName, $userPassword);
-    if($loginValid)
-    {
-    header('location:menuPage.php');
-    }
-    else
-    {
-    echo 'Failed';
-    }
-
-}
-
-?>
